@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.css": "/restaurant-builder-client/static/css/main.31d6cfe0.css",
+    "main.js": "/restaurant-builder-client/static/js/main.3fe66f35.js",
+    "index.html": "/restaurant-builder-client/index.html",
+    "main.3fe66f35.js.map": "/restaurant-builder-client/static/js/main.3fe66f35.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.31d6cfe0.css",
+    "static/js/main.3fe66f35.js"
+  ]
+}
