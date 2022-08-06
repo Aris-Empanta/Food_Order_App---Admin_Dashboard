@@ -5,8 +5,8 @@ function App() {
 
   const getFood = () => {
     
-    axios.get("https://restaurant-builder-server.herokuapp.com/").then((res) => {
-      console.log(res.data[0].name)
+    axios.get("https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita").then((res) => {
+      console.log(res.data[0])
     }).catch((err) => console.log(err))
   }
 
