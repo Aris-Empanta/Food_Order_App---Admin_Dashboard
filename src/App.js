@@ -8,14 +8,15 @@ function App() {
 
   const getFood = () => {
     
-    axios.get("https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita").then((res) => {
-      setFood(res.data[0])
+    axios.get("https://restaurant-builder-server.herokuapp.com/").then((res) => {
+      setFood(res.data[0].name)
     }).catch((err) => console.log(err))
   }
 
   return (
     <div>
-      <button onClick={ getFood }>{ food }</button>
+      <button onClick={ getFood }>add food</button>
+      <p>{ food }</p>
     </div>
   );
 }
