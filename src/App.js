@@ -5,8 +5,8 @@ function App() {
 
   const getFood = () => {
     
-    axios.get("https://restaurant-builder-server.herokuapp.com").then((res) => {
-      console.log(res.data[0])
+    axios.get("https://restaurant-builder-server.herokuapp.com/").then((res) => {
+      console.log(res.data[0].name)
     }).catch((err) => console.log(err))
   }
 
