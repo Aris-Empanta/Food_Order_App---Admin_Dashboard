@@ -35,10 +35,9 @@
     gap: 20px;
 }
 
-.editCatalogue {
-    display: initial;
+.products {
     align-self: flex-start;
-    padding-left: 70px;
+    padding-left: 60px;
 }
 
 .angleDown {
@@ -46,4 +45,5 @@
     border: none;
     font-size: 1.4rem;
     cursor: pointer;
+    padding: 10px;
 }

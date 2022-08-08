@@ -1,13 +1,16 @@
 import './App.css';
 import {Route,  Routes} from 'react-router-dom';
-import { NavBar } from "./components/navBar.js"
-import { Catalogue } from "./components/catalogue.js"
+import { NavBar } from "./components/navBar"
+import { AddProduct } from "./components/addProduct"
+import { Preview } from "./components/ProductsPreview"
 
 function App() {
 
   return(<div>
           <NavBar />
-          <Routes>         
+          <Routes>       
+            <Route path="/add-product" element={<AddProduct />} />
+            <Route path="/preview" element={<Preview />} />
           </Routes>
         </div>)
 }
