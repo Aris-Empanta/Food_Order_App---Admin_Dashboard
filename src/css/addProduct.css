@@ -1,3 +1,97 @@
 .addProduct {
     margin-left: 200px;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.addProduct form {
+    border: 1px solid black;
+    display: grid;
+    box-shadow: 1px 1px 4px black;
+    grid-template-areas: "header header"
+                         "hr hr";
+}
+
+.formComponents {
+    margin: 12px;
+}
+
+#formTitle {
+    grid-area: header;
+}
+
+#formLine {
+    grid-area: hr;
+    margin-left: 0;
+}
+
+#categoryLabel {
+    grid-area: line 1;
+    margin: 15px;
+}
+
+#categoryInput {
+    grid-area: line 2;
+}
+
+#nameLabel {
+    grid-area: line 3;
+}
+
+#currencyLabel {
+    grid-area: line 3;
+}
+
+#nameInput {
+    grid-area: line 4;
+}
+
+#currencySelect {
+    grid-area: line 4;
+}
+
+#quantityLabel {
+    grid-area: line 5;
+}
+
+#deliveryLabel {
+    grid-area: line 5;
+}
+
+#quantityInput {
+    grid-area: line 6;
+}
+
+#deliveryInput {
+    grid-area: line 6;
+}
+
+#priceLabel {
+    grid-area: line 7;
+}
+
+#descriptionLabel {
+    grid-area: line 7;
+}
+
+#priceInput {
+    grid-area: line 8;
+}
+
+#descriptionInput {
+    grid-area: line 8;
+}
+
+#imageLabel  {
+    grid-area: line 9;
+}
+
+#imageInput  {
+    grid-area: line 10;
+}
+
+#submit {
+    grid-area: line 11;
 }
