@@ -68,7 +68,7 @@
     grid-area: line 6;
 }
 
-#priceLabel {
+#takeAwayLabel {
     grid-area: line 7;
 }
 
@@ -76,7 +76,7 @@
     grid-area: line 7;
 }
 
-#priceInput {
+#takeAwayInput {
     grid-area: line 8;
 }
 
