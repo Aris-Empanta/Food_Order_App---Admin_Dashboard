@@ -4,7 +4,12 @@ import { useState } from  'react'
 
 export const AddProduct = () => {
 
-       const addProduct = () => {
+    const [ selectedImage, setSelectedImage ] = useState(null)
+
+       const addProduct = (e) => {
+            e.preventDefault()    
+            let data = new FormData()
+            data.append("image", selectedImage, selectedImage.name)
 
             let category = document.getElementById("categoryInput").value
             let name = document.getElementById("nameInput").value
@@ -15,7 +20,7 @@ export const AddProduct = () => {
             let description = document.getElementById("descriptionInput").value
             let image = document.getElementById("imageInput").value
 
-            axios.post("http://localhost:5000/products", {
+            axios.post("http://localhost:5000/products", /*{
                     category: category,
                     name: name,
                     currency: currency,
@@ -24,11 +29,15 @@ export const AddProduct = () => {
                     takeAwayPrice: takeAwayPrice,
                     description: description,
                     image: image
-            })
+            }*/ data).then((res) => console.log(res)).catch((e) => console.log(e))
+        }
+
+        const handleImage = (event) => {
+            setSelectedImage(event.target.files[0])
         }
 
     return(<div className="addProduct">
-                <form enctype="multipart/form-data" action="/#/add-product" method="post">
+                <form encType="multipart/form-data" action="/#/add-product" method="post">
                     <h1 id="formTitle" className="formComponents" >Add Products</h1>
                     <hr id="formLine"></hr>                    
                     <label id="categoryLabel" className="formComponents" >Product Category</label>
@@ -49,7 +58,7 @@ export const AddProduct = () => {
                     <label id="descriptionLabel" className="formComponents" >Description</label>
                     <textarea id="descriptionInput" placeholder="Description" className="formComponents" />
                     <label id="imageLabel" className="formComponents" >Product Image</label>
-                    <input type="file" name="image" id="imageInput"  className="formComponents" ></input>
+                    <input type="file" name="image" id="imageInput"  className="formComponents" onChange={ handleImage }></input>
                     <button type="submit" id="submit" className="formComponents" onClick={ addProduct }>add product</button>
                 </form>
            </div>)
