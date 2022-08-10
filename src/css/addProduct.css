@@ -1,3 +1,4 @@
+/*The addProduct component outer wrapper*/
 .addProduct {
     margin-left: 200px;
     height: 100vh;
@@ -6,6 +7,7 @@
     justify-content: center;
 }
 
+/*The form wrapper*/
 .addProduct form {
     border: 1px solid black;
     display: grid;
@@ -14,10 +16,12 @@
                          "hr hr";
 }
 
+/*All forms' elements*/
 .formComponents {
     margin: 12px;
 }
 
+/*Below are all the form elements one by one, for grid positioning*/
 #formTitle {
     grid-area: header;
 }

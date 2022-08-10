@@ -4,6 +4,7 @@ import { NavBar } from "./components/navBar"
 import { AddProduct } from "./components/addProduct"
 import { Preview } from "./components/ProductsPreview"
 
+//The parent component
 function App() {
 
   return(<div>
