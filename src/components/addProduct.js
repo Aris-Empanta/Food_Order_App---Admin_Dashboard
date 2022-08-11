@@ -1,6 +1,6 @@
 import "../css/addProduct.css"
 import axios from "axios"
-import { useState } from  'react'
+import { useEffect, useState } from  'react'
 
 //The component where we add new products to the restaurant menu.
 export const AddProduct = () => {
@@ -14,6 +14,16 @@ export const AddProduct = () => {
     const [ takeAwayPrice, setTakeAwayPrice] = useState("")
     const [ description, setDescription] = useState("")
     const [ stringData, setStringData] = useState({})
+
+    //Adding to the object the initial currency value for the case we keep the default.
+    useEffect(() => {
+        
+        let data = Object.values(stringData)
+
+        if(data.length === 0){
+            setStringData({currency: currency})
+        }
+    })
     
     //Capturing the uploaded image in the state.
     const handleImage = (event) => {
@@ -78,7 +88,7 @@ export const AddProduct = () => {
                                                                                                                 }}/>
                     <label id="currencyLabel"  className="formComponents" >Currency</label>
                     <select id="currencySelect" name="currency" className="formComponents" onChange={ (e) => { let currency = e.target.value
-                                                                                                                 setCurrency(name)                                
+                                                                                                                 setCurrency(currency)                                
                                                                                                                  setStringData({...stringData, currency: currency})                                
                                                                                                                 } }>
                         <option value="USD">USD</option>
