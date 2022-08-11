@@ -2,3 +2,15 @@
 .preview {
     margin-left: 200px;
 }
+
+#productsWrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 30px;
+
+}
+
+.products {
+    border: 1px solid black;
+  
+}
