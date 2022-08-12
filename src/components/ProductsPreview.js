@@ -23,7 +23,7 @@ export const Preview = () => {
     return(<div className="preview">
             <div id="productsWrapper">
             {products.map((item) => <div className="products">
-                                        <img src="http://localhost:5000/images/1660216422033-pizza_margarita.jpg"/>
+                                        <img src={ item.Image_name} />                                        
                                         <p>{item.Category}</p>
                                         <p>{item.Name}</p>
                                         <p>{item.Delivery_price}</p>

@@ -13,6 +13,7 @@ export const AddProduct = () => {
     const [ deliveryPrice, setDeliveryPrice] = useState("")
     const [ takeAwayPrice, setTakeAwayPrice] = useState("")
     const [ description, setDescription] = useState("")
+    const [ imageName, setImageName] = useState("")
     const [ stringData, setStringData] = useState({})
 
     //Adding to the object the initial currency value for the case we keep the default.
@@ -27,7 +28,9 @@ export const AddProduct = () => {
     
     //Capturing the uploaded image in the state.
     const handleImage = (event) => {
-                            setSelectedImage(event.target.files[0])                            
+                            setSelectedImage(event.target.files[0]) 
+                            let name = event.target.files[0].name
+                            setStringData({...stringData, imageName: name})
                         }   
     
     //The function to send form data to the server.
@@ -39,6 +42,7 @@ export const AddProduct = () => {
                      let imageData = new FormData()
                      if(selectedImage !== null) {
                             imageData.append("image", selectedImage, selectedImage.name)
+                            console.log(selectedImage.name)
                         }
                     
                     /*The stingData object state, contaings all the values of the input fields.
