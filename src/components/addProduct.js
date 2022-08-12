@@ -29,7 +29,7 @@ export const AddProduct = () => {
     //Capturing the uploaded image in the state.
     const handleImage = (event) => {
                             setSelectedImage(event.target.files[0]) 
-                            let name = event.target.files[0].name
+                            let name =  Date.now() + "-" + event.target.files[0].name
                             setStringData({...stringData, imageName: name})
                         }   
     
@@ -41,8 +41,8 @@ export const AddProduct = () => {
                      //Using the FormData object to prepare the uploaded image to be sent to the server.
                      let imageData = new FormData()
                      if(selectedImage !== null) {
-                            imageData.append("image", selectedImage, selectedImage.name)
-                            console.log(selectedImage.name)
+                            imageData.append("image", selectedImage, stringData.imageName)
+                            console.log(stringData.imageName)
                         }
                     
                     /*The stingData object state, contaings all the values of the input fields.
@@ -77,7 +77,7 @@ export const AddProduct = () => {
                     }      
 
     return(<div className="addProduct">
-                <form >
+                <form enctype="mutipart/form-data">
                     <h1 id="formTitle" className="formComponents" >Add Products</h1>
                     <hr id="formLine"></hr>                    
                     <label id="categoryLabel" className="formComponents" >Product Category</label>
