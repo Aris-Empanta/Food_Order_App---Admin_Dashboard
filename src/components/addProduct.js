@@ -28,10 +28,34 @@ export const AddProduct = () => {
     
     //Capturing the uploaded image in the state.
     const handleImage = (event) => {
-                            setSelectedImage(event.target.files[0]) 
-                            let name =  Date.now() + "-" + event.target.files[0].name
-                            setStringData({...stringData, imageName: name})
-                        }   
+
+                                    let file = event.target.files[0]
+                                    let type = /\.(jpe?g|tiff?|png|webp|bmp)$/i
+                                    let name = event.target.files[0].name
+                                    let size = event.target.files[0].size
+                                    let input = document.getElementById("imageInput")
+                                    
+                                    //Allowing only images of specific size
+                                    if( type.test(event.target.files[0].name) === true ) {
+                                        
+                                        setSelectedImage(event.target.files[0])                                        
+                                    }  else if( type.test(name) === false ){
+
+                                        alert("This is not an image!!")
+                                        input.value = ""
+                                    } else if( size > 500000 ){
+
+                                        alert("The image size is too big")
+                                        input.value = ""
+                                    }
+
+                                    
+                                    
+                                    let imageName =  Date.now() + "-" + name
+                                    setStringData({...stringData, imageName: imageName}) 
+                                    console.log(type.test(event.target.files[0].name))
+                                    
+                                }   
     
     //The function to send form data to the server.
     const addProduct = (event) => {
@@ -40,8 +64,10 @@ export const AddProduct = () => {
                      
                      //Using the FormData object to prepare the uploaded image to be sent to the server.
                      let imageData = new FormData()
-                     if(selectedImage !== null) {
-                            imageData.append("image", selectedImage, stringData.imageName)
+
+                     
+                     if(selectedImage !== null ) {                            
+                            imageData.append("image", selectedImage, stringData.imageName) 
                             console.log(stringData.imageName)
                         }
                     
@@ -50,12 +76,12 @@ export const AddProduct = () => {
                     let data = Object.values(stringData)
                                                 
                     //Not allowing empty fields
-                    if( data.includes("") || data.length === 0 || selectedImage === null ){
+                    if( data.includes("") || data.length < 7 || selectedImage === null ){
 
                             let formComponents = document.getElementsByClassName("inputs")
                             
                             for(let i=0; i<formComponents.length; i++){
-                                if(formComponents[i].value === "") {
+                                if(formComponents[i].value === "" ) {
                                     formComponents[i].style.border = "1px solid red"
                                 } else {
                                     formComponents[i].style.border = "1px solid black"
@@ -65,19 +91,27 @@ export const AddProduct = () => {
                     } else {    
 
                         let formComponents = document.getElementsByClassName("inputs")
+
+                        console.log(data.length)
                             
                         for(let i=0; i<formComponents.length; i++){
                             
                             formComponents[i].style.border = "1px solid black"                            
                         }                        
-                            axios.post("http://localhost:5000/products", imageData)
+                            axios.post("http://localhost:5000/products", imageData).then(() => console.log("succeess")).catch((err) => console.log(err))                            
                             axios.post("http://localhost:5000/products", stringData)
+                            
                             setTimeout(() => alert("product added successfully!"), 10)
-                        }                        
+                            setTimeout(() => window.location.reload(), 500)
+
+                           
+                        }          
+                        
                     }      
 
+
     return(<div className="addProduct">
-                <form enctype="mutipart/form-data">
+                <form encType= "multipart/form-data" >
                     <h1 id="formTitle" className="formComponents" >Add Products</h1>
                     <hr id="formLine"></hr>                    
                     <label id="categoryLabel" className="formComponents" >Product Category</label>
@@ -119,7 +153,7 @@ export const AddProduct = () => {
                                                                                                                             setStringData({...stringData, description: description})                                
                                                                                                                             }}/>
                     <label id="imageLabel" className="formComponents" >Product Image</label>
-                    <input type="file" name="image" id="imageInput"  className="formComponents inputs" onChange={ handleImage }></input>
+                    <input type="file"   name="image" id="imageInput"  className="formComponents inputs" onChange={ handleImage }></input>
                     <button id="submit" className="formComponents" onClick={ addProduct }>add product</button>
                 </form>
            </div>)
