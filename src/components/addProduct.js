@@ -7,6 +7,8 @@ export const AddProduct = () => {
 
     const [ selectedImage, setSelectedImage ] = useState(null)  
     const [ category, setCategory] = useState("")
+    const [id, setId] = useState("")
+    const [allIds, setAllIds] = useState([])
     const [ name, setName] = useState("")
     const [ currency, setCurrency] = useState("USD")
     const [ quantity, setQuantity] = useState("")
@@ -24,7 +26,18 @@ export const AddProduct = () => {
         if(data.length === 0){
             setStringData({currency: currency})
         }
-    })
+
+        axios.get("http://localhost:5000/products").then((res) => {
+
+            let ids = []
+            for(data of res.data) {
+                ids.push(data.ID)
+            }
+            setAllIds(ids)
+            
+        })
+        
+    }, [setAllIds])
     
     //Capturing the uploaded image in the state.
     const handleImage = (event) => {
@@ -53,32 +66,32 @@ export const AddProduct = () => {
                                     
                                     let imageName =  Date.now() + "-" + name
                                     setStringData({...stringData, imageName: imageName}) 
-                                    console.log(type.test(event.target.files[0].name))
                                     
+                                   
                                 }   
     
     //The function to send form data to the server.
     const addProduct = (event) => {
 
                      event.preventDefault()
-                     
+                                         
                      //Using the FormData object to prepare the uploaded image to be sent to the server.
                      let imageData = new FormData()
 
                      
                      if(selectedImage !== null ) {                            
                             imageData.append("image", selectedImage, stringData.imageName) 
-                            console.log(stringData.imageName)
                         }
                     
                     /*The stingData object state, contaings all the values of the input fields.
                       we convert it to an array for the use needed below.*/
                     let data = Object.values(stringData)
-                                                
+                    let formComponents = document.getElementsByClassName("inputs")
+                             
                     //Not allowing empty fields
                     if( data.includes("") || data.length < 7 || selectedImage === null ){
 
-                            let formComponents = document.getElementsByClassName("inputs")
+                            
                             
                             for(let i=0; i<formComponents.length; i++){
                                 if(formComponents[i].value === "" ) {
@@ -88,22 +101,24 @@ export const AddProduct = () => {
                                 }
                             }
                             setTimeout(() => alert("There are empty fields!"), 10)                      
-                    } else {    
+                    } else if (allIds.includes(parseInt(stringData.id))) {
+                                
+                                formComponents[1].style.border = "1px solid red"
+                                setTimeout(() => alert("Product id already exists!"), 10)
+                    }
+                    else {    
 
                         let formComponents = document.getElementsByClassName("inputs")
-
-                        console.log(data.length)
                             
                         for(let i=0; i<formComponents.length; i++){
                             
                             formComponents[i].style.border = "1px solid black"                            
                         }                        
-                            axios.post("http://localhost:5000/products", imageData).then(() => console.log("succeess")).catch((err) => console.log(err))                            
+                            axios.post("http://localhost:5000/products", imageData)                            
                             axios.post("http://localhost:5000/products", stringData)
                             
                             setTimeout(() => alert("product added successfully!"), 10)
-                            setTimeout(() => window.location.reload(), 500)
-
+                            setTimeout(() => window.location.reload(), 500) 
                            
                         }          
                         
@@ -118,6 +133,11 @@ export const AddProduct = () => {
                     <input placeholder="Pizza" id="categoryInput" className="formComponents inputs" onChange={ (e) => { let category = e.target.value
                                                                                                                  setCategory(category)                                
                                                                                                                  setStringData({...stringData, category: category})                                
+                                                                                                                }}/>
+                    <label id="productId" className="formComponents">Product ID</label>
+                    <input id="productId" className="formComponents inputs"  placeholder="ID" onChange={ (e) => { let id = e.target.value
+                                                                                                                 setId(id)                                
+                                                                                                                 setStringData({...stringData, id: id})                                
                                                                                                                 }}/>
                     <label id="nameLabel" className="formComponents">Product Name</label>
                     <input id="nameInput" className="formComponents inputs"  placeholder="Margarita" onChange={ (e) => { let name = e.target.value

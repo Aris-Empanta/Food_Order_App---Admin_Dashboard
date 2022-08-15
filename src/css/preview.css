@@ -11,6 +11,16 @@
 }
 
 .products {
-    border: 1px solid black;
-  
+    border: 1px solid black;  
+    display: flex;
+    flex-direction: column;
+}
+
+.productImage {
+    width: 200px;
+    height: 200px;
+}
+
+.area {
+    display: none;
 }
