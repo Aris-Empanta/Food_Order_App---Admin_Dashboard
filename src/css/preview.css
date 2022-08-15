@@ -1,26 +1,25 @@
 /*The component where you can check and modify the menu*/
 .preview {
-    margin-left: 200px;
+  margin-left: 200px;
 }
 
 #productsWrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    column-gap: 30px;
-
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 30px;
 }
 
 .products {
-    border: 1px solid black;  
-    display: flex;
-    flex-direction: column;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
 }
 
-.productImage {
-    width: 200px;
-    height: 200px;
+.image {
+  width: 200px;
+  height: 200px;
 }
 
 .area {
-    display: none;
+  display: none;
 }

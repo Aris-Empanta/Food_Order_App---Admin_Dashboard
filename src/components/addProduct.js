@@ -42,7 +42,6 @@ export const AddProduct = () => {
     //Capturing the uploaded image in the state.
     const handleImage = (event) => {
 
-                                    let file = event.target.files[0]
                                     let type = /\.(jpe?g|tiff?|png|webp|bmp)$/i
                                     let name = event.target.files[0].name
                                     let size = event.target.files[0].size
