@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 //The component where we can check and modify the menu.
 export const Preview = () => {
     
-    //----------------------STATE NEEDED------------------------------------------------------
+    //----------------------STATE NEEDED------------------------------------------------------>
 
     const [ products, setProducts ] = useState([])
     const [ name, setName ] = useState("")
@@ -14,11 +14,11 @@ export const Preview = () => {
     const [ currency, setCurrency ] = useState("USD")
     const [ description, setDescription ] = useState("")
 
-    //-----------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------->
     
-    //----------------------------FUNCTIONS NEEDED---------------------------------------------
+    //----------------------------FUNCTIONS NEEDED--------------------------------------------->
 
-    //Saving all products from database
+    //-------> Saving all products from database to state <------
     useEffect(() => {
 
         axios.get("http://localhost:5000/products").
@@ -30,7 +30,7 @@ export const Preview = () => {
            } , [setProducts]
         )
     
-    //The function to edit each individual products    
+    //-------> The function to edit each individual products <------    
     const editProducts = (index) => {
 
           let edit = document.getElementsByClassName("edit" + index)
@@ -84,20 +84,25 @@ export const Preview = () => {
                 else {
 
                       let id =  characteristics[0].innerHTML
+                      let date = new Date()
+                      date = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear() +
+                             "_" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
 
                       axios.put("http://localhost:5000/products/update-characteristics/" + id,
-                                                                 {  name: name,
+                                                                 {  date: date,
+                                                                    name: name,
                                                                     deliveryPrice: deliveryPrice,
                                                                     takeAwayPrice: takeAwayPrice,
                                                                     currency: currency,
                                                                     description: description }
                                                                 )   
+                      
                       window.location.reload()   
                     }   
                 }
             }
     
-    //The function to change a product image        
+    //-------> The function to change a product image  <------      
     const updateImage = (event, index) => {
                 
                 let type = /\.(jpe?g|tiff?|png|webp|bmp)$/i
@@ -114,11 +119,13 @@ export const Preview = () => {
                      
 
                     let newName = Date.now() + "-" + event.target.files[0].name
-                    console.log(newName)
+                    let date = new Date()
+                    date = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear() +
+                             "_" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
 
                     newImage.append("newImage", event.target.files[0], newName )     
                     
-                    axios.post("http://localhost:5000/products/update-image/" + id, newImage )
+                    axios.post("http://localhost:5000/products/update-image/" + id, newImage)
                     window.location.reload()
                 }  else if( type.test(name) === false ){
 
@@ -132,7 +139,7 @@ export const Preview = () => {
 
     }
     
-    //The function to delete products
+    //-------> The function to delete products <-------
     const deleteProducts = (index) => {
 
         let id = products[index].ID
@@ -141,7 +148,7 @@ export const Preview = () => {
         window.location.reload()
     }
 
-  //-----------------------------------------------------------------------------------------
+  //----------------------------------------------------------------------------------------->
 
   return(<div className="preview">
             <div id="productsWrapper">
@@ -171,6 +178,7 @@ export const Preview = () => {
                                               <p className={"characteristics" + index} >{item.Description}</p><textarea defaultValue={item.Description} 
                                                                                                                         className={"edit edit" + index } 
                                                                                                                         onChange = {(e) => setDescription(e.target.value)} />
+                                              <p>Last date modified: {item.Date} </p>
                                               <button onClick={ () => editProducts(index) } className={"editButton" + index}>Edit </button>
                                               <button onClick={ () => deleteProducts(index) } className={"deleteButton" + index}>Delete </button>
                                           </div>)}

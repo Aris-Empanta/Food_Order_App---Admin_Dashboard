@@ -5,6 +5,8 @@ import { useEffect, useState } from  'react'
 //The component where we add new products to the restaurant menu.
 export const AddProduct = () => {
 
+    //----------------------STATE NEEDED------------------------------------------------------>
+
     const [ selectedImage, setSelectedImage ] = useState(null)  
     const [ category, setCategory] = useState("")
     const [id, setId] = useState("")
@@ -18,7 +20,11 @@ export const AddProduct = () => {
     const [ imageName, setImageName] = useState("")
     const [ stringData, setStringData] = useState({})
 
-    //Adding to the object the initial currency value for the case we keep the default.
+    //-------------------------------------------------------------------------------------->
+
+    //----------------------FUNCTIONS NEEDED------------------------------------------------------>
+
+    //-------> Setting the initial currency default value. <------
     useEffect(() => {
         
         let data = Object.values(stringData)
@@ -40,7 +46,7 @@ export const AddProduct = () => {
         
     }, [setAllIds])
     
-    //Capturing the uploaded image in the state.
+    //------> Capturing the uploaded image in the state. <------
     const handleImage = (event) => {
 
                                     let type = /\.(jpe?g|tiff?|png|webp|bmp)$/i
@@ -72,7 +78,7 @@ export const AddProduct = () => {
                                 }   
 
     
-    //The function to send product data to the server.
+    //------> The function to send product data to the server. <------
     const addProduct = (event) => {
 
                      event.preventDefault()
@@ -103,8 +109,40 @@ export const AddProduct = () => {
                             setTimeout(() => alert("There are empty fields!"), 10)                      
                     } else if (allIds.includes(parseInt(stringData.id))) {
                                 
+                                for(let i=0; i<formComponents.length; i++){
+                                    
+                                    formComponents[i].style.border = "1px solid black"                            
+                                }  
                                 formComponents[1].style.border = "1px solid red"
                                 setTimeout(() => alert("Product id already exists!"), 10)
+                    }
+                    //Not allowing very high prices. 
+                    else if(stringData.deliveryPrice.length > 3 || stringData.takeAwayPrice.length > 3) {
+
+                        alert("This is a restaurant, not a jewelleryshop! You are too expensive")
+
+                        for(let i=0; i<formComponents.length; i++){
+                            
+                            formComponents[i].style.border = "1px solid black"                            
+                        }  
+                         
+                        if (stringData.deliveryPrice.length > 3){
+                            formComponents[4].style.border = "1px solid red" 
+                        }
+                        if(stringData.takeAwayPrice.length > 3){
+                             formComponents[5].style.border = "1px solid red" 
+                            }
+
+                    }
+                    //Also quantity should have a limit.
+                    else if(stringData.quantity.length > 4) {
+
+                        for(let i=0; i<formComponents.length; i++){
+                            
+                            formComponents[i].style.border = "1px solid black"                            
+                        }  
+                        alert("So many products? How many people you want to feed an entire army?")
+                        formComponents[3].style.border = "1px solid red"
                     }
                     else {    
 
@@ -122,7 +160,7 @@ export const AddProduct = () => {
                         }          
                         
                     }      
-
+    //---------------------------------------------------------------------------------------------------->
 
     return(<div className="addProduct">
                 <form encType= "multipart/form-data" >
