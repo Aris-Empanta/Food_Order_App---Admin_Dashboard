@@ -4,6 +4,8 @@ import { useEffect, useState } from "react"
 
 //The component where we can check and modify the menu.
 export const Preview = () => {
+    
+    //----------------------STATE NEEDED------------------------------------------------------
 
     const [ products, setProducts ] = useState([])
     const [ name, setName ] = useState("")
@@ -11,6 +13,10 @@ export const Preview = () => {
     const [ takeAwayPrice, setTakeAwayPrice ] = useState("")
     const [ currency, setCurrency ] = useState("USD")
     const [ description, setDescription ] = useState("")
+
+    //-----------------------------------------------------------------------------------------
+    
+    //----------------------------FUNCTIONS NEEDED---------------------------------------------
 
     //Saving all products from database
     useEffect(() => {
@@ -90,8 +96,8 @@ export const Preview = () => {
                     }   
                 }
             }
-
-
+    
+    //The function to change a product image        
     const updateImage = (event, index) => {
                 
                 let type = /\.(jpe?g|tiff?|png|webp|bmp)$/i
@@ -125,6 +131,17 @@ export const Preview = () => {
                 }              
 
     }
+    
+    //The function to delete products
+    const deleteProducts = (index) => {
+
+        let id = products[index].ID
+
+        axios.delete("http://localhost:5000/products/delete-product/" + id)
+        window.location.reload()
+    }
+
+  //-----------------------------------------------------------------------------------------
 
   return(<div className="preview">
             <div id="productsWrapper">
@@ -155,6 +172,7 @@ export const Preview = () => {
                                                                                                                         className={"edit edit" + index } 
                                                                                                                         onChange = {(e) => setDescription(e.target.value)} />
                                               <button onClick={ () => editProducts(index) } className={"editButton" + index}>Edit </button>
+                                              <button onClick={ () => deleteProducts(index) } className={"deleteButton" + index}>Delete </button>
                                           </div>)}
                 </div>
            </div>)
