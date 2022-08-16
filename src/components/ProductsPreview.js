@@ -7,8 +7,8 @@ export const Preview = () => {
 
     const [ products, setProducts ] = useState([])
     const [ name, setName ] = useState("")
-    const [ deliveryPrice, setDeliveryPrice ] = useState(0)
-    const [ takeAwayPrice, setTakeAwayPrice ] = useState(0)
+    const [ deliveryPrice, setDeliveryPrice ] = useState("")
+    const [ takeAwayPrice, setTakeAwayPrice ] = useState("")
     const [ currency, setCurrency ] = useState("USD")
     const [ description, setDescription ] = useState("")
 
@@ -20,8 +20,7 @@ export const Preview = () => {
 
                 setProducts(res.data)
                }
-             )
-            
+             )            
            } , [setProducts]
         )
     
@@ -31,12 +30,11 @@ export const Preview = () => {
           let edit = document.getElementsByClassName("edit" + index)
           let editButton = document.getElementsByClassName("editButton" + index)
           let characteristics = document.getElementsByClassName("characteristics" + index)
-   
+
           
           if(edit[0].style.display === "") {
             edit[0].style.display = "none"
           }
-          console.log(characteristics[5])
 
           if(edit[0].style.display === "none") {
 
@@ -54,17 +52,31 @@ export const Preview = () => {
                     characteristics[i].style.display = "initial"              
                   }
                   characteristics[5].style.display = "initial"
-                  
-                  axios.put("http://localhost:5000/products", { id: characteristics[0].innerHTML ,
-                                                                name: name,
-                                                                deliveryPrice: deliveryPrice,
-                                                                takeAwayPrice: takeAwayPrice,
-                                                                currency: currency,
-                                                                description: description   
-                                                              })   
-                  window.location.reload()      
-          }
-    }
+                
+                if((name === "" || description === "" || 
+                   deliveryPrice === "" || takeAwayPrice === "")
+                   && deliveryPrice.length <= 3 
+                   && takeAwayPrice.length <= 3 ){
+
+                  alert("No empty fields allowed!")
+                } 
+                else if (deliveryPrice.length > 3 || takeAwayPrice.length > 3) {
+
+                  alert("This is a restaurant, not a jewellery shop. You are too expensive!!")
+                }  
+                else {  
+                      axios.put("http://localhost:5000/products", { id: characteristics[0].innerHTML ,
+                                                                    name: name,
+                                                                    deliveryPrice: deliveryPrice,
+                                                                    takeAwayPrice: takeAwayPrice,
+                                                                    currency: currency,
+                                                                    description: description   
+                                                                  })   
+                      window.location.reload()   
+                    }   
+                }
+            }
+
 
     const updateImage = (event, index) => {
                 
@@ -108,18 +120,18 @@ export const Preview = () => {
                                                      name="newImage" onChange = { (event) => updateImage(event, index) } />
                                               <p className={"characteristics" + index}>{ item.ID }</p>                                       
                                               <p>{item.Category}</p>
-                                              <p className={"characteristics" + index} >{item.Name}</p><input className={"area edit" + index }
+                                              <p className={"characteristics" + index} >{item.Name}</p><input defaultValue={item.Name} className={"area edit" + index }
                                                                                                               onChange = {(e) => setName(e.target.value)} /> 
-                                              <p className={"characteristics" + index} >{item.Delivery_price}</p><input className={"area edit" + index } 
-                                                                                                                        onChange = {(e) => setDeliveryPrice(e.target.value)} />
-                                              <p className={"characteristics" + index} >{item.Take_away_price}</p><input className={"area edit" + index }  
+                                              <p className={"characteristics" + index} >{item.Delivery_price}</p><input defaultValue={item.Delivery_price} className={"area edit" + index } 
+                                                                                                                        onChange = {(e) => { setDeliveryPrice(e.target.value) }} />
+                                              <p className={"characteristics" + index} >{item.Take_away_price}</p><input defaultValue={item.Take_away_price} className={"area edit" + index }  
                                                                                                                           onChange = {(e) => setTakeAwayPrice(e.target.value)} />
                                               <p className={"characteristics" + index} >{item.Currency}</p><select className={"area edit" + index } 
                                                                                                                     onChange = {(e) => setCurrency(e.target.value)} >
                                                                                                               <option value={item.Currency}>{item.Currency}</option>
                                                                                                               <option value={ item.Currency === "EUR"? "USD" : "EUR"}>{ item.Currency === "EUR"? "USD" : "EUR"}</option>
                                                                                                            </select>
-                                              <p className={"characteristics" + index} >{item.Description}</p><textarea className={"area edit" + index } 
+                                              <p className={"characteristics" + index} >{item.Description}</p><textarea defaultValue={item.Description} className={"area edit" + index } 
                                                                                                                         onChange = {(e) => setDescription(e.target.value)} />
                                               <button onClick={ () => editProducts(index) } className={"editButton" + index}>Edit </button>
                                           </div>)}
