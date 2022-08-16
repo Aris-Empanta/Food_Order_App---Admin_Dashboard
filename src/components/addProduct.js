@@ -27,6 +27,7 @@ export const AddProduct = () => {
             setStringData({currency: currency})
         }
 
+        //Saving all product Ids, to avoid duplicates later.
         axios.get("http://localhost:5000/products").then((res) => {
 
             let ids = []
@@ -62,19 +63,21 @@ export const AddProduct = () => {
                                     }
 
                                     
-                                    
+                                    /*Saving the image in the object state that we will sent to the backend, 
+                                     with the date in front, in case 2 users put an image with same name.*/
                                     let imageName =  Date.now() + "-" + name
                                     setStringData({...stringData, imageName: imageName}) 
                                     
                                    
                                 }   
+
     
-    //The function to send form data to the server.
+    //The function to send product data to the server.
     const addProduct = (event) => {
 
                      event.preventDefault()
                                          
-                     //Using the FormData object to prepare the uploaded image to be sent to the server.
+                     //Using the FormData object to save the uploaded image to be sent to the server.
                      let imageData = new FormData()
 
                      
@@ -82,15 +85,13 @@ export const AddProduct = () => {
                             imageData.append("image", selectedImage, stringData.imageName) 
                         }
                     
-                    /*The stingData object state, contaings all the values of the input fields.
+                    /*The stingData object state, contains all the values of the input fields.
                       we convert it to an array for the use needed below.*/
                     let data = Object.values(stringData)
                     let formComponents = document.getElementsByClassName("inputs")
                              
-                    //Not allowing empty fields
-                    if( data.includes("") || data.length < 7 || selectedImage === null ){
-
-                            
+                    //Not allowing empty fields or duplicate IDs.
+                    if( data.includes("") || data.length < 7 || selectedImage === null ){                           
                             
                             for(let i=0; i<formComponents.length; i++){
                                 if(formComponents[i].value === "" ) {
@@ -113,12 +114,11 @@ export const AddProduct = () => {
                             
                             formComponents[i].style.border = "1px solid black"                            
                         }                        
-                            axios.post("http://localhost:5000/products", imageData)                            
-                            axios.post("http://localhost:5000/products", stringData)
+                            axios.post("http://localhost:5000/products/add/" + stringData.id, imageData)                            
+                            axios.post("http://localhost:5000/products/add/" + stringData.id, stringData)
                             
                             setTimeout(() => alert("product added successfully!"), 10)
-                            setTimeout(() => window.location.reload(), 500) 
-                           
+                            setTimeout(() => window.location.reload(), 500)                         
                         }          
                         
                     }      

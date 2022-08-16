@@ -30,12 +30,20 @@ export const Preview = () => {
           let edit = document.getElementsByClassName("edit" + index)
           let editButton = document.getElementsByClassName("editButton" + index)
           let characteristics = document.getElementsByClassName("characteristics" + index)
-
           
+          //Setting the characteristics state for the case the user doesnt modify all the fields.
+          setName(characteristics[1].innerHTML)
+          setDeliveryPrice(characteristics[2].innerHTML)
+          setTakeAwayPrice(characteristics[3].innerHTML)
+          setDescription(characteristics[5].innerHTML)
+          
+          //Setting first input field display none from the start, so that the function works on first click.
           if(edit[0].style.display === "") {
             edit[0].style.display = "none"
           }
 
+
+          //Hiding the saved characteristics and show only input fields
           if(edit[0].style.display === "none") {
 
                   for( let i=0; i < edit.length; i++) {
@@ -44,7 +52,9 @@ export const Preview = () => {
                     characteristics[i].style.display = "none"
                   }
                   characteristics[5].style.display = "none"
-          } else {
+          } 
+          //Not allowing empty fields and very large prices numbers
+          else {
             
                   for( let i=0; i < edit.length; i++) {
                     edit[i].style.display = "none"
@@ -57,21 +67,25 @@ export const Preview = () => {
                    deliveryPrice === "" || takeAwayPrice === "")
                    && deliveryPrice.length <= 3 
                    && takeAwayPrice.length <= 3 ){
-
+                    console.log(name, deliveryPrice, takeAwayPrice, currency, description) 
                   alert("No empty fields allowed!")
                 } 
                 else if (deliveryPrice.length > 3 || takeAwayPrice.length > 3) {
 
                   alert("This is a restaurant, not a jewellery shop. You are too expensive!!")
                 }  
-                else {  
-                      axios.put("http://localhost:5000/products", { id: characteristics[0].innerHTML ,
-                                                                    name: name,
+                //Update the data and refresh the page.
+                else {
+
+                      let id =  characteristics[0].innerHTML
+
+                      axios.put("http://localhost:5000/products/update-characteristics/" + id,
+                                                                 {  name: name,
                                                                     deliveryPrice: deliveryPrice,
                                                                     takeAwayPrice: takeAwayPrice,
                                                                     currency: currency,
-                                                                    description: description   
-                                                                  })   
+                                                                    description: description }
+                                                                )   
                       window.location.reload()   
                     }   
                 }
@@ -98,7 +112,7 @@ export const Preview = () => {
 
                     newImage.append("newImage", event.target.files[0], newName )     
                     
-                    axios.post("http://localhost:5000/products/" + id, newImage )
+                    axios.post("http://localhost:5000/products/update-image/" + id, newImage )
                     window.location.reload()
                 }  else if( type.test(name) === false ){
 
@@ -112,7 +126,7 @@ export const Preview = () => {
 
     }
 
-    return(<div className="preview">
+  return(<div className="preview">
             <div id="productsWrapper">
             {products.map((item, index) => <div className="products">
                                               <img src={ item.Image_name} className= {"image productImage" + index} /> 
@@ -120,21 +134,28 @@ export const Preview = () => {
                                                      name="newImage" onChange = { (event) => updateImage(event, index) } />
                                               <p className={"characteristics" + index}>{ item.ID }</p>                                       
                                               <p>{item.Category}</p>
-                                              <p className={"characteristics" + index} >{item.Name}</p><input defaultValue={item.Name} className={"area edit" + index }
-                                                                                                              onChange = {(e) => setName(e.target.value)} /> 
-                                              <p className={"characteristics" + index} >{item.Delivery_price}</p><input defaultValue={item.Delivery_price} className={"area edit" + index } 
+                                              <p className={"characteristics" + index} >{item.Name}</p><input defaultValue={item.Name} 
+                                                                                                              className={"edit edit" + index }
+                                                                                                              onChange = {(e) => {(e.target.value !== "") ? 
+                                                                                                                                setName(e.target.value) : 
+                                                                                                                                setName(item.Name)}
+                                                                                                                          } /> 
+                                              <p className={"characteristics" + index} >{item.Delivery_price}</p><input defaultValue={item.Delivery_price} 
+                                                                                                                        className={"edit edit" + index } 
                                                                                                                         onChange = {(e) => { setDeliveryPrice(e.target.value) }} />
-                                              <p className={"characteristics" + index} >{item.Take_away_price}</p><input defaultValue={item.Take_away_price} className={"area edit" + index }  
-                                                                                                                          onChange = {(e) => setTakeAwayPrice(e.target.value)} />
-                                              <p className={"characteristics" + index} >{item.Currency}</p><select className={"area edit" + index } 
+                                              <p className={"characteristics" + index} >{item.Take_away_price}</p><input defaultValue={item.Take_away_price} 
+                                                                                                                         className={"edit edit" + index }  
+                                                                                                                         onChange = {(e) => setTakeAwayPrice(e.target.value)} />
+                                              <p className={"characteristics" + index} >{item.Currency}</p><select className={"edit edit" + index } 
                                                                                                                     onChange = {(e) => setCurrency(e.target.value)} >
                                                                                                               <option value={item.Currency}>{item.Currency}</option>
                                                                                                               <option value={ item.Currency === "EUR"? "USD" : "EUR"}>{ item.Currency === "EUR"? "USD" : "EUR"}</option>
                                                                                                            </select>
-                                              <p className={"characteristics" + index} >{item.Description}</p><textarea defaultValue={item.Description} className={"area edit" + index } 
+                                              <p className={"characteristics" + index} >{item.Description}</p><textarea defaultValue={item.Description} 
+                                                                                                                        className={"edit edit" + index } 
                                                                                                                         onChange = {(e) => setDescription(e.target.value)} />
                                               <button onClick={ () => editProducts(index) } className={"editButton" + index}>Edit </button>
                                           </div>)}
-            </div>
+                </div>
            </div>)
 }

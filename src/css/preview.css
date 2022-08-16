@@ -3,23 +3,27 @@
   margin-left: 200px;
 }
 
+/*The products outer wrapper*/
 #productsWrapper {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   column-gap: 30px;
 }
 
+/*The container that holds the product's info*/
 .products {
   border: 1px solid black;
   display: flex;
   flex-direction: column;
 }
 
+/*The product's image*/
 .image {
   width: 200px;
   height: 200px;
 }
 
-.area {
+/*The edit input elements*/
+.edit {
   display: none;
 }
