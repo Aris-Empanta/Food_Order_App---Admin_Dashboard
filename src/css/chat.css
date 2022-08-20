@@ -1,0 +1,30 @@
+.chat {
+    margin-left: 200px;
+}
+
+.chat ul li {
+    padding: 30px;
+    font-size: 1.5rem;
+}
+
+#form { background: rgba(0, 0, 0, 0.15); 
+        padding: 0.25rem; position: fixed; 
+        bottom: 0; 
+        left: 200px;
+        right: 0; 
+        display: flex; 
+        height: 3rem; 
+        box-sizing: border-box;
+      }
+
+#input { border: none; 
+         padding: 0 1rem; 
+         flex-grow: 1; 
+         border-radius: 2rem; 
+         margin: 0.25rem; 
+        }
+
+
+        
+
+

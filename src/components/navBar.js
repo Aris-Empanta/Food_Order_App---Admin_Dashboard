@@ -59,7 +59,7 @@ export const NavBar = () => {
                         <a href="#/">Inbox</a>
                     </li>
                     <li>
-                        <a href="#/">Chat</a>
+                        <a href="#/chat">Chat</a>
                     </li>
                 </ul>
             </div>

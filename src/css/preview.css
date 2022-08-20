@@ -11,7 +11,7 @@
 }
 
 /*The container that holds the product's info*/
-.products {
+.product {
   border: 1px solid black;
   display: flex;
   flex-direction: column;
@@ -27,3 +27,4 @@
 .edit {
   display: none;
 }
+

@@ -8,6 +8,7 @@ export const Preview = () => {
     //----------------------STATE NEEDED------------------------------------------------------>
 
     const [ products, setProducts ] = useState([])
+    const [categories, setCategories] = useState([])
     const [ name, setName ] = useState("")
     const [ deliveryPrice, setDeliveryPrice ] = useState("")
     const [ takeAwayPrice, setTakeAwayPrice ] = useState("")
@@ -21,14 +22,18 @@ export const Preview = () => {
     //-------> Saving all products from database to state <------
     useEffect(() => {
 
-        axios.get("http://localhost:5000/products").
-        then((res) => {
+          axios.get("http://localhost:5000/products").
+          then((res) => {
 
-                setProducts(res.data)
-               }
-             )            
-           } , [setProducts]
-        )
+                  setProducts(res.data)
+                }
+              )            
+            
+          axios.get("http://localhost:5000/products/categories").then((res) => {
+
+              setCategories(res.data)
+          }) 
+        } , [setProducts, setCategories])
     
     //-------> The function to edit each individual products <------    
     const editProducts = (index) => {
@@ -149,39 +154,39 @@ export const Preview = () => {
     }
 
   //----------------------------------------------------------------------------------------->
-
+  
   return(<div className="preview">
             <div id="productsWrapper">
-            {products.map((item, index) => <div className="products">
-                                              <img src={ item.Image_name} className= {"image productImage" + index} /> 
-                                              <input type="file" className= {"updateImage" + index}
-                                                     name="newImage" onChange = { (event) => updateImage(event, index) } />
-                                              <p className={"characteristics" + index}>{ item.ID }</p>                                       
-                                              <p>{item.Category}</p>
-                                              <p className={"characteristics" + index} >{item.Name}</p><input defaultValue={item.Name} 
-                                                                                                              className={"edit edit" + index }
-                                                                                                              onChange = {(e) => {(e.target.value !== "") ? 
-                                                                                                                                setName(e.target.value) : 
-                                                                                                                                setName(item.Name)}
-                                                                                                                          } /> 
-                                              <p className={"characteristics" + index} >{item.Delivery_price}</p><input defaultValue={item.Delivery_price} 
-                                                                                                                        className={"edit edit" + index } 
-                                                                                                                        onChange = {(e) => { setDeliveryPrice(e.target.value) }} />
-                                              <p className={"characteristics" + index} >{item.Take_away_price}</p><input defaultValue={item.Take_away_price} 
-                                                                                                                         className={"edit edit" + index }  
-                                                                                                                         onChange = {(e) => setTakeAwayPrice(e.target.value)} />
-                                              <p className={"characteristics" + index} >{item.Currency}</p><select className={"edit edit" + index } 
-                                                                                                                    onChange = {(e) => setCurrency(e.target.value)} >
-                                                                                                              <option value={item.Currency}>{item.Currency}</option>
-                                                                                                              <option value={ item.Currency === "EUR"? "USD" : "EUR"}>{ item.Currency === "EUR"? "USD" : "EUR"}</option>
-                                                                                                           </select>
-                                              <p className={"characteristics" + index} >{item.Description}</p><textarea defaultValue={item.Description} 
-                                                                                                                        className={"edit edit" + index } 
-                                                                                                                        onChange = {(e) => setDescription(e.target.value)} />
-                                              <p>Last date modified: {item.Date} </p>
-                                              <button onClick={ () => editProducts(index) } className={"editButton" + index}>Edit </button>
-                                              <button onClick={ () => deleteProducts(index) } className={"deleteButton" + index}>Delete </button>
-                                          </div>)}
-                </div>
-           </div>)
+              {products.map((item, index) => 
+                              <div className={ "product product" + index }>
+                                <img src={ item.Image_name} className= {"image productImage" + index} /> 
+                                <input type="file" className= {"updateImage" + index}
+                                      name="newImage" onChange = { (event) => updateImage(event, index) } />
+                                <p className={"characteristics" + index}>{ item.ID }</p>                                       
+                                <p className={"category" + index}>{item.Category}</p>
+                                <p className={"characteristics" + index} >{item.Name}</p><input defaultValue={item.Name} 
+                                                                                                className={"edit edit" + index }
+                                                                                                onChange = {(e) => {(e.target.value !== "") ? 
+                                                                                                                    setName(e.target.value) : 
+                                                                                                                    setName(item.Name)}  } /> 
+                                <p className={"characteristics" + index} >{item.Delivery_price}</p><input defaultValue={item.Delivery_price} 
+                                                                                                          className={"edit edit" + index } 
+                                                                                                          onChange = {(e) => { setDeliveryPrice(e.target.value) }} />
+                                <p className={"characteristics" + index} >{item.Take_away_price}</p><input defaultValue={item.Take_away_price} 
+                                                                                                          className={"edit edit" + index }  
+                                                                                                          onChange = {(e) => setTakeAwayPrice(e.target.value)} />
+                                <p className={"characteristics" + index} >{item.Currency}</p><select className={"edit edit" + index } 
+                                                                                                    onChange = {(e) => setCurrency(e.target.value)} >
+                                                                                                    <option value={item.Currency}>{item.Currency}</option>
+                                                                                                    <option value={ item.Currency === "EUR"? "USD" : "EUR"}>{ item.Currency === "EUR"? "USD" : "EUR"}</option>
+                                                                                              </select>
+                                <p className={"characteristics" + index} >{item.Description}</p><textarea defaultValue={item.Description} 
+                                                                                                          className={"edit edit" + index } 
+                                                                                                          onChange = {(e) => setDescription(e.target.value)} />
+                                <p>Last date modified: {item.Date} </p>
+                                  <button onClick={ () => editProducts(index) } className={"editButton" + index}>Edit </button>
+                                  <button onClick={ () => deleteProducts(index) } className={"deleteButton" + index}>Delete </button>
+                              </div>)}                                              
+            </div>
+         </div>)
 }
