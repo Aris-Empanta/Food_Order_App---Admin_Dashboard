@@ -1,7 +1,7 @@
 import "../css/chat.css"
 import io from 'socket.io-client';
 import { useEffect } from "react"
-import { serverMessage } from "../functions/chat";
+import { showMessage } from "../functions/chat";
 
 
 export const Chat = () => {
@@ -9,14 +9,19 @@ export const Chat = () => {
    const socket = io(`http://localhost:5000`);
 
    useEffect( () => {
-         socket.on('message', serverMessage)
 
-         socket.on("chat message", serverMessage)
+         socket.on('message', showMessage)
 
-      }
-   ) 
+         socket.on("chat message", showMessage)
 
-   
+          //Grabing room name from customer and send it back to server   
+         socket.on('roomName', (room) => {
+            socket.emit("room", room)
+            console.log(room)
+         })
+      }, []
+   )  
+  
 
    const sendMessage =  (e) => {
          e.preventDefault()
@@ -24,11 +29,9 @@ export const Chat = () => {
          let message = document.getElementById("input").value
 
          socket.emit("chat message", message)
-   }
+   }   
 
-   
-
-    return(<div className="chat">
+   return(<div className="chat">
              <ul id="messages">
                 <li>hey</li>
              </ul>

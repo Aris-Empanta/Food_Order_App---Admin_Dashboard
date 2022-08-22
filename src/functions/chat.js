@@ -1,4 +1,4 @@
-export const serverMessage = (msg) => {
+export const showMessage = (msg) => {
             
     let message = document.createElement("li")
     message.innerHTML = msg
