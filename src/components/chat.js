@@ -10,16 +10,13 @@ export const Chat = () => {
 
    useEffect( () => {
 
-         socket.on('message', showMessage)
-
          socket.on("chat message", showMessage)
 
-          //Grabing room name from customer and send it back to server   
-         socket.on('roomName', (room) => {
-            socket.emit("room", room)
-            console.log(room)
-         })
-      }, []
+      //Grabing room name from customer and send it back to server, in order to join it   
+      socket.on('sendToAdmin', (data) => {
+            socket.emit('joinRoom', data.username)
+        })
+      }
    )  
   
 
