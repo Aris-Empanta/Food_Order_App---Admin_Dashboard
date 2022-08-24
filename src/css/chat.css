@@ -1,3 +1,7 @@
+.chatDashboard {
+    margin-left: 300px;
+}
+
 .chat {
     margin-left: 200px;
 }
@@ -23,3 +27,4 @@
          border-radius: 2rem; 
          margin: 0.25rem; 
         }
+
