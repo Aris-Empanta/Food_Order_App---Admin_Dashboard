@@ -2,6 +2,7 @@ import "../css/chat.css"
 import io from 'socket.io-client';
 import {useParams} from 'react-router-dom';
 import { useEffect } from "react";
+import { showMessage } from "../functions/chat";
 
 export const PrivateChat = () => {
 
@@ -10,20 +11,20 @@ export const PrivateChat = () => {
 
     useEffect(() => {
         socket.on('customer '+ params.customer, (msg)=> {
-            console.log(msg)
+           
+            showMessage(msg)
         })
     })
 
     const sendMessage = (e) => {
         e.preventDefault()
 
-        let name = params.customer
-        let message = document.getElementById("input").value
-        let data = { name: name,
+        let username = params.customer
+        let message = "admin: " + document.getElementById("input").value
+        let data = { username: username,
                      message: message
                     }
-
-
+        
         socket.emit('chat message', data)
     }
 
