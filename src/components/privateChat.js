@@ -10,19 +10,20 @@ export const PrivateChat = () => {
     const params = useParams();
 
     useEffect(() => {
-        socket.on('customer '+ params.customer, (msg)=> {
-           
-            showMessage(msg)
-        })
-    })
+        socket.on('customer '+ params.customer, (data)=> {  let sender = data.sender === 'admin' ? 'me' : data.sender
+                                                            let message = data.message
+                                                            showMessage(sender, message)
+                                                        })
+                    })
 
     const sendMessage = (e) => {
         e.preventDefault()
 
         let username = params.customer
-        let message = "admin: " + document.getElementById("input").value
+        let message = document.getElementById("input").value
         let data = { username: username,
-                     message: message
+                     message: message,
+                     sender: 'admin'
                     }
         
         socket.emit('chat message', data)
