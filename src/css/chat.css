@@ -10,6 +10,10 @@
     margin-left: 200px;
 }
 
+.admin {
+    display: none;
+}
+
 .chat ul li {
     padding: 30px;
     font-size: 1.5rem;
