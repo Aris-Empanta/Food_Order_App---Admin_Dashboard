@@ -45,10 +45,7 @@ export const NavBar = () => {
                         <p>Products<span><button onClick={ catalogueChoices } className="angleDown" >< FontAwesomeIcon icon={ faAngleDown } /></button></span></p>
                         <a id="addProduct" className="products" href="#/add-product">Add Product</a>
                         <a id="preview" className="products" href="#/preview">Preview</a>
-                    </li>
-                    <li>
-                        <a href="#/">Colors</a>
-                    </li>
+                    </li>                  
                     <li>
                         <a href="#/">Orders</a>
                     </li>
@@ -56,11 +53,8 @@ export const NavBar = () => {
                         <a href="#/">Customers</a>
                     </li>
                     <li>
-                        <a href="#/">Inbox</a>
-                    </li>
-                    <li>
-                        <a href="#/chat">Chat</a>
-                    </li>
+                        <a href="#/chat">Inbox</a>
+                    </li>                    
                 </ul>
             </div>
            )

@@ -1,24 +1,23 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import "../css/chat.css"
 
 export const ChatDashboard = () => {
    
-   const [messages, setMessages] = useState([])   
+   
+   const [customers, setCustomers] = useState([])   
       
    useEffect(() => {
 
-      axios.get('http://localhost:5000/chat-messages/customers').then((res) => { let names = []
-                                                                                 for(let data of res.data){
-                                                                                    names.push(data.Name)
-                                                                                 } 
-                                                                                 setMessages(names)  
-                                                                                 
-                                                                                    })
-   }, [setMessages])   
+      axios.get('http://localhost:5000/chat-messages/customers')
+      .then((res) => { let data = res.data
+                        if(customers.length !== data.length) setCustomers(data)
+                     })
+   }, [setCustomers])   
     
    return(<div className="chatDashboard">
             <ul>
-                  {messages.map(item => <li><a href={"#/chat/"+item} target="_blank">{item}</a></li>)}
+               { customers.map( item => <li><a href= { "#/chat/" + item.Customer }>{item.Customer}</a></li>)}
             </ul>
          </div>)
 }
