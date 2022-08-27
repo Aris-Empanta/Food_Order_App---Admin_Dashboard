@@ -2,26 +2,22 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons"
 import "../css/navBar.css"
 import { useEffect, useState } from "react"
-import axios from 'axios'
+import { Link } from 'react-router-dom';
 
 export const NavBar = () => {
-    
-    //The status needed
-    const [unread, setUnread ] =useState(0)
 
     /*I added useEffect, because otherwise the function catalogueChoices()
       works only on second click!*/
     useEffect(() => {
                         let addProduct = document.getElementById("addProduct")
                         let preview = document.getElementById("preview")
+                        let newMessage = document.getElementById('newMessage')
 
                         addProduct.style.display = "none"
-                        preview.style.display = "none"
-
-                        //Fetching the amount of unread messages
-                        axios.get('http://localhost:5000/chat-messages/unread-messages')
-                            .then(res => setUnread(res.data[0].Unread))                    
+                        preview.style.display = "none"                                           
                     }, [])
+
+ 
     
     //The function that shows and hide the cataloque submenu on nav-bar.
     const catalogueChoices = () => {
@@ -39,10 +35,10 @@ export const NavBar = () => {
                                         addProduct.style.display = "none"
                                         preview.style.display = "none"
                                         catalogue.style.height = "70px"
-                                    }
-                                
+                                    }                                
                                 }
 
+    
     return( <div className="navBar">
                 <ul>
                     <li>
@@ -56,8 +52,8 @@ export const NavBar = () => {
                                 </button>
                             </span>
                         </p>
-                        <a id="addProduct" className="products" href="#/add-product">Add Product</a>
-                        <a id="preview" className="products" href="#/preview">Preview</a>
+                        <Link id="addProduct" className="products" to="add-product">Add Product</Link>
+                        <Link id="preview" className="products" to="preview">Preview</Link>
                     </li>                  
                     <li>
                         <a href="#/">Orders</a>
@@ -65,8 +61,8 @@ export const NavBar = () => {
                     <li>
                         <a href="#/">Customers</a>
                     </li>
-                    <li>
-                        <a href="#/chat">Inbox <span id="unread" > { unread } </span></a>
+                    <li >
+                        <a  href="#/chat" >Inbox <span id="newMessage"> new </span></a>
                     </li>                    
                 </ul>
             </div>

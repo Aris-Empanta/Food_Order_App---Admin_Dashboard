@@ -3,7 +3,7 @@ import io from 'socket.io-client';
 import {useParams} from 'react-router-dom';
 import { useEffect, useState } from "react";
 import { showMessage } from "../functions/chat";
-import axios from "axios"
+import axios from "axios"    
 
 /*Below component is dynamically generated in order to chat with
   a specific customer that sent us a message*/
