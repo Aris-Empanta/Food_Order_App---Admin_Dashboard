@@ -5,9 +5,16 @@ import { AddProduct } from "./components/addProduct"
 import { Preview } from "./components/ProductsPreview"
 import { ChatDashboard } from './components/chatDashboard';
 import { PrivateChat } from './components/privateChat'
+import { socket } from './components/privateChat';
+import { useEffect } from 'react';
 
 //The parent component
 function App() {
+
+  useEffect(() => {
+
+              socket.on('new order', (data) => console.log(data))    
+            }, [])
 
   return(<div>
           <NavBar />

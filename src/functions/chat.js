@@ -5,5 +5,4 @@ export const showMessage = (name, msg) => {
     
     let messages = document.getElementById("messages")
     messages.appendChild(message)
-    console.log(1)
  }
