@@ -35,6 +35,9 @@ export const PrivateChat = () => {
 
                                         //Hide loading element when fetch the data
                                         loader.style.display = 'none'
+
+                                        //Updates the unread message indicator on navbar
+                                        socket.emit('update navbar')
                                         })
                          .catch(err => console.log(err))
                     
@@ -43,23 +46,21 @@ export const PrivateChat = () => {
                                                                         let message = data.message
                                                                         if(data.sender !== 'admin') showMessage(sender, message)
                                                                         //Not showing new messages in navbar
-                                                                        socket.emit('messages detected')
-                                                                      })
+                                                                        window.scrollTo(0, document.body.scrollHeight);
+                                                                        
+                                                                       /* When we receive messages with this component mounted,
+                                                                         navbar message indicator should remain zero*/
+                                                                        socket.emit('inbox zero', sender)
+                                                                      })                    
+                   
+    }, [])
 
-                    //Below emit will cause the number of message in the navbar to become zero.
-                    socket.emit('messages detected')
-                    
-                    //We disconnect the socket, otherwise side effects like double messages wil occur
-                  /*  return () => {
-                        socket.disconnect()
-                    }*/
-                    
-}, [])
     /*The function to send a message to a customer in real time,
       saving it in the database and displaying it.*/
     const sendMessage = (e) => {
         e.preventDefault()
         
+        let inputMessage = document.getElementById("input")
         let username = params.customer
         let message = document.getElementById("input").value
         let data = {
@@ -68,8 +69,13 @@ export const PrivateChat = () => {
                      sender: 'admin'
                     }
         
-        socket.emit('chat message', data)
-        showMessage("me", message)
+        if (inputMessage.value) {
+
+          socket.emit('chat message', data)
+          showMessage("me", message)
+          inputMessage.value = '';
+          window.scrollTo(0, document.body.scrollHeight);
+        }
     }
 
      return(<div className="chat">

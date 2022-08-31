@@ -27,17 +27,16 @@ export const ChatDashboard = () => {
                                        }
       
       fetchMessages()
-            
+      
+      //Reevaluates unread messages on bellow listener
       socket.on('new message', () =>  fetchMessages() )     
 
       }, [])   
 
-   const markAsRead = (sender) => {      
+   const markAsRead = (sender) => {     
       
-      axios.put('http://localhost:5000/chat-messages', { sender: sender })  
-      //Fetching all messages from the database      
       socket.emit('message read', sender)
-   }
+   } 
     
    return(<div className="chatDashboard">
       <div id="loaderInbox">Loading.....</div>

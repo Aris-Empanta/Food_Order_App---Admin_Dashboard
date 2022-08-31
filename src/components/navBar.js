@@ -14,22 +14,23 @@ export const NavBar = () => {
     useEffect(() => {
                         let addProduct = document.getElementById("addProduct")
                         let preview = document.getElementById("preview")
-                        let newMessage = document.getElementById("newMessage")
 
                         addProduct.style.display = "none"
                         preview.style.display = "none" 
-                        //if(unreadMessages === 0) newMessage.style.display = 'none'
-                        
-                        
-                        axios.get('http://localhost:5000/chat-messages')
-                             .then( res => {
-                                        res.data.find(item => item.Read_status === 'unread' ? setUnreadMessages(prevAmount => prevAmount +1) : null )
-                                    })
-                        //Showing notification for every new message in real time
-                        socket.on('new message', () => setUnreadMessages(prevAmount => prevAmount +1) )
 
-                        socket.on('no new messages', () => setUnreadMessages(0))
-                                                
+                        const fetchUnread = () => {
+
+                            axios.get('http://localhost:5000/chat-messages/unread-messages')
+                                 .then((res) => setUnreadMessages(res.data[0].Unread))
+                        }
+
+                        fetchUnread()
+
+                        //Reevaluates unread messages on bellow listener
+                        socket.on('new message', () =>  fetchUnread()) 
+                        
+                        //An event triggered when admin's chat opens
+                        socket.on('re-evaluate unread',  () =>  fetchUnread())                                                
                     }, [])
 
  
