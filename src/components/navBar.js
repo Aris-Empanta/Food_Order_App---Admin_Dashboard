@@ -14,23 +14,33 @@ export const NavBar = () => {
     useEffect(() => {
                         let addProduct = document.getElementById("addProduct")
                         let preview = document.getElementById("preview")
+                        let unread = document.getElementById("newMessage")
 
                         addProduct.style.display = "none"
-                        preview.style.display = "none" 
-
+                        preview.style.display = "none"       
+                        
                         const fetchUnread = () => {
 
                             axios.get('http://localhost:5000/chat-messages/unread-messages')
-                                 .then((res) => setUnreadMessages(res.data[0].Unread))
+                                 .then((res) => { 
+                                                  setUnreadMessages(res.data[0].Unread)  
+                                                  //If unread messages are '0', They will not be displayed in navbar. 
+                                                  res.data[0].Unread === '0' ? unread.style.display = "none" : 
+                                                                               unread.style.display = "initial"                                        
+                                                })
                         }
 
-                        fetchUnread()
+                        fetchUnread()                        
 
                         //Reevaluates unread messages on bellow listener
-                        socket.on('new message', () =>  fetchUnread()) 
+                        socket.on('new message', () =>  {
+                                                          fetchUnread()
+                                                        }) 
                         
                         //An event triggered when admin's chat opens
-                        socket.on('re-evaluate unread',  () =>  fetchUnread())                                                
+                        socket.on('re-evaluate unread',  () =>  { fetchUnread()
+                                                                  
+                                                                })                                                
                     }, [])
 
  
