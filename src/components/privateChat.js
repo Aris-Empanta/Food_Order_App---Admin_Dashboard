@@ -22,7 +22,8 @@ export const PrivateChat = () => {
                     let customer = params.customer
 
                     //The loading element
-                    let loader = document.getElementById("loaderMessages")                    
+                    let loader = document.getElementById("loaderMessages")        
+                    let userTyping = document.getElementById("userTyping")           
                     
                    //Fetching all the old messages to be displayed.
                     axios.get('http://localhost:5000/chat-messages')
@@ -51,9 +52,23 @@ export const PrivateChat = () => {
                                                                        /* When we receive messages with this component mounted,
                                                                          navbar message indicator should remain zero*/
                                                                         socket.emit('inbox zero', sender)
-                                                                      })                    
+                                                                      }) 
+
+                  //below listeners notify if a specific customer is typing or not
+                  socket.on(params.customer + ' is typing', () => userTyping.style.display = 'initial') 
+                  
+                  socket.on(params.customer + ' not typing', () => userTyping.style.display = 'none') 
                    
     }, [])
+    
+    //Below function is triggered to notify a specific customer that we are typing to him
+    const userTyping = () => {
+
+      let customer = params.customer
+      let inputValue = document.getElementById('input').value
+
+      inputValue === ''? socket.emit('Admin not typing', customer ) : socket.emit('Admin typing', customer )
+    }
 
     /*The function to send a message to a customer in real time,
       saving it in the database and displaying it.*/
@@ -84,8 +99,9 @@ export const PrivateChat = () => {
                     
                     { messagesHistory.map( item => <li>{(item.Sender === "admin" ? "me" : item.Sender) + ": " + item.Message}</li>) }                    
                 </ul>
+                <div id="userTyping">{params.customer + " typing..."}</div>
                 <form id="form" action="" onSubmit={sendMessage}>
-                    <input id="input" /><button>Send</button>
+                    <input id="input" onChange={ userTyping } /><button>Send</button>
                 </form>
             </div>)
 }

@@ -18,7 +18,7 @@ export const ChatDashboard = () => {
       const fetchMessages = () => {  axios.get('http://localhost:5000/chat-messages/customers')
                                           .then(res =>  {
                                                          let data = res.data.map(item => Object.values(item))
-                                                         
+                                                         //If unread messages are 0, no need to be displayed.
                                                          data.map(item => {
                                                             if(item[1] == '0') {
                                                                item[1] = ''
@@ -27,7 +27,7 @@ export const ChatDashboard = () => {
                                                                item[2] = 'red'
                                                             }
                                                          })
-                                                         console.log(data)
+                                                         
                                                          setCustomers(data)
                                                        
                                                          //Hide loading element when fetch the data
@@ -53,11 +53,12 @@ export const ChatDashboard = () => {
    return(<div className="chatDashboard">
       <div id="loaderInbox">Loading.....</div>
             <ul>
-               { customers.map( (item, index ) => <li className={ item.Sender } >
+               { customers.map( (item) => <li className={ item.Sender } >
                                             <a href= { "#/chat/" + item[0] } onClick={ () => markAsRead(item[0]) }>
                                                 {item[0]} <span className="unreadMessages">{ item[1] }</span>
                                             </a>
-                                        </li>)}
+                                        </li>)
+                                        }
             </ul>
          </div>)
 }

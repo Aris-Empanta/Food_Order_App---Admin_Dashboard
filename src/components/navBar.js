@@ -19,6 +19,7 @@ export const NavBar = () => {
                         addProduct.style.display = "none"
                         preview.style.display = "none"       
                         
+                        //The function to fetch the number  of unread messages
                         const fetchUnread = () => {
 
                             axios.get('http://localhost:5000/chat-messages/unread-messages')
@@ -29,18 +30,15 @@ export const NavBar = () => {
                                                                                unread.style.display = "initial"                                        
                                                 })
                         }
-
+                        
+                        //Fetching unread messages number on component render
                         fetchUnread()                        
 
                         //Reevaluates unread messages on bellow listener
-                        socket.on('new message', () =>  {
-                                                          fetchUnread()
-                                                        }) 
+                        socket.on('new message', () => fetchUnread() ) 
                         
                         //An event triggered when admin's chat opens
-                        socket.on('re-evaluate unread',  () =>  { fetchUnread()
-                                                                  
-                                                                })                                                
+                        socket.on('re-evaluate unread',  () => fetchUnread() )                                                
                     }, [])
 
  
@@ -63,7 +61,6 @@ export const NavBar = () => {
                                         catalogue.style.height = "70px"
                                     }                                
                                 }
-
     
     return( <div className="navBar">
                 <ul>
