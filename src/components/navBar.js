@@ -5,16 +5,16 @@ import { useEffect, useState } from "react"
 import { Link } from 'react-router-dom';
 import { socket } from "./privateChat";
 import axios from 'axios'
-
+ 
 export const NavBar = () => {
 
-     const [ unreadMessages, setUnreadMessages ] = useState(0)
+     const [ unreadMessages, setUnreadMessages ] = useState("")
+     const [ uncheckedOrders, setUncheckedOrders ] = useState("")
     /*I added useEffect, because otherwise the function catalogueChoices()
       works only on second click!*/
     useEffect(() => {
                         let addProduct = document.getElementById("addProduct")
                         let preview = document.getElementById("preview")
-                        let unread = document.getElementById("newMessage")
 
                         addProduct.style.display = "none"
                         preview.style.display = "none"       
@@ -24,12 +24,26 @@ export const NavBar = () => {
 
                             axios.get('http://localhost:5000/chat-messages/unread-messages')
                                  .then((res) => { 
-                                                  setUnreadMessages(res.data[0].Unread)  
+                                                    
                                                   //If unread messages are '0', They will not be displayed in navbar. 
-                                                  res.data[0].Unread === '0' ? unread.style.display = "none" : 
-                                                                               unread.style.display = "initial"                                        
+                                                  res.data[0].Unread === '0' ? setUnreadMessages("") : 
+                                                                               setUnreadMessages(res.data[0].Unread)                                        
                                                 })
                         }
+
+                        //The function to fetch the number  of unchecked orders
+                        const fetchUncheckedOrders = () => {
+
+                            axios.get('http://localhost:5000/orders/unchecked-orders')
+                            .then((res) => { 
+                                               
+                                             //If unread messages are '0', They will not be displayed in navbar. 
+                                             res.data.length === 0 ? setUncheckedOrders("") : 
+                                                                     setUncheckedOrders(res.data.length)                                        
+                                           })
+                        }
+
+                        fetchUncheckedOrders()
                         
                         //Fetching unread messages number on component render
                         fetchUnread()                        
@@ -79,7 +93,7 @@ export const NavBar = () => {
                         <Link id="preview" className="products" to="preview">Preview</Link>
                     </li>                  
                     <li>
-                        <a href="#/">Orders</a>
+                        <a href="#/orders">Orders <span id="newOrder">{ uncheckedOrders }</span></a>
                     </li>
                     <li>
                         <a href="#/">Customers</a>
