@@ -1,0 +1,20 @@
+.specificOrder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    gap: 30px;
+}
+
+.orderDetails {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+}
+
+.orderImage {
+    height: 150px;
+    width: 150px;
+}

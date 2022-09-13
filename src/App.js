@@ -6,6 +6,7 @@ import { Preview } from "./components/ProductsPreview"
 import { ChatDashboard } from './components/chatDashboard';
 import { PrivateChat } from './components/privateChat'
 import { Orders } from "./components/orders"
+import { SpecificOrder } from "./components/specificOrder"
 
 //The parent component
 function App() {
@@ -16,6 +17,7 @@ function App() {
             <Route path="add-product" element={<AddProduct />} />
             <Route path="preview" element={<Preview />} />
             <Route path="orders" element={<Orders />} />
+            <Route path="orders/order-number-:id" element={<SpecificOrder />} />
             <Route path="chat" element={<ChatDashboard />} />
             <Route path="chat/:customer" element={<PrivateChat/>} />
           </Routes>

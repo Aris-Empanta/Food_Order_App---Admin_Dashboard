@@ -48,11 +48,17 @@ export const NavBar = () => {
                         //Fetching unread messages number on component render
                         fetchUnread()                        
 
-                        //Reevaluates unread messages on bellow listener
+                        //Reevaluates unread messages when receiving new message
                         socket.on('new message', () => fetchUnread() ) 
                         
-                        //An event triggered when admin's chat opens
-                        socket.on('re-evaluate unread',  () => fetchUnread() )                                                
+                        //Reevaluates unread messages  when admin's chat opens
+                        socket.on('re-evaluate unread',  () => fetchUnread() )  
+
+                        //Reevaluates unchecked orders  when receiving new order
+                        socket.on('new order', () => fetchUncheckedOrders() )
+
+                        //Reevaluates unchecked orders when we open an order
+                        socket.on('re-evaluate orders', () => fetchUncheckedOrders() )
                     }, [])
 
  
@@ -93,7 +99,7 @@ export const NavBar = () => {
                         <Link id="preview" className="products" to="preview">Preview</Link>
                     </li>                  
                     <li>
-                        <a href="#/orders">Orders <span id="newOrder">{ uncheckedOrders }</span></a>
+                        <a href="#/orders"> Orders <span id="newOrder">{ uncheckedOrders }</span></a>
                     </li>
                     <li>
                         <a href="#/">Customers</a>

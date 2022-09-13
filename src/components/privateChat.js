@@ -41,7 +41,7 @@ export const PrivateChat = () => {
                                         socket.emit('update navbar')
                                         })
                          .catch(err => console.log(err))
-                    
+                     
                    //Handling the socket.io event that will send us a message from admin and displaying it.
                     socket.on('customer '+ params.customer, (data)=> {  let sender = data.sender === 'admin' ? 'me' : data.sender
                                                                         let message = data.message
