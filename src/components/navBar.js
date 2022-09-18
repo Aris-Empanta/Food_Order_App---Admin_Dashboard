@@ -1,89 +1,52 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faAngleDown } from "@fortawesome/free-solid-svg-icons"
+import { faAngleDown,
+          faPizzaSlice } from "@fortawesome/free-solid-svg-icons"
+import { faLemon } from "@fortawesome/free-regular-svg-icons"
 import "../css/navBar.css"
 import { useEffect, useState } from "react"
 import { Link } from 'react-router-dom';
 import { socket } from "./privateChat";
 import axios from 'axios'
+import { catalogueChoices, fetchUnread, fetchUncheckedOrders } from "../functions/navBar";
  
 export const NavBar = () => {
 
      const [ unreadMessages, setUnreadMessages ] = useState("")
      const [ uncheckedOrders, setUncheckedOrders ] = useState("")
-    /*I added useEffect, because otherwise the function catalogueChoices()
-      works only on second click!*/
+    
     useEffect(() => {
                         let addProduct = document.getElementById("addProduct")
                         let preview = document.getElementById("preview")
 
                         addProduct.style.display = "none"
-                        preview.style.display = "none"       
-                        
-                        //The function to fetch the number  of unread messages
-                        const fetchUnread = () => {
+                        preview.style.display = "none"
 
-                            axios.get('http://localhost:5000/chat-messages/unread-messages')
-                                 .then((res) => { 
-                                                    
-                                                  //If unread messages are '0', They will not be displayed in navbar. 
-                                                  res.data[0].Unread === '0' ? setUnreadMessages("") : 
-                                                                               setUnreadMessages(res.data[0].Unread)                                        
-                                                })
-                        }
-
-                        //The function to fetch the number  of unchecked orders
-                        const fetchUncheckedOrders = () => {
-
-                            axios.get('http://localhost:5000/orders/unchecked-orders')
-                            .then((res) => { 
-                                               
-                                             //If unread messages are '0', They will not be displayed in navbar. 
-                                             res.data.length === 0 ? setUncheckedOrders("") : 
-                                                                     setUncheckedOrders(res.data.length)                                        
-                                           })
-                        }
-
-                        fetchUncheckedOrders()
+                        //Fetching new unchecked orders
+                        fetchUncheckedOrders(axios, setUncheckedOrders)
                         
                         //Fetching unread messages number on component render
-                        fetchUnread()                        
+                        fetchUnread(axios, setUnreadMessages)                        
 
                         //Reevaluates unread messages when receiving new message
-                        socket.on('new message', () => fetchUnread() ) 
+                        socket.on('new message', () => fetchUnread(axios, setUnreadMessages) ) 
                         
                         //Reevaluates unread messages  when admin's chat opens
-                        socket.on('re-evaluate unread',  () => fetchUnread() )  
+                        socket.on('re-evaluate unread',  () => fetchUnread(axios, setUnreadMessages) )  
 
                         //Reevaluates unchecked orders  when receiving new order
-                        socket.on('new order', () => fetchUncheckedOrders() )
+                        socket.on('new order', () => fetchUncheckedOrders(axios, setUncheckedOrders) )
 
                         //Reevaluates unchecked orders when we open an order
-                        socket.on('re-evaluate orders', () => fetchUncheckedOrders() )
+                        socket.on('re-evaluate orders', () => fetchUncheckedOrders(axios, setUncheckedOrders) )
                     }, [])
 
- 
-    
-    //The function that shows and hide the cataloque submenu on nav-bar.
-    const catalogueChoices = () => {
-
-                                    let addProduct = document.getElementById("addProduct")
-                                    let preview = document.getElementById("preview")
-                                    let catalogue = document.getElementById("catalogue")
-                                    let display = preview.style.display
-
-                                    if(display === "none"){
-                                        addProduct.style.display = "initial"
-                                        preview.style.display = "initial"
-                                        catalogue.style.height = "150px"
-                                    } else {
-                                        addProduct.style.display = "none"
-                                        preview.style.display = "none"
-                                        catalogue.style.height = "70px"
-                                    }                                
-                                }
-    
     return( <div className="navBar">
                 <ul>
+                    <li>
+                        <div id="logoWrapper">
+                            <FontAwesomeIcon icon={ faLemon } id="logo"/>
+                        </div>
+                    </li>
                     <li>
                         <a href="#/">Dashboard</a>
                     </li>
@@ -102,7 +65,7 @@ export const NavBar = () => {
                         <a href="#/orders"> Orders <span id="newOrder">{ uncheckedOrders }</span></a>
                     </li>
                     <li>
-                        <a href="#/">Customers</a>
+                        <a href="#/customers">Customers</a>
                     </li>
                     <li >
                         <a  href="#/chat">Inbox <span id="newMessage">{ unreadMessages }</span></a>
