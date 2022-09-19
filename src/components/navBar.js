@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faAngleDown,
+import { faAngleRight,
           faPizzaSlice } from "@fortawesome/free-solid-svg-icons"
 import { faLemon } from "@fortawesome/free-regular-svg-icons"
 import "../css/navBar.css"
@@ -53,8 +53,8 @@ export const NavBar = () => {
                     <li id="catalogue">
                         <p>Products
                             <span>
-                                <button onClick={ catalogueChoices } className="angleDown" >
-                                    < FontAwesomeIcon icon={ faAngleDown } />
+                                <button onClick={ catalogueChoices } id="expandArrow" >
+                                    < FontAwesomeIcon icon={ faAngleRight } />
                                 </button>
                             </span>
                         </p>

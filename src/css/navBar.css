@@ -4,7 +4,7 @@
     flex-direction: column;
     justify-content:baseline;
     height: 100vh;
-    width: 250px;
+    width: 200px;
     background-color: white;
     padding-top: 20px;
     padding-left: 20px;
@@ -53,18 +53,22 @@
 #catalogue {
     gap: 20px;
     color: #606060;
+    transition: margin-bottom 0.4s;
 }
 
 .products {
     align-self: flex-start;
-    padding-left: 60px;
+    padding-left: 20px;
+    font-size: 1.1rem;
 }
 
-.angleDown {
+#expandArrow {
     background-color: transparent;
     border: none;
-    font-size: 1.4rem;
+    font-size: 1.1rem;
     cursor: pointer;
     padding: 10px;
+    margin-left: 70px;
     color: #606060;
+    transition: transform 0.4s;
 }

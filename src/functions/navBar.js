@@ -5,15 +5,20 @@ export const catalogueChoices = () => {
     let preview = document.getElementById("preview")
     let catalogue = document.getElementById("catalogue")
     let display = preview.style.display
+    let arrow = document.getElementById("expandArrow")
 
     if(display === "none"){
         addProduct.style.display = "initial"
         preview.style.display = "initial"
-        catalogue.style.height = "150px"
+        catalogue.style.marginBottom = "30px"
+        catalogue.style.marginTop = "40px"
+        arrow.style.transform = "rotate(90deg)"
     } else {
         addProduct.style.display = "none"
         preview.style.display = "none"
-        catalogue.style.height = "70px"
+        catalogue.style.marginBottom = "0"
+        catalogue.style.marginTop = "0"
+        arrow.style.transform = "rotate(0)"
     }                                
 }
 
