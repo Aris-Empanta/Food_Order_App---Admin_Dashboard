@@ -1,6 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faAngleRight,
-          faPizzaSlice } from "@fortawesome/free-solid-svg-icons"
+          faTableColumns,
+          faUtensils,
+          faMotorcycle,
+          faUsers,
+          faComment
+         } from "@fortawesome/free-solid-svg-icons"
 import { faLemon } from "@fortawesome/free-regular-svg-icons"
 import "../css/navBar.css"
 import { useEffect, useState } from "react"
@@ -42,16 +47,21 @@ export const NavBar = () => {
 
     return( <div className="navBar">
                 <ul>
-                    <li>
+                    <li id="firmWrapper">
                         <div id="logoWrapper">
-                            <FontAwesomeIcon icon={ faLemon } id="logo"/>
+                            <FontAwesomeIcon icon={ faLemon } id="logo"/>                            
+                        </div>
+                        <div>
+                            <p class="restaurantName">Aris</p>
+                            <p class="restaurantName">Restaurant</p>
                         </div>
                     </li>
                     <li>
-                        <a href="#/">Dashboard</a>
+                        <a href="#/">< FontAwesomeIcon icon={ faTableColumns } className="navbarIcons" />Dashboard</a>
                     </li>
                     <li id="catalogue">
-                        <p>Products
+                        <p>< FontAwesomeIcon icon={ faUtensils } className="navbarIcons" />
+                            Products
                             <span>
                                 <button onClick={ catalogueChoices } id="expandArrow" >
                                     < FontAwesomeIcon icon={ faAngleRight } />
@@ -62,13 +72,22 @@ export const NavBar = () => {
                         <Link id="preview" className="products" to="preview">Preview</Link>
                     </li>                  
                     <li>
-                        <a href="#/orders"> Orders <span id="newOrder">{ uncheckedOrders }</span></a>
+                        <a href="#/orders">
+                            < FontAwesomeIcon icon={ faMotorcycle } className="navbarIcons" />
+                            Orders <span id="newOrder">{ uncheckedOrders }</span>
+                        </a>
                     </li>
                     <li>
-                        <a href="#/customers">Customers</a>
+                        <a href="#/customers">
+                            < FontAwesomeIcon icon={ faUsers } className="navbarIcons" />
+                            Customers
+                        </a>
                     </li>
                     <li >
-                        <a  href="#/chat">Inbox <span id="newMessage">{ unreadMessages }</span></a>
+                        <a  href="#/chat">
+                            < FontAwesomeIcon icon={ faComment } className="navbarIcons" />
+                            Inbox <span id="newMessage">{ unreadMessages }</span>
+                        </a>
                     </li>                    
                 </ul>
             </div>
