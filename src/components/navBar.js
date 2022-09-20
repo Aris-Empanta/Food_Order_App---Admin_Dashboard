@@ -12,7 +12,10 @@ import { useEffect, useState } from "react"
 import { Link } from 'react-router-dom';
 import { socket } from "./privateChat";
 import axios from 'axios'
-import { catalogueChoices, fetchUnread, fetchUncheckedOrders } from "../functions/navBar";
+import { catalogueChoices, 
+         fetchUnread, 
+         fetchUncheckedOrders, 
+         focus } from "../functions/navBar";
  
 export const NavBar = () => {
 
@@ -56,35 +59,41 @@ export const NavBar = () => {
                             <p class="restaurantName">Restaurant</p>
                         </div>
                     </li>
-                    <li>
-                        <a href="#/">< FontAwesomeIcon icon={ faTableColumns } className="navbarIcons" />Dashboard</a>
+                    <li id="dashboard"  className="navBarList">
+                        <a href="#/" id="dashboardLink" onClick={ () => focus("dashboard", "dashboardLink") }>
+                            < FontAwesomeIcon icon={ faTableColumns } className="navbarIcons" />
+                            Dashboard
+                        </a>
                     </li>
-                    <li id="catalogue">
-                        <p>< FontAwesomeIcon icon={ faUtensils } className="navbarIcons" />
-                            Products
-                            <span>
-                                <button onClick={ catalogueChoices } id="expandArrow" >
-                                    < FontAwesomeIcon icon={ faAngleRight } />
-                                </button>
-                            </span>
-                        </p>
+                    <li id="catalogue"  >
+                        <div id="navCatalogue" className="navBarList" >                       
+                            <p id="navProducts" onClick={ () => focus("navCatalogue") }>
+                                < FontAwesomeIcon icon={ faUtensils } className="navbarIcons"/>
+                                Products
+                                <span>
+                                    <button onClick={ catalogueChoices } id="expandArrow" >
+                                        < FontAwesomeIcon icon={ faAngleRight } />
+                                    </button>
+                                </span>
+                            </p>
+                        </div>
                         <Link id="addProduct" className="products" to="add-product">Add Product</Link>
                         <Link id="preview" className="products" to="preview">Preview</Link>
                     </li>                  
-                    <li>
-                        <a href="#/orders">
+                    <li id="orders"  className="navBarList">
+                        <a href="#/orders" onClick={ () => focus("orders") }>
                             < FontAwesomeIcon icon={ faMotorcycle } className="navbarIcons" />
                             Orders <span id="newOrder">{ uncheckedOrders }</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="#/customers">
+                    <li id="customers"  className="navBarList">
+                        <a href="#/customers"  onClick={ () => focus("customers") }>
                             < FontAwesomeIcon icon={ faUsers } className="navbarIcons" />
                             Customers
                         </a>
                     </li>
-                    <li >
-                        <a  href="#/chat">
+                    <li id="inbox"  className="navBarList">
+                        <a  href="#/chat"  onClick={ () => focus("inbox") }>
                             < FontAwesomeIcon icon={ faComment } className="navbarIcons" />
                             Inbox <span id="newMessage">{ unreadMessages }</span>
                         </a>

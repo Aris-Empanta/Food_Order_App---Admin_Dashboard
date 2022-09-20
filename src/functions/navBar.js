@@ -45,3 +45,17 @@ export const fetchUncheckedOrders = (axios, callback) => {
                                                 callback(res.data.length)                                        
                     })
 }
+
+export const focus = (id, linkId) => {
+
+    let elements = document.getElementsByClassName("navBarList")
+    let current = document.getElementById(id)
+    let link = document.getElementById(linkId)
+
+    for( let element of elements) {
+        element.classList.remove("focus")
+    }
+
+    current.classList.add("focus")
+    link.style.color = "purple"
+}

@@ -7,7 +7,6 @@
     width: 230px;
     background-color: white;
     padding-top: 20px;
-    padding-left: 20px;
     position: fixed;
     box-shadow: 1px 1px 4px silver;
 }
@@ -58,12 +57,12 @@
     list-style: none;
     font-size: 1.2rem;
     font-weight: 500;
+    height: 70px;
     font-family: Arial, Helvetica, sans-serif;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    height: 70px;
     cursor: pointer;
 }
 
@@ -93,4 +92,20 @@
     margin-left: 60px;
     color: #606060;
     transition: transform 0.4s;
+}
+
+.focus {
+    background-color: #ba55d3;
+    color: purple;
+    width: 100%;
+}
+
+.navBarList {
+    padding-left: 20px;
+}
+
+#navProducts {
+    height: 70px;
+    display: flex;
+    align-items: center;
 }
