@@ -15,7 +15,10 @@ import axios from 'axios'
 import { catalogueChoices, 
          fetchUnread, 
          fetchUncheckedOrders, 
-         focus } from "../functions/navBar";
+         focus,
+         soundNotification } from "../functions/navBar";
+import  orderNotification  from "../mp3/orderNotification.mp3";
+import messageNotification from "../mp3/messageNotification.mp3"
  
 export const NavBar = () => {
 
@@ -33,16 +36,18 @@ export const NavBar = () => {
                         fetchUncheckedOrders(axios, setUncheckedOrders)
                         
                         //Fetching unread messages number on component render
-                        fetchUnread(axios, setUnreadMessages)                        
+                        fetchUnread( axios, setUnreadMessages)                        
 
                         //Reevaluates unread messages when receiving new message
-                        socket.on('new message', () => fetchUnread(axios, setUnreadMessages) ) 
+                        socket.on('new message', () => { fetchUnread( axios, setUnreadMessages) 
+                                                         soundNotification("messageNotification") }) 
                         
                         //Reevaluates unread messages  when admin's chat opens
                         socket.on('re-evaluate unread',  () => fetchUnread(axios, setUnreadMessages) )  
 
                         //Reevaluates unchecked orders  when receiving new order
-                        socket.on('new order', () => fetchUncheckedOrders(axios, setUncheckedOrders) )
+                        socket.on('new order', () => { fetchUncheckedOrders(axios, setUncheckedOrders) 
+                                                       soundNotification("orderNotification") })
 
                         //Reevaluates unchecked orders when we open an order
                         socket.on('re-evaluate orders', () => fetchUncheckedOrders(axios, setUncheckedOrders) )
@@ -60,19 +65,20 @@ export const NavBar = () => {
                         </div>
                     </li>
                     <li id="dashboard"  className="navBarList">
-                        <a href="#/" id="dashboardLink" onClick={ () => focus("dashboard", "dashboardLink") }>
-                            < FontAwesomeIcon icon={ faTableColumns } className="navbarIcons" />
-                            Dashboard
+                        <a href="#/" id="dashboardLink"                          
+                           onClick={ () => focus("dashboard", "dashboardColor") }>
+                            < FontAwesomeIcon icon={ faTableColumns } className="navbarIcons dashboardColor fontsColor" />
+                            <span className="dashboardColor fontsColor" >Dashboard</span>
                         </a>
                     </li>
                     <li id="catalogue"  >
                         <div id="navCatalogue" className="navBarList" >                       
-                            <p id="navProducts" onClick={ () => focus("navCatalogue") }>
-                                < FontAwesomeIcon icon={ faUtensils } className="navbarIcons"/>
-                                Products
+                            <p id="navProducts" onClick={ () => focus("navCatalogue", "productsColor") }>
+                                < FontAwesomeIcon icon={ faUtensils } className="navbarIcons productsColor fontsColor"/>
+                                <span className="productsColor fontsColor">Products</span>
                                 <span>
                                     <button onClick={ catalogueChoices } id="expandArrow" >
-                                        < FontAwesomeIcon icon={ faAngleRight } />
+                                        < FontAwesomeIcon icon={ faAngleRight } className="productsColor fontsColor"/>
                                     </button>
                                 </span>
                             </p>
@@ -81,24 +87,43 @@ export const NavBar = () => {
                         <Link id="preview" className="products" to="preview">Preview</Link>
                     </li>                  
                     <li id="orders"  className="navBarList">
-                        <a href="#/orders" onClick={ () => focus("orders") }>
-                            < FontAwesomeIcon icon={ faMotorcycle } className="navbarIcons" />
-                            Orders <span id="newOrder">{ uncheckedOrders }</span>
+                        <a href="#/orders"                         
+                           onClick={ () => focus("orders", "ordersColor") }>
+                            < FontAwesomeIcon icon={ faMotorcycle } className="navbarIcons ordersColor fontsColor" />
+                            <span className="ordersColor fontsColor" >Orders </span>                          
+                            <span id="newOrder" className="ordersColor fontsColor">
+                                { uncheckedOrders !== "" ?
+                                 <div className="uncheckedOrders">{uncheckedOrders}</div> :
+                                 uncheckedOrders }  
+                            </span>                            
                         </a>
                     </li>
                     <li id="customers"  className="navBarList">
-                        <a href="#/customers"  onClick={ () => focus("customers") }>
-                            < FontAwesomeIcon icon={ faUsers } className="navbarIcons" />
-                            Customers
+                        <a href="#/customers"                            
+                           onClick={ () => focus("customers", "customersColor") }>
+                            < FontAwesomeIcon icon={ faUsers } className="navbarIcons customersColor fontsColor" />
+                            <span className="customersColor fontsColor">Customers</span>
                         </a>
                     </li>
-                    <li id="inbox"  className="navBarList">
-                        <a  href="#/chat"  onClick={ () => focus("inbox") }>
-                            < FontAwesomeIcon icon={ faComment } className="navbarIcons" />
-                            Inbox <span id="newMessage">{ unreadMessages }</span>
+                    <li id="inbox"  className="navBarList inboxColor">
+                        <a  href="#/chat"                           
+                            onClick={ () => focus("inbox", "inboxColor") }>
+                            < FontAwesomeIcon icon={ faComment } className="navbarIcons inboxColor fontsColor" />
+                            <span className="inboxColor fontsColor" >Inbox </span>                            
+                            <span className="inboxColor fontsColor" id="newMessage">
+                                 { unreadMessages !== "" ?
+                                 <div className="unreadMessages">{unreadMessages}</div> :
+                                 unreadMessages } 
+                            </span>                            
                         </a>
                     </li>                    
                 </ul>
+                <audio id="orderNotification">
+                    <source  src={orderNotification} type="audio/mp3" />
+                </audio>
+                <audio id="messageNotification">
+                    <source  src={messageNotification} type="audio/mp3" />
+                </audio>
             </div>
         )
 }

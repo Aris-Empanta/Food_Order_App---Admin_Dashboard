@@ -25,37 +25,61 @@ export const catalogueChoices = () => {
 //The function to fetch the number  of unread messages
 export const fetchUnread = (axios, callback) => {
 
+    
     axios.get('http://localhost:5000/chat-messages/unread-messages')
-         .then((res) => { 
-                            
+         .then((res) => {                          
                           //If unread messages are '0', They will not be displayed in navbar. 
                           res.data[0].Unread === '0' ? callback("") : 
-                                                       callback(res.data[0].Unread)                                        
+                                                       callback(res.data[0].Unread)                          
                         })
+    
 }
 
  //The function to fetch the number  of unchecked orders
 export const fetchUncheckedOrders = (axios, callback) => {
+
 
     axios.get('http://localhost:5000/orders/unchecked-orders')
         .then((res) => { 
                         
                         //If unread messages are '0', They will not be displayed in navbar. 
                         res.data.length === 0 ? callback("") : 
-                                                callback(res.data.length)                                        
+                                                callback(res.data.length)  
                     })
 }
 
-export const focus = (id, linkId) => {
+
+//The function to change the list item color on navBar onClick.
+export const focus = (id, className ) => {
 
     let elements = document.getElementsByClassName("navBarList")
-    let current = document.getElementById(id)
-    let link = document.getElementById(linkId)
+    let currentId = document.getElementById(id)
+    let currentClass = document.getElementsByClassName(className)
+    let fontsColor = document.getElementsByClassName("fontsColor")
 
+    //Restore all items background to initial color
     for( let element of elements) {
-        element.classList.remove("focus")
+
+        element.classList.remove("focusBackground")
     }
 
-    current.classList.add("focus")
-    link.style.color = "purple"
+    //Restore all fonts color to initial
+    for(let font of fontsColor ) {
+
+        font.classList.remove("focusColor")
+    }
+
+    //Change the chosen list item font's color
+    for( let item of currentClass ) {
+
+        item.classList.add("focusColor")
+    }
+
+    //Change the chosen list item background color
+    currentId.classList.add("focusBackground")
+}
+
+export const soundNotification = (id) => {
+
+    document.getElementById(id).play()
 }
