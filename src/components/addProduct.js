@@ -5,8 +5,7 @@ import { useEffect, useState } from  'react'
 //The component where we add new products to the restaurant menu.
 export const AddProduct = () => {
 
-    //----------------------STATE NEEDED------------------------------------------------------>
-
+    //State needed
     const [ selectedImage, setSelectedImage ] = useState(null)  
     const [ category, setCategory] = useState("")
     const [id, setId] = useState("")
@@ -14,13 +13,10 @@ export const AddProduct = () => {
     const [ name, setName] = useState("")
     const [ currency, setCurrency] = useState("USD")
     const [ quantity, setQuantity] = useState("")
-    const [ deliveryPrice, setDeliveryPrice] = useState("")
-    const [ takeAwayPrice, setTakeAwayPrice] = useState("")
+    const [ price, setPrice] = useState("")
     const [ description, setDescription] = useState("")
     const [ imageName, setImageName] = useState("")
     const [ stringData, setStringData] = useState({})
-
-    //-------------------------------------------------------------------------------------->
 
     //----------------------FUNCTIONS NEEDED------------------------------------------------------>
 
@@ -72,9 +68,7 @@ export const AddProduct = () => {
                                     /*Saving the image in the object state that we will sent to the backend, 
                                      with the date in front, in case 2 users put an image with same name.*/
                                     let imageName =  Date.now() + "-" + name
-                                    setStringData({...stringData, imageName: imageName}) 
-                                    
-                                   
+                                    setStringData({...stringData, imageName: imageName})                                  
                                 }   
 
     
@@ -117,7 +111,7 @@ export const AddProduct = () => {
                                 setTimeout(() => alert("Product id already exists!"), 10)
                     }
                     //Not allowing very high prices. 
-                    else if(stringData.deliveryPrice.length > 3 || stringData.takeAwayPrice.length > 3) {
+                    else if(stringData.price.length > 3) {
 
                         alert("This is a restaurant, not a jewelleryshop! You are too expensive")
 
@@ -126,13 +120,9 @@ export const AddProduct = () => {
                             formComponents[i].style.border = "1px solid black"                            
                         }  
                          
-                        if (stringData.deliveryPrice.length > 3){
+                        if (stringData.price.length > 3){
                             formComponents[4].style.border = "1px solid red" 
                         }
-                        if(stringData.takeAwayPrice.length > 3){
-                             formComponents[5].style.border = "1px solid red" 
-                            }
-
                     }
                     //Also quantity should have a limit.
                     else if(stringData.quantity.length > 4) {
@@ -164,14 +154,14 @@ export const AddProduct = () => {
 
     return(<div className="addProduct">
                 <form encType= "multipart/form-data" >
-                    <h1 id="formTitle" className="formComponents" >Add Products</h1>
+                    <h1 id="formTitle" className="formComponents" >ADD PRODUCT FORM</h1>
                     <hr id="formLine"></hr>                    
                     <label id="categoryLabel" className="formComponents" >Product Category</label>
                     <input placeholder="Pizza" id="categoryInput" className="formComponents inputs" onChange={ (e) => { let category = e.target.value
                                                                                                                  setCategory(category)                                
                                                                                                                  setStringData({...stringData, category: category})                                
                                                                                                                 }}/>
-                    <label id="productId" className="formComponents">Product ID</label>
+                    <label id="productLabel" className="formComponents">Product ID</label>
                     <input id="productId" className="formComponents inputs"  placeholder="ID" onChange={ (e) => { let id = e.target.value
                                                                                                                  setId(id)                                
                                                                                                                  setStringData({...stringData, id: id})                                
@@ -194,24 +184,25 @@ export const AddProduct = () => {
                                                                                                                  setQuantity(quantity)                                
                                                                                                                  setStringData({...stringData, quantity: quantity})                                
                                                                                                             }}/>
-                    <label id="deliveryLabel"  className="formComponents" >Delivery Price</label>
-                    <input placeholder="$10" id="deliveryInput"  className="formComponents inputs" onChange={(e) => { let deliveryPrice = e.target.value
-                                                                                                                 setDeliveryPrice(deliveryPrice)                                
-                                                                                                                 setStringData({...stringData, deliveryPrice: deliveryPrice})                                
-                                                                                                                }}/>
-                    <label id="takeAwayLabel" className="formComponents" >Take away Price</label>
-                    <input placeholder="$10" id="takeAwayInput" className="formComponents inputs" onChange={(e) => { let takeAwayPrice = e.target.value
-                                                                                                                 setTakeAwayPrice(takeAwayPrice)                                
-                                                                                                                 setStringData({...stringData, takeAwayPrice: takeAwayPrice})                                
-                                                                                                                }}/>
+                    <label id="deliveryLabel"  className="formComponents" >Price</label>
+                    <input placeholder="10" id="deliveryInput"  className="formComponents inputs" onChange={(e) => { let price = e.target.value
+                                                                                                                      setPrice(price)                                
+                                                                                                                      setStringData({...stringData, price: price})                                
+                                                                                                                    }}/>
                     <label id="descriptionLabel" className="formComponents" >Description</label>
-                    <textarea id="descriptionInput" placeholder="Description" className="formComponents inputs" onChange={(e) => { let description = e.target.value
+                    <textarea id="descriptionInput"  rows="6" placeholder="Description" className="formComponents inputs" onChange={(e) => { let description = e.target.value
                                                                                                                             setDescription(description)                                
                                                                                                                             setStringData({...stringData, description: description})                                
                                                                                                                             }}/>
-                    <label id="imageLabel" className="formComponents" >Product Image</label>
-                    <input type="file"   name="image" id="imageInput"  className="formComponents inputs" onChange={ handleImage }></input>
-                    <button id="submit" className="formComponents" onClick={ addProduct }>add product</button>
+                    <label id="imageLabel" className="formComponents" >Product Image</label>    
+                    <label id="uploadWrapper">
+                        <button id="uploadImage" >Select image</button>   
+                        <input type="file"   name="image" id="imageInput" className="formComponents inputs" onChange={ handleImage } />             
+                                                                                                                             
+                    </label>
+                    <div id="submitWrapper">
+                        <button id="submit" className="formComponents" onClick={ addProduct }>ADD PRODUCT</button>
+                    </div>                
                 </form>
            </div>)
 }

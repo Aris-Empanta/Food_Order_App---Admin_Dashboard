@@ -4,31 +4,52 @@
     height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center;    
 }
 
 /*The form wrapper*/
 .addProduct form {
-    border: 1px solid black;
     display: grid;
     box-shadow: 1px 1px 4px black;
     grid-template-areas: "header header"
                          "hr hr";
+    background-color: white;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 5px;
+    border-radius: 3px;
+    width: 600px;
 }
 
 /*All forms' elements*/
 .formComponents {
-    margin: 12px;
+    margin: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #202020;
 }
 
 /*Below are all the form elements one by one, for grid positioning*/
 #formTitle {
     grid-area: header;
+    font-size: 1rem;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
 }
 
 #formLine {
     grid-area: hr;
     margin-left: 0;
+}
+
+#productLabel {
+    grid-area: line 1;
+    margin: 15px;
+}
+
+#productId {    
+    grid-area: line 2;
+    height: 35px;
 }
 
 #categoryLabel {
@@ -38,6 +59,7 @@
 
 #categoryInput {
     grid-area: line 2;
+    height: 35px;
 }
 
 #nameLabel {
@@ -50,6 +72,7 @@
 
 #nameInput {
     grid-area: line 4;
+    height: 35px;
 }
 
 #currencySelect {
@@ -66,36 +89,105 @@
 
 #quantityInput {
     grid-area: line 6;
+    height: 35px;
 }
 
 #deliveryInput {
     grid-area: line 6;
-}
-
-#takeAwayLabel {
-    grid-area: line 7;
+    height: 35px;
 }
 
 #descriptionLabel {
     grid-area: line 7;
 }
 
-#takeAwayInput {
-    grid-area: line 8;
-}
-
 #descriptionInput {
     grid-area: line 8;
+    grid-column: 1 / -1;
 }
 
 #imageLabel  {
     grid-area: line 9;
 }
 
-#imageInput  {
+#uploadWrapper {
+    position: relative;
     grid-area: line 10;
+    height: 40px;
+    margin-bottom: 15px;
+    grid-column: 1 / -1;
+}
+
+#uploadImage {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    height: 35px;
+    width: 150px;
+    border-radius: 3px;
+    border: none;    
+    background-color: rgb(64, 84, 178);
+    color: whitesmoke;
+    font-size: 1rem;
+}
+
+#imageInput  {
+    position: absolute;
+    top: 0;
+    width: 150px;
+    opacity: 0;   
+}
+
+#submitWrapper {
+    grid-area: line 11;
+    justify-self: flex-end;
+    grid-column: 1 / -1;
 }
 
 #submit {
-    grid-area: line 11;
+    height: 40px;
+    width: 130px;
+    background-color: rgb(219, 2, 234);
+    border: none;
+    border-radius: 3px;
+    font-weight: 500;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.inputs {
+    border-radius: 3px;
+    padding: 6px;
+    font-size: 0.9rem;
+    color: #202020;
+    border: 1px solid #808080;
+}
+
+.inputs:focus{
+    box-shadow: 1px 1px 4px 1px purple;
+    border: none;
+    outline: none;
+}
+
+#currencySelect {
+    border-radius: 3px;
+    padding: 6px;
+    font-size: 0.9rem;
+    color: #202020;
+    border: 1px solid #808080;
+    padding-right: 2rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+}
+
+#currencySelect-items{
+    outline: none;
+    margin: 5px;
+ }
+
+#currencySelect:focus {
+    outline: none;
 }

@@ -5,17 +5,13 @@ import { useEffect, useState } from "react"
 //The component where we can check and modify the menu.
 export const Preview = () => {
     
-    //----------------------STATE NEEDED------------------------------------------------------>
-
+    //State needed
     const [ products, setProducts ] = useState([])
     const [categories, setCategories] = useState([])
     const [ name, setName ] = useState("")
-    const [ deliveryPrice, setDeliveryPrice ] = useState("")
-    const [ takeAwayPrice, setTakeAwayPrice ] = useState("")
+    const [ price, setPrice ] = useState("")
     const [ currency, setCurrency ] = useState("USD")
     const [ description, setDescription ] = useState("")
-
-    //----------------------------------------------------------------------------------------->
     
     //----------------------------FUNCTIONS NEEDED--------------------------------------------->
 
@@ -44,9 +40,8 @@ export const Preview = () => {
           
           //Setting the characteristics state for the case the user doesnt modify all the fields.
           setName(characteristics[1].innerHTML)
-          setDeliveryPrice(characteristics[2].innerHTML)
-          setTakeAwayPrice(characteristics[3].innerHTML)
-          setDescription(characteristics[5].innerHTML)
+          setPrice(characteristics[2].innerHTML)
+          setDescription(characteristics[4].innerHTML)
           
           //Setting first input field display none from the start, so that the function works on first click.
           if(edit[0].style.display === "") {
@@ -62,7 +57,7 @@ export const Preview = () => {
                     editButton[0].innerHTML = "Confirm"
                     characteristics[i].style.display = "none"
                   }
-                  characteristics[5].style.display = "none"
+                  characteristics[4].style.display = "none"
           } 
           //Not allowing empty fields and very large prices numbers
           else {
@@ -72,16 +67,13 @@ export const Preview = () => {
                     editButton[0].innerHTML = "Edit"
                     characteristics[i].style.display = "initial"              
                   }
-                  characteristics[5].style.display = "initial"
+                  characteristics[4].style.display = "initial"
                 
-                if((name === "" || description === "" || 
-                   deliveryPrice === "" || takeAwayPrice === "")
-                   && deliveryPrice.length <= 3 
-                   && takeAwayPrice.length <= 3 ){
-                    console.log(name, deliveryPrice, takeAwayPrice, currency, description) 
+                if((name === "" || description === "" || price === "")
+                   && price.length <= 3){                    
                   alert("No empty fields allowed!")
                 } 
-                else if (deliveryPrice.length > 3 || takeAwayPrice.length > 3) {
+                else if (price.length > 3) {
 
                   alert("This is a restaurant, not a jewellery shop. You are too expensive!!")
                 }  
@@ -96,8 +88,7 @@ export const Preview = () => {
                       axios.put("http://localhost:5000/products/update-characteristics/" + id,
                                                                  {  date: date,
                                                                     name: name,
-                                                                    deliveryPrice: deliveryPrice,
-                                                                    takeAwayPrice: takeAwayPrice,
+                                                                    price: price,
                                                                     currency: currency,
                                                                     description: description }
                                                                 )   
@@ -169,12 +160,9 @@ export const Preview = () => {
                                                                                                 onChange = {(e) => {(e.target.value !== "") ? 
                                                                                                                     setName(e.target.value) : 
                                                                                                                     setName(item.Name)}  } /> 
-                                <p className={"characteristics" + index} >{item.Delivery_price}</p><input defaultValue={item.Delivery_price} 
+                                <p className={"characteristics" + index} >{item.Price}</p><input defaultValue={item.Price} 
                                                                                                           className={"edit edit" + index } 
-                                                                                                          onChange = {(e) => { setDeliveryPrice(e.target.value) }} />
-                                <p className={"characteristics" + index} >{item.Take_away_price}</p><input defaultValue={item.Take_away_price} 
-                                                                                                          className={"edit edit" + index }  
-                                                                                                          onChange = {(e) => setTakeAwayPrice(e.target.value)} />
+                                                                                                          onChange = {(e) => { setPrice(e.target.value) }} />
                                 <p className={"characteristics" + index} >{item.Currency}</p><select className={"edit edit" + index } 
                                                                                                     onChange = {(e) => setCurrency(e.target.value)} >
                                                                                                     <option value={item.Currency}>{item.Currency}</option>

@@ -79,6 +79,7 @@ export const focus = (id, className ) => {
     currentId.classList.add("focusBackground")
 }
 
+//The function to sound notification on orders and messages received
 export const soundNotification = (id) => {
 
     document.getElementById(id).play()
