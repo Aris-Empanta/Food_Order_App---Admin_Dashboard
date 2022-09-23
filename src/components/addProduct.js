@@ -184,8 +184,8 @@ export const AddProduct = () => {
                                                                                                                  setQuantity(quantity)                                
                                                                                                                  setStringData({...stringData, quantity: quantity})                                
                                                                                                             }}/>
-                    <label id="deliveryLabel"  className="formComponents" >Price</label>
-                    <input placeholder="10" id="deliveryInput"  className="formComponents inputs" onChange={(e) => { let price = e.target.value
+                    <label id="priceLabel"  className="formComponents" >Price</label>
+                    <input placeholder="10" id="priceInput"  className="formComponents inputs" onChange={(e) => { let price = e.target.value
                                                                                                                       setPrice(price)                                
                                                                                                                       setStringData({...stringData, price: price})                                
                                                                                                                     }}/>

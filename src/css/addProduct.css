@@ -23,7 +23,7 @@
 
 /*All forms' elements*/
 .formComponents {
-    margin: 10px;
+    margin: 8px;
     font-family: Arial, Helvetica, sans-serif;
     color: #202020;
 }
@@ -37,19 +37,10 @@
     margin-left: 20px;
 }
 
+/* The horizontal line under the title*/
 #formLine {
     grid-area: hr;
     margin-left: 0;
-}
-
-#productLabel {
-    grid-area: line 1;
-    margin: 15px;
-}
-
-#productId {    
-    grid-area: line 2;
-    height: 35px;
 }
 
 #categoryLabel {
@@ -62,17 +53,27 @@
     height: 35px;
 }
 
-#nameLabel {
-    grid-area: line 3;
+#productLabel {
+    grid-area: line 1;
+    margin: 15px;
 }
 
-#currencyLabel {
+#productId {    
+    grid-area: line 2;
+    height: 35px;
+}
+
+#nameLabel {
     grid-area: line 3;
 }
 
 #nameInput {
     grid-area: line 4;
     height: 35px;
+}
+
+#currencyLabel {
+    grid-area: line 3;
 }
 
 #currencySelect {
@@ -83,16 +84,16 @@
     grid-area: line 5;
 }
 
-#deliveryLabel {
-    grid-area: line 5;
-}
-
 #quantityInput {
     grid-area: line 6;
     height: 35px;
 }
 
-#deliveryInput {
+#priceLabel {
+    grid-area: line 5;
+}
+
+#priceInput {
     grid-area: line 6;
     height: 35px;
 }
@@ -110,6 +111,7 @@
     grid-area: line 9;
 }
 
+/*The div holding the input type file for the image upload*/
 #uploadWrapper {
     position: relative;
     grid-area: line 10;
@@ -117,7 +119,7 @@
     margin-bottom: 15px;
     grid-column: 1 / -1;
 }
-
+/*The element below the image input that is shown*/
 #uploadImage {
     position: absolute;
     top: 10px;
@@ -131,6 +133,7 @@
     font-size: 1rem;
 }
 
+/*The input type file for the image upload*/
 #imageInput  {
     position: absolute;
     top: 0;
@@ -138,12 +141,14 @@
     opacity: 0;   
 }
 
+/*The div that contains the add product button button*/
 #submitWrapper {
     grid-area: line 11;
     justify-self: flex-end;
     grid-column: 1 / -1;
 }
 
+/*The add product button*/
 #submit {
     height: 40px;
     width: 130px;
@@ -153,12 +158,13 @@
     font-weight: 500;
     color: white;
     cursor: pointer;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
+/*A general class for all the input elements*/
 .inputs {
     border-radius: 3px;
-    padding: 6px;
+    padding: 5px;
     font-size: 0.9rem;
     color: #202020;
     border: 1px solid #808080;
@@ -182,11 +188,6 @@
     text-indent: 1px;
     text-overflow: '';
 }
-
-#currencySelect-items{
-    outline: none;
-    margin: 5px;
- }
 
 #currencySelect:focus {
     outline: none;
