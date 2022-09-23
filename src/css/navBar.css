@@ -112,7 +112,7 @@
     width: 25px;
     border-radius: 50%;
     background-color: #FF033E;
-    color: white;
+    color: white; 
     font-size: 1rem;
 }
 
@@ -136,4 +136,8 @@
     height: 70px;
     display: flex;
     align-items: center;
+}
+
+#preview {
+    margin-bottom: 10px;
 }
