@@ -1,9 +1,10 @@
 import "../css/preview.css"
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
 
 //The component where we can check and modify the menu.
-export const Preview = () => {
+export const SpecificCategory = () => {
     
     //State needed
     const [ products, setProducts ] = useState([])
@@ -12,13 +13,15 @@ export const Preview = () => {
     const [ price, setPrice ] = useState("")
     const [ currency, setCurrency ] = useState("USD")
     const [ description, setDescription ] = useState("")
+
+    const params = useParams()
     
     //----------------------------FUNCTIONS NEEDED--------------------------------------------->
 
     //-------> Saving all products from database to state <------
     useEffect(() => {
 
-          axios.get("http://localhost:5000/products").
+          axios.get("http://localhost:5000/products/by-category/" + params.category ).
           then((res) => {
 
                   setProducts(res.data)

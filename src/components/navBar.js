@@ -84,7 +84,7 @@ export const NavBar = () => {
                             </p>
                         </div>
                         <Link id="addProduct" className="products" to="add-product">Add Product</Link>
-                        <Link id="preview" className="products" to="preview">Preview</Link>
+                        <Link id="preview" className="products" to="all-categories">Preview</Link>
                     </li>                  
                     <li id="orders"  className="navBarList">
                         <a href="#/orders"                         

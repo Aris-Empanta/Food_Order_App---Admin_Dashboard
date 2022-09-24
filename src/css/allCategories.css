@@ -1,0 +1,12 @@
+.allCategories {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.categoryImage {
+    height: 150px;
+    width: 150px;
+}
