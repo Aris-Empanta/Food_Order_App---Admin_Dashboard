@@ -10,7 +10,7 @@
 /*The form wrapper*/
 .addProduct form {
     display: grid;
-    box-shadow: 1px 1px 4px black;
+    box-shadow: 1px 1px 6px #808080;
     grid-template-areas: "header header"
                          "hr hr";
     background-color: white;

@@ -2,6 +2,9 @@ import "../css/preview.css"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { faCamera} from "@fortawesome/free-solid-svg-icons"
 
 //The component where we can check and modify the menu.
 export const SpecificCategory = () => {
@@ -150,12 +153,24 @@ export const SpecificCategory = () => {
   //----------------------------------------------------------------------------------------->
   
   return(<div className="preview">
-            <div id="productsWrapper">
+             <div className="productsHeader">
+               <p id="productsTitle"> Dish types / {params.category}</p>
+               <div id="searchWrapper">
+                <input id="searchBar" type="text" />
+                <button id="searchButton"><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
+               </div>
+             </div>
+            <div id="productsWrapper">              
               {products.map((item, index) => 
                               <div className={ "product product" + index }>
                                 <img src={ item.Image_name} className= {"image productImage" + index} /> 
-                                <input type="file" className= {"updateImage" + index}
+                                <label id="changeImageWrapper">
+                                  <button id="changeImage" >
+                                    <FontAwesomeIcon icon={faCamera} />
+                                  </button> 
+                                  <input type="file" className= {"updateImage" + index} id="changeImageInput"
                                       name="newImage" onChange = { (event) => updateImage(event, index) } />
+                                </label>                             
                                 <p className={"characteristics" + index}>{ item.ID }</p>                                       
                                 <p className={"category" + index}>{item.Category}</p>
                                 <p className={"characteristics" + index} >{item.Name}</p><input defaultValue={item.Name} 

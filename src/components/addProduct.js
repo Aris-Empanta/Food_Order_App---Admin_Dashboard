@@ -197,8 +197,7 @@ export const AddProduct = () => {
                     <label id="imageLabel" className="formComponents" >Product Image</label>    
                     <label id="uploadWrapper">
                         <button id="uploadImage" >Select image</button>   
-                        <input type="file"   name="image" id="imageInput" className="formComponents inputs" onChange={ handleImage } />             
-                                                                                                                             
+                        <input type="file"   name="image" id="imageInput" className="formComponents inputs" onChange={ handleImage } />                                                                                                                           
                     </label>
                     <div id="submitWrapper">
                         <button id="submit" className="formComponents" onClick={ addProduct }>ADD PRODUCT</button>
