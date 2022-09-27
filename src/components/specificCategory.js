@@ -54,20 +54,18 @@ export const SpecificCategory = () => {
             edit[0].style.display = "none"
           }
 
-
           //Hiding the saved characteristics and show only input fields
           if(edit[0].style.display === "none") {
 
                   for( let i=0; i < edit.length; i++) {
                     edit[i].style.display = "initial"
                     editButton[0].innerHTML = "Confirm"
-                    characteristics[i].style.display = "none"
+                    if(i !== 0)characteristics[i].style.display = "none"
                   }
                   characteristics[4].style.display = "none"
           } 
           //Not allowing empty fields and very large prices numbers
-          else {
-            
+          else {            
                   for( let i=0; i < edit.length; i++) {
                     edit[i].style.display = "none"
                     editButton[0].innerHTML = "Edit"
@@ -171,21 +169,29 @@ export const SpecificCategory = () => {
                                   <input type="file" className= {"updateImage" + index} id="changeImageInput"
                                       name="newImage" onChange = { (event) => updateImage(event, index) } />
                                 </label>                             
-                                <p className={"characteristics" + index}>{ item.ID }</p>                                       
-                                <p className={"category" + index}>{item.Category}</p>
-                                <p className={"characteristics" + index} >{item.Name}</p><input defaultValue={item.Name} 
-                                                                                                className={"edit edit" + index }
-                                                                                                onChange = {(e) => {(e.target.value !== "") ? 
-                                                                                                                    setName(e.target.value) : 
-                                                                                                                    setName(item.Name)}  } /> 
-                                <p className={"characteristics" + index} >{item.Price}</p><input defaultValue={item.Price} 
-                                                                                                          className={"edit edit" + index } 
-                                                                                                          onChange = {(e) => { setPrice(e.target.value) }} />
-                                <p className={"characteristics" + index} >{item.Currency}</p><select className={"edit edit" + index } 
-                                                                                                    onChange = {(e) => setCurrency(e.target.value)} >
-                                                                                                    <option value={item.Currency}>{item.Currency}</option>
-                                                                                                    <option value={ item.Currency === "EUR"? "USD" : "EUR"}>{ item.Currency === "EUR"? "USD" : "EUR"}</option>
-                                                                                              </select>
+                                <p>Product ID: <span className={"characteristics" + index}>{ item.ID }</span></p>                                       
+                                <p> Category: <span className={"category" + index}>{item.Category}</span></p>
+                                <p> Name: <span className={"characteristics" + index} >{item.Name}</span>
+                                          <input defaultValue={item.Name} 
+                                                className={"edit edit" + index }
+                                                onChange = {(e) => {(e.target.value !== "") ? 
+                                                                    setName(e.target.value) : 
+                                                                    setName(item.Name)}  } /> 
+                                </p>
+                                <p>Price: <span className={"characteristics" + index} >{item.Price}</span>
+                                          <input defaultValue={item.Price} 
+                                                    className={"edit edit" + index } 
+                                                    onChange = {(e) => { setPrice(e.target.value) }} />
+                                </p>
+                                <p> Currency: 
+                                  <span className={"characteristics" + index} >{item.Currency}</span>
+                                  <select className={"edit edit" + index } 
+                                        onChange = {(e) => setCurrency(e.target.value)} >
+                                        <option value={item.Currency}>{item.Currency}</option>
+                                        <option value={ item.Currency === "EUR"? "USD" : "EUR"}>{ item.Currency === "EUR"? "USD" : "EUR"}</option>
+                                  </select>
+                                </p>
+                                <p>Description: </p>
                                 <p className={"characteristics" + index} >{item.Description}</p><textarea defaultValue={item.Description} 
                                                                                                           className={"edit edit" + index } 
                                                                                                           onChange = {(e) => setDescription(e.target.value)} />
