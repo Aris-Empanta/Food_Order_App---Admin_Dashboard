@@ -8,7 +8,7 @@
 
 .productsHeader {
   display: flex;
-  height: 200px;
+  height: 180px;
   align-items: center;
   justify-content: space-between;
   margin-right: 100px;
@@ -62,11 +62,12 @@
   box-shadow: 1px 1px 4px black;
   border-radius: 3px;
   position: relative;
+  padding: 5px;
 }
 
 /*The product's image*/
 .image {
-  
+  margin-bottom: 10px;
   width: 100%;
   height: 200px;
   border-radius: 3px 3px 0 0;
@@ -74,7 +75,7 @@
 
 #changeImageWrapper {
   position: absolute;
-  top: 6px;
+  top: 10px;
   left: 81%;
 }
 
@@ -87,6 +88,12 @@
   border: none;
   color:#101010;
   background-color: rgb(90, 90, 90, 0.7);
+}
+
+.productInfo {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 10px;
+  color: #202020;
 }
 
 #changeImageInput {
@@ -102,5 +109,51 @@
 /*The edit input elements*/
 .edit {
   display: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  color: #202020;
+  border: none;
+  border-bottom: 1px solid #202020;
 }
 
+.edit:focus {
+  outline: none;
+}
+
+.description {
+  overflow: auto;
+  outline: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  resize: none;
+  margin-left: 10px;
+}
+
+.buttonFlexbox {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.editButton {
+  flex-basis: 47%;
+  background-color: rgb(64, 84, 178);
+  border: none;
+  border-radius: 3px;
+  height:30px;
+  cursor: pointer;
+  color: white;
+  font-size: 1rem;
+}
+
+.deleteButton {
+  flex-basis: 47%;
+  background-color: red;
+  border: none;
+  border-radius: 3px;
+  height:30px;
+  cursor: pointer;
+  color: white;
+  font-size: 1rem;
+}

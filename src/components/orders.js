@@ -26,13 +26,31 @@ export const Orders = () => {
     }
 
     return(<div className="orders">
-                { ordersDetails.map( item => <a href={"#/orders/order-number-" + item.orderId} 
-                                                onClick={ () => markAsChecked(item.orderId) }>  
-                                               <div className="order">
-                                                  <p>orderId: { item.orderId }</p>
-                                                  <p>Name: { item.customerName }</p>
-                                               </div> 
-                                             </a>                                                                                  
-                                              ) } 
+              <div id="ordersListTitle"><h1>Orders' list</h1></div>
+              <div id="ordersWrapper">
+               <table className="ordersTable" cellspacing="0">
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Customer's name</th>
+                    <th>Address</th>
+                    <th>Date received</th>
+                    <th>Checked Status</th>
+                    <th>Price</th>
+                    <th>Check Order</th>
+                  </tr>              
+                { ordersDetails.map( item => <tr>                                               
+                                                  <td>{ item.orderId }</td>
+                                                  <td>{ item.customerName }</td>
+                                                  <td>Address</td>
+                                                  <td>Date</td>
+                                                  <td>Checked</td>
+                                                  <td>Price</td>
+                                                  <td><a href={"#/orders/order-number-" + item.orderId} 
+                                                      onClick={ () => markAsChecked(item.orderId) }> Check order </a>
+                                                  </td>                                                  
+                                              </tr>                                                                                                                               
+                                            ) } 
+                </table>
+              </div>
            </div>)
 }
