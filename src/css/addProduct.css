@@ -19,6 +19,7 @@
     padding-bottom: 5px;
     border-radius: 3px;
     width: 600px;
+    row-gap: 3px;
 }
 
 /*All forms' elements*/
@@ -72,29 +73,12 @@
     height: 35px;
 }
 
-#currencyLabel {
+#priceLabel {
     grid-area: line 3;
 }
 
-#currencySelect {
-    grid-area: line 4;
-}
-
-#quantityLabel {
-    grid-area: line 5;
-}
-
-#quantityInput {
-    grid-area: line 6;
-    height: 35px;
-}
-
-#priceLabel {
-    grid-area: line 5;
-}
-
 #priceInput {
-    grid-area: line 6;
+    grid-area: line 4;
     height: 35px;
 }
 

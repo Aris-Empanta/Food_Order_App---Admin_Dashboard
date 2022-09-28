@@ -20,7 +20,9 @@ export const SpecificOrder = () => {
 
                 //Fetching all the order's product details
                 axios.get("http://localhost:5000/orders/order-with-id-" + id)
-                     .then((res) => setOrderDetails(res.data))
+                     .then((res) => {
+                         setOrderDetails(res.data)
+                    console.log(res.data)})
 
                 axios.get("http://localhost:5000/orders/price-of-" + id)
                      .then((res) => setTotalPrice(res.data.totalPrice))
@@ -28,7 +30,7 @@ export const SpecificOrder = () => {
 
     return(<div className="specificOrder">
                 {orderDetails.map( item => <div className="orderDetails">
-                                                <img src={ item.image } className="orderImage"/>
+                                                <img src={ item.imageName } className="orderImage"/>
                                                 <div>
                                                     <p>{ item.productName } </p>
                                                     <p> quantity: { item.quantity }</p>

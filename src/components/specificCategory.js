@@ -96,7 +96,7 @@ export const SpecificCategory = () => {
                                                                  {  date: date,
                                                                     name: name,
                                                                     price: price,
-                                                                    currency: currency,
+                                                                    currency: "EUR",
                                                                     description: description }
                                                                 )   
                       
@@ -187,12 +187,7 @@ export const SpecificCategory = () => {
                                                       onChange = {(e) => { setPrice(e.target.value) }} />
                                   </p>
                                   <p className="productInfo"><b> Currency: </b> 
-                                    <span className={"characteristics" + index} >{item.Currency}</span>
-                                    <select className={"edit edit" + index } 
-                                          onChange = {(e) => setCurrency(e.target.value)} >
-                                          <option value={item.Currency}>{item.Currency}</option>
-                                          <option value={ item.Currency === "EUR"? "USD" : "EUR"}>{ item.Currency === "EUR"? "USD" : "EUR"}</option>
-                                    </select>
+                                    <span className={"characteristics" + index} >{item.Currency}</span>                                    
                                   </p>
                                   <p className="productInfo"><b>Description: </b>
                                   <span className={"productInfo characteristics" + index} >{item.Description}</span>

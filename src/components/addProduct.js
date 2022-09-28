@@ -11,8 +11,6 @@ export const AddProduct = () => {
     const [id, setId] = useState("")
     const [allIds, setAllIds] = useState([])
     const [ name, setName] = useState("")
-    const [ currency, setCurrency] = useState("USD")
-    const [ quantity, setQuantity] = useState("")
     const [ price, setPrice] = useState("")
     const [ description, setDescription] = useState("")
     const [ imageName, setImageName] = useState("")
@@ -23,17 +21,11 @@ export const AddProduct = () => {
     //-------> Setting the initial currency default value. <------
     useEffect(() => {
         
-        let data = Object.values(stringData)
-
-        if(data.length === 0){
-            setStringData({currency: currency})
-        }
-
         //Saving all product Ids, to avoid duplicates later.
         axios.get("http://localhost:5000/products").then((res) => {
 
             let ids = []
-            for(data of res.data) {
+            for(let data of res.data) {
                 ids.push(data.ID)
             }
             setAllIds(ids)
@@ -91,7 +83,7 @@ export const AddProduct = () => {
                     let formComponents = document.getElementsByClassName("inputs")
                              
                     //Not allowing empty fields or duplicate IDs.
-                    if( data.includes("") || data.length < 7 || selectedImage === null ){                           
+                    if( data.includes("") || data.length < 5 || selectedImage === null ){                           
                             
                             for(let i=0; i<formComponents.length; i++){
                                 if(formComponents[i].value === "" ) {
@@ -123,22 +115,12 @@ export const AddProduct = () => {
                         if (stringData.price.length > 3){
                             formComponents[4].style.border = "1px solid red" 
                         }
-                    }
-                    //Also quantity should have a limit.
-                    else if(stringData.quantity.length > 4) {
-
-                        for(let i=0; i<formComponents.length; i++){
-                            
-                            formComponents[i].style.border = "1px solid black"                            
-                        }  
-                        alert("So many products? How many people you want to feed an entire army?")
-                        formComponents[3].style.border = "1px solid red"
-                    }
+                    }                  
                     else {    
 
                         let formComponents = document.getElementsByClassName("inputs")
                             
-                        for(let i=0; i<formComponents.length; i++){
+                        for(let i=0; i < formComponents.length; i++){
                             
                             formComponents[i].style.border = "1px solid black"                            
                         }                        
@@ -170,27 +152,14 @@ export const AddProduct = () => {
                     <input id="nameInput" className="formComponents inputs"  placeholder="Margarita" onChange={ (e) => { let name = e.target.value
                                                                                                                  setName(name)                                
                                                                                                                  setStringData({...stringData, name: name})                                
-                                                                                                                }}/>
-                    <label id="currencyLabel"  className="formComponents" >Currency</label>
-                    <select id="currencySelect" name="currency" className="formComponents" onChange={ (e) => { let currency = e.target.value
-                                                                                                                 setCurrency(currency)                                
-                                                                                                                 setStringData({...stringData, currency: currency})                                
-                                                                                                                } }>
-                        <option value="USD">USD</option>
-                        <option value="EUR">EUR</option>                                       
-                    </select>
-                    <label id="quantityLabel" className="formComponents" >Quantity</label>
-                    <input placeholder="01" id="quantityInput" className="formComponents inputs" onChange={(e) => { let quantity = e.target.value
-                                                                                                                 setQuantity(quantity)                                
-                                                                                                                 setStringData({...stringData, quantity: quantity})                                
-                                                                                                            }}/>
+                                                                                                                }}/>    
                     <label id="priceLabel"  className="formComponents" >Price</label>
                     <input placeholder="10" id="priceInput"  className="formComponents inputs" onChange={(e) => { let price = e.target.value
                                                                                                                       setPrice(price)                                
                                                                                                                       setStringData({...stringData, price: price})                                
                                                                                                                     }}/>
                     <label id="descriptionLabel" className="formComponents" >Description</label>
-                    <textarea id="descriptionInput"  rows="6" placeholder="Description" className="formComponents inputs" onChange={(e) => { let description = e.target.value
+                    <textarea id="descriptionInput"  rows="8" placeholder="Description" className="formComponents inputs" onChange={(e) => { let description = e.target.value
                                                                                                                             setDescription(description)                                
                                                                                                                             setStringData({...stringData, description: description})                                
                                                                                                                             }}/>
