@@ -41,10 +41,10 @@ export const Orders = () => {
                 { ordersDetails.map( item => <tr>                                               
                                                   <td>{ item.orderId }</td>
                                                   <td>{ item.customerName }</td>
-                                                  <td>Address</td>
-                                                  <td>Date</td>
-                                                  <td>Checked</td>
-                                                  <td>Price</td>
+                                                  <td>{ item.address }</td>
+                                                  <td>{ item.date }</td>
+                                                  <td>{ item.checkedStatus }</td>
+                                                  <td>{ item.price }</td>
                                                   <td><a href={"#/orders/order-number-" + item.orderId} 
                                                       onClick={ () => markAsChecked(item.orderId) }> Check order </a>
                                                   </td>                                                  
