@@ -7,6 +7,14 @@
     margin-left: 230px;
 }
 
+.unChecked {
+    font-weight: 600;
+}
+
+.checked {
+    font-weight: 400;
+}
+
 #ordersListTitle {
     display: flex;
     justify-content: center;
@@ -25,20 +33,42 @@
     box-shadow: 1px 1px 6px #808080;
 }
 
+
 .ordersTable  th {
     font-family: Arial, Helvetica, sans-serif;
-    padding: 12px 25px;
+    padding: 12px 30px;
     background-color: #ba55d3;
     color: white;
   }
 
 .ordersTable  td {
     font-family: Arial, Helvetica, sans-serif;
-    padding: 15px 25px;
+    padding: 15px 30px;
     text-align: center;
     color: #303030;
 }
 
 .ordersTable  tr:hover{
     background-color: silver;
+}
+
+.checkOrderButton {
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+.checkOrderButton a{
+    text-decoration: none;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+}
+
+.checkedOrder {    
+    background: linear-gradient( to bottom right, rgb(64, 84, 178), rgb(219, 2, 234));
+}
+
+.unCheckedOrder {
+    background-color: red;
 }
