@@ -25,3 +25,12 @@ export const renderCharacters = (text) => {
 
     return text.length > 15 ? text.split("").slice(0, 15).join("") + "..." : text 
 }
+
+//Below function will generate the id number for each order
+export const generateOrderId = (id) => {
+
+  return id.length === 3 ? "#" + id :
+                           id.length === 2 ?
+                           "#0" + id :
+                           "#00" + id 
+}

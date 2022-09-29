@@ -3,10 +3,13 @@ import "../css/orders.css"
 import { socket } from "./privateChat"
 import axios from "axios"
 import { fetchOrders, markAsChecked, renderCharacters } from "../functions/orders"
+import { useNavigate } from "react-router-dom";
 
 export const Orders = () => {
  
     const [ ordersDetails, setOrdersDetails ] = useState([])
+
+    const navigate = useNavigate()
 
     useEffect(() => {                      
                       //The function to fetch all the orders sorted by order's id reversed
@@ -28,7 +31,7 @@ export const Orders = () => {
                     <th>Address</th>
                     <th>Phone number</th>
                     <th>Date received</th>
-                    <th>Price</th>
+                    <th>Total price</th>
                     <th>Check Order</th>
                   </tr>              
                 { ordersDetails.map( (item, index) => <tr>                                               
@@ -39,11 +42,11 @@ export const Orders = () => {
                                                           <td className={item.checkedStatus }>{ item.date }</td>
                                                           <td className={item.checkedStatus }>{ item.price }</td>
                                                           <td>
-                                                              <button className={"checkOrderButton " + item.checkedStatus +"Order" }>
-                                                                <a href={"#/orders/order-number-" + item.orderId}                                                               
-                                                                  onClick={ () => markAsChecked(socket, item.orderId) }> 
-                                                                  Check order 
-                                                                </a>
+                                                              <button className={"checkOrderButton " + item.checkedStatus +"Order" }
+                                                                      onClick={ () => { markAsChecked(socket, item.orderId)
+                                                                        navigate("./order-number-" + item.orderId, { replace: false} )}
+                                                                       }>                                                                
+                                                                  Check order                                                             
                                                               </button>
                                                           </td>                                                  
                                                       </tr>                                                                                                                               
