@@ -4,7 +4,6 @@
     justify-content: center;
     align-items: center;
     margin-left: 230px;
-   
 }
 
 .ordersWrapper {
@@ -13,7 +12,25 @@
     background-color: white;
     width: 80%;
     padding: 20px;
+    box-shadow: 1px 1px 4px #808080;
 }
+
+.ordersInfo {
+    font-size: 1rem;
+}
+
+.receiver {
+    font-size: 1.6rem;
+    margin-top: 20px;
+    color: #303030;
+}
+
+.customerInfo {
+    margin-bottom: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #303030;
+}
+
 
 .header {
     display: flex;
@@ -23,4 +40,34 @@
 .nameAndDate {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.specificName {
+    font-size: 1.2rem;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.specificAddress {
+    margin-bottom: 50px;
+}
+
+.allOrdersTable th {
+    text-align: left;
+    background-color: #ba55d3;
+    padding: 10px 20px 10px 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+.allOrdersTable td {
+    text-align: left;
+    padding: 10px 20px 10px 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #303030;
+    border-bottom: 1px ridge silver;
+}
+
+.totalPriceRow td{
+    border-bottom: none;
 }

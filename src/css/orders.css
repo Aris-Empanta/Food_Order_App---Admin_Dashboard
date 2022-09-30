@@ -30,7 +30,6 @@
 
 #ordersWrapper {
     background-color: white;
-    box-shadow: 1px 1px 6px #808080;
 }
 
 
@@ -46,6 +45,7 @@
     padding: 15px 30px;
     text-align: center;
     color: #303030;
+    border-bottom: 1px ridge silver;
 }
 
 .ordersTable  tr:hover{

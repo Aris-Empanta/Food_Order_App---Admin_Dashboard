@@ -34,23 +34,23 @@ export const Orders = () => {
                     <th>Total price</th>
                     <th>Check Order</th>
                   </tr>              
-                { ordersDetails.map( (item, index) => <tr>                                               
-                                                          <td className={item.checkedStatus }>{ item.orderId }</td>
-                                                          <td className={item.checkedStatus }>{ renderCharacters(item.customerName) }</td>
-                                                          <td className={item.checkedStatus }>{ renderCharacters(item.address) }</td>
-                                                          <td className={item.checkedStatus }>{ item.phone }</td>
-                                                          <td className={item.checkedStatus }>{ item.date }</td>
-                                                          <td className={item.checkedStatus }>{ item.price }</td>
-                                                          <td>
-                                                              <button className={"checkOrderButton " + item.checkedStatus +"Order" }
-                                                                      onClick={ () => { markAsChecked(socket, item.orderId)
-                                                                        navigate("./order-number-" + item.orderId, { replace: false} )}
-                                                                       }>                                                                
-                                                                  Check order                                                             
-                                                              </button>
-                                                          </td>                                                  
-                                                      </tr>                                                                                                                               
-                                                    ) } 
+                { ordersDetails.map( item => <tr>                                               
+                                                  <td className={item.checkedStatus }>{ item.orderId }</td>
+                                                  <td className={item.checkedStatus }>{ renderCharacters(item.customerName) }</td>
+                                                  <td className={item.checkedStatus }>{ renderCharacters(item.address) }</td>
+                                                  <td className={item.checkedStatus }>{ item.phone }</td>
+                                                  <td className={item.checkedStatus }>{ item.date }</td>
+                                                  <td className={item.checkedStatus }>{ item.price }</td>
+                                                  <td>
+                                                      <button className={"checkOrderButton " + item.checkedStatus +"Order" }
+                                                              onClick={ () => { markAsChecked(socket, item.orderId)
+                                                                navigate("./order-number-" + item.orderId, { replace: false} )}
+                                                                }>                                                                
+                                                          Check order                                                             
+                                                      </button>
+                                                  </td>                                                  
+                                              </tr>                                                                                                                               
+                                            ) } 
                 </table>
               </div>
            </div>)

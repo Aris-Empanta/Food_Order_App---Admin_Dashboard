@@ -13,6 +13,7 @@ export const SpecificOrder = () => {
     const [date, setDate ] = useState('')
     const [email, setEmail ] = useState('')
     const [phone, setPhone ] = useState('')
+    const [currency, setCurrency ] = useState('')
     const [address, setAddress ] = useState('')
     const [ totalPrice, setTotalPrice ] = useState('')
 
@@ -35,6 +36,7 @@ export const SpecificOrder = () => {
                          setEmail(res.data[0].customerMail)
                          setPhone(res.data[0].phone)
                          setAddress(res.data[0].address)
+                         setCurrency(res.data[0].currency)
                          })
 
                 axios.get("http://localhost:5000/orders/price-of-" + id)
@@ -43,19 +45,43 @@ export const SpecificOrder = () => {
 
     return(<div className="specificOrder">
               <div className="ordersWrapper">              
-                <div className="header">
-                    <p>Order</p>
-                    <p>{ generateOrderId(params.id) }</p>
+                <div className="header customerInfo">
+                    <p className="ordersInfo"><b>Order Info</b></p>
+                    <p><b>{ generateOrderId(params.id) }</b></p>
                 </div>
-                <h1>Receiver:</h1>
-                <div className="nameAndDate">
-                    <p>{name}</p>
-                    <p>Date/time received: {date}</p>
+                <h1 className="customerInfo receiver">Receiver:</h1>
+                <div className="nameAndDate customerInfo">
+                    <p className="specificName">{name}</p>
+                    <p><b>Date/time received:</b> {date}</p>
                 </div>
-                <p>Email: {email}</p>
-                <p>Phone number: {phone}</p>
-                <p>Address:</p>
-                <p>{address}</p>
+                <p className="customerInfo"><b>Email:</b> {email}</p>
+                <p className="customerInfo"><b>Phone number:</b> {phone}</p>
+                <p className="customerInfo specificAddress"><b>Address:</b> {address}</p>
+                <table className="allOrdersTable" cellspacing="0">
+                  <tr>
+                    <th>ID</th>
+                    <th style={{width: "35%"}}>Product</th>
+                    <th>Quantity</th>
+                    <th>Unit cost</th>
+                    <th>Total</th>
+                  </tr>
+                  {orderDetails.map( item => <tr>
+                                                <td>{ item.productId }</td>
+                                                <td style={{width: "35%"}}>{ item.productName }</td>
+                                                <td>{ item.quantity }</td>
+                                                <td>{ item.unitPrice + " " + currency }</td>
+                                                <td>{ item.price + " " + currency }</td>
+                                             </tr>
+                                            )
+                                    }
+                 <tr className="totalPriceRow">
+                    <td></td>
+                    <td style={{width: "35%"}}></td>
+                    <td></td>
+                    <td>Total Price:</td>
+                    <td>{ totalPrice+ " " + currency  }</td>
+                 </tr>
+                </table>
               </div>
            </div>)
 }
