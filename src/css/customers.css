@@ -10,7 +10,8 @@
 .customersWrapper {
     background-color: white;
     padding: 20px;
-    width: 90%;
+    width: 90%; 
+    box-shadow: 1px 1px 4px #808080;
 }
 
 .customersTitle {

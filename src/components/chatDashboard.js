@@ -8,33 +8,40 @@ export const ChatDashboard = () => {
    
    const [customers, setCustomers] = useState([])  
    
-      
+       
    useEffect(() => {
 
       //The loading element
-      let loader = document.getElementById("loaderInbox")     
+      let loader = document.getElementById("loaderInbox")  
+      
+      let endpoints = [ 'http://localhost:5000/chat-messages/customers', 
+                        'http://localhost:5000/chat-messages/latest-message']
 
       //Fetching all messages from the database      
-      const fetchMessages = () => {  axios.get('http://localhost:5000/chat-messages/customers')
-                                          .then(res =>  {
-                                                         let data = res.data.map(item => Object.values(item))
-                                                         //If unread messages are 0, no need to be displayed.
-                                                         data.map(item => {
-                                                            if(item[1] == '0') {
-                                                               item[1] = ''
-                                                               item[2] = 'transparent'
-                                                            } else {
-                                                               item[2] = 'red'
-                                                            }
-                                                         })
-                                                         
-                                                         setCustomers(data)
-                                                       
-                                                         //Hide loading element when fetch the data
-                                                         loader.style.display = 'none'            
-                                                                           
-                                                         })
-                                          .catch((err) => console.log(err))
+      const fetchMessages = () => {  axios.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
+                                                   (data) => {
+
+                                                      let customerInfo = []
+
+                                                      let firstPartInfo = data[0].data
+
+                                                      let secondPartInfo = data[1].data
+                                                      
+                                                      for(let i=0; i < firstPartInfo.length; i++) {
+
+                                                         let object = {...firstPartInfo[i], ...secondPartInfo[i]}
+
+                                                         customerInfo.push(object)
+
+                                                      }
+
+                                                      setCustomers(customerInfo)                                                      
+
+
+                                                      //Hide loading element when fetch the data
+                                                      loader.style.display = 'none'
+                                                   },
+                                                )
                                        }
       
       
@@ -51,14 +58,25 @@ export const ChatDashboard = () => {
    } 
     
    return(<div className="chatDashboard">
-      <div id="loaderInbox">Loading.....</div>
-            <ul>
-               { customers.map( (item) => <li className={ item.Sender } >
-                                            <a href= { "#/chat/" + item[0] } onClick={ () => markAsRead(item[0]) }>
-                                                {item[0]} <span className="unreadMessages">{ item[1] }</span>
-                                            </a>
-                                        </li>)
-                                        }
-            </ul>
+            <div id="loaderInbox">Loading.....</div>
+            <div id="chatWrapper">
+               <ul className="messageList">
+                  { customers.map( (item) => <li className={ item.Sender } >
+                                                <a href= { "#/chat/"  } onClick={ () => markAsRead(item[0]) }>
+                                                   <div className="chatMessageDetails">
+                                                      <div>
+                                                         <p>{ item.Customer}</p> 
+                                                         <p>{ item.dateReceived}</p>
+                                                      </div>               
+                                                      <div>
+                                                         <p>{ item.Message}</p>
+                                                         <p className="unreadMessages">{ item.Sum }</p>
+                                                      </div>                                       
+                                                   </div>
+                                                </a>
+                                             </li>)
+                                          }
+               </ul>
+            </div>
          </div>)
 }

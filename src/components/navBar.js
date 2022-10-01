@@ -109,7 +109,7 @@ export const NavBar = () => {
                         <a  href="#/chat"                           
                             onClick={ () => focus("inbox", "inboxColor") }>
                             < FontAwesomeIcon icon={ faComment } className="navbarIcons inboxColor fontsColor" />
-                            <span className="inboxColor fontsColor" >Inbox </span>                            
+                            <span className="inboxColor fontsColor" > Chat </span>                            
                             <span className="inboxColor fontsColor" id="newMessage">
                                  { unreadMessages !== "" ?
                                  <div className="unreadMessages">{unreadMessages}</div> :

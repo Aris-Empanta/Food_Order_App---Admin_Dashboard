@@ -2,13 +2,32 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 200px;
+    margin-left: 230px;
     height: 100vh;
+}
+
+#chatWrapper {
+    background-color: white;
+    width: 90%;
+    box-shadow: 1px 1px 4px #808080;
+    padding: 15px;
+}
+
+.messageList {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;   
+}
+
+.chatMessageDetails {
+    border-bottom: 1px ridge silver;
 }
 
 .chat {
     margin-left: 200px;
 }
+
+
 
 .load {
     display: none;
