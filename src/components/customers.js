@@ -19,7 +19,7 @@ export const Customers = () => {
                   <tr>                    
                     <th>Customer's name</th>
                     <th>Address</th>
-                    <th>Phone number</th>
+                    <th>Phone</th>
                     <th>Email</th>
                     <th>Floor</th>
                     <th>Date registered</th>

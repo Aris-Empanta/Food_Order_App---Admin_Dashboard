@@ -9,26 +9,30 @@
 
 .customersWrapper {
     background-color: white;
-    padding: 10px;
+    padding: 20px;
+    width: 90%;
 }
 
 .customersTitle {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-family: Arial, Helvetica, sans-serif;
     margin-bottom: 30px;
+    margin-top: 20px
 }
 
 .customersTable th {
     font-family: Arial, Helvetica, sans-serif;
-    padding: 12px 30px;
-    background-color: #ba55d3;
+    padding: 12px 20px;
+    background-color: #9370db;
     color: white;
+    text-align: left;
 }
 
 .customersTable td {
     font-family: Arial, Helvetica, sans-serif;
-    padding: 15px 30px;
+    padding: 12px 20px;
     text-align: center;
     color: #303030;
     border-bottom: 1px ridge silver;
+    text-align: left;
 }
