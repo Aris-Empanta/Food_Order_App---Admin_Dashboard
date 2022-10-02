@@ -2,6 +2,9 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import "../css/chat.css"
 import { socket } from "./privateChat"
+import { combineEndpoints, 
+         markAsRead,
+         renderName } from "../functions/chat"
 
 export const ChatDashboard = () => {
    
@@ -19,64 +22,54 @@ export const ChatDashboard = () => {
 
       //Fetching all messages from the database      
       const fetchMessages = () => {  axios.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
-                                                   (data) => {
+                                                   (response) => {
 
-                                                      let customerInfo = []
-
-                                                      let firstPartInfo = data[0].data
-
-                                                      let secondPartInfo = data[1].data
-                                                      
-                                                      for(let i=0; i < firstPartInfo.length; i++) {
-
-                                                         let object = {...firstPartInfo[i], ...secondPartInfo[i]}
-
-                                                         customerInfo.push(object)
-
-                                                      }
-
-                                                      setCustomers(customerInfo)                                                      
-
+                                                      //We combine the data from the endpoints and 
+                                                      // save them to the state
+                                                      combineEndpoints(response, setCustomers)
 
                                                       //Hide loading element when fetch the data
                                                       loader.style.display = 'none'
                                                    },
                                                 )
-                                       }
-      
+                                       }      
       
       fetchMessages()
 
       //Reevaluates unread messages on bellow listener
-      socket.on('new message', () =>  fetchMessages() )     
+      socket.on('new message', () =>  fetchMessages() ) 
 
       }, [])   
 
-   const markAsRead = (sender) => {     
-      
-      socket.emit('message read', sender)
-   } 
+   
     
    return(<div className="chatDashboard">
             <div id="loaderInbox">Loading.....</div>
-            <div id="chatWrapper">
-               <ul className="messageList">
-                  { customers.map( (item) => <li className={ item.Sender } >
-                                                <a href= { "#/chat/"  } onClick={ () => markAsRead(item[0]) }>
-                                                   <div className="chatMessageDetails">
-                                                      <div>
-                                                         <p>{ item.Customer}</p> 
-                                                         <p>{ item.dateReceived}</p>
-                                                      </div>               
-                                                      <div>
-                                                         <p>{ item.Message}</p>
-                                                         <p className="unreadMessages">{ item.Sum }</p>
-                                                      </div>                                       
-                                                   </div>
-                                                </a>
-                                             </li>)
-                                          }
+           
+               <ul className="messageList"  id="chatWrapper">
+               { customers.map( (item) => <li className={ item.Sender } >
+                                             <a href= { "#/chat/" + item.Customer } 
+                                                onClick={ () => markAsRead(socket, item.Customer) }
+                                                className="messageLink">
+                                                { item.Sum !== '0' ?   
+                                                      <div className="chatMessageDetails">                                                                                                               
+                                                         <p className="bold customersName">{ renderName(item.Customer) }</p>                                                                                                                 
+                                                         <p className="bold customersMessage">{ item.Message}</p>                                             
+                                                         <p className="unreadMessages">{ item.Sum }</p>  
+                                                         <p className="bold">{ item.dateReceived}</p>                                                       
+                                                      </div> 
+                                                      :
+                                                      <div className="chatMessageDetails">                                                      
+                                                         <p className="normalFont customersName">{ renderName(item.Customer)}</p>                                                          
+                                                         <p className="normalFont customersMessage">{ item.Message}</p>                                                   
+                                                         <p></p>                                         
+                                                         <p className="normalFont">{ item.dateReceived}</p>                                                                                                                                                   
+                                                      </div>                                                
+                                                   }
+                                             </a>
+                                          </li>)
+                                       }
                </ul>
-            </div>
+         
          </div>)
 }
