@@ -40,3 +40,9 @@ export const renderName = (text) => {
 
     return text.length > 8 ? text.split("").slice(0, 8).join("") + "..." : text 
 }
+
+//With below function, we allow 60 characters for each message preview
+export const renderMessage = (text) => {
+
+    return text.length > 60 ? text.split("").slice(0, 60).join("") + "..." : text 
+}
