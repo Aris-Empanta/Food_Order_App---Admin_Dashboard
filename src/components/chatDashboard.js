@@ -5,10 +5,9 @@ import { socket } from "./privateChat"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { combineEndpoints, 
-         markAsRead,
-         renderName,
-         renderMessage } from "../functions/chat"
+import { combineEndpoints, markAsRead,
+         renderName, renderMessage,
+         selectMessage, selectAllMessages } from "../functions/chat"
 
 export const ChatDashboard = () => {
    
@@ -45,6 +44,8 @@ export const ChatDashboard = () => {
       socket.on('new message', () =>  fetchMessages() ) 
 
       }, [])   
+
+        
     
    return(<div className="chatDashboard">
             <div id="loaderInbox">Loading.....</div>
@@ -52,7 +53,8 @@ export const ChatDashboard = () => {
                <h1>Chat messages</h1>
             </div>
             <div id="deleteMessageWrapper">
-               <input type="checkbox" />
+               <input type="checkbox" id="selectAll"
+                      onClick={() => selectAllMessages(setMarkedMessages, customers)}/>
                <p id="selectAll">Select all</p>               
                <button id="markUnread"> Mark as unread </button>
                <button id="deleteButton"> Delete <FontAwesomeIcon icon={faTrash} /></button>
@@ -64,7 +66,11 @@ export const ChatDashboard = () => {
             <ul className="messageList"  id="chatWrapper">
             { customers.map( (item) => <li className={ item.Sender + " chatList"} >
                                           <div className="checkbox">
-                                             <input type="checkbox" />
+                                             <input type="checkbox" className="checkBoxes" id={"check" + item.Customer} 
+                                                    onClick={() => selectMessage( setMarkedMessages,
+                                                                                  markedMessages,
+                                                                                  item.Customer, 
+                                                                                  "check" + item.Customer )}/>
                                           </div>
                                           <a href= { "#/chat/" + item.Customer } 
                                              onClick={ () => markAsRead(socket, item.Customer) }
@@ -87,6 +93,6 @@ export const ChatDashboard = () => {
                                                 }
                                           </a>
                                        </li>) }
-            </ul>         
+            </ul>      
          </div>)
 }

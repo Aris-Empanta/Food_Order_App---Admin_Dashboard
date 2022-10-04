@@ -46,3 +46,45 @@ export const renderMessage = (text) => {
 
     return text.length > 60 ? text.split("").slice(0, 60).join("") + "..." : text 
 }
+
+//With below function, every time we check / uncheck a messages, it enters / leaves
+//the markedMessages array state.
+export const selectMessage = (callback, state, customer, id) => {
+
+    let checkBox = document.getElementById(id)
+    let selectAll = document.getElementById("selectAll")
+    
+    if(checkBox.checked === true ) {
+
+         callback( [...state, customer] ) 
+    } else {
+
+        callback( state.filter( item => item !== customer )) 
+        selectAll.checked = false
+    }                                                   
+  }
+
+//The function to select/unselect all messages
+export const selectAllMessages = (callback, customersState) => {
+    
+    let customers = customersState.map( item => item.Customer)
+    let checkBoxes = document.getElementsByClassName('checkBoxes')
+    let selectAll = document.getElementById("selectAll")
+
+    if(selectAll.checked === true) {
+
+        for(let checkBox of checkBoxes) {
+
+            checkBox.checked = true
+        }
+
+        callback([...customers])       
+    } else {
+        
+        for(let checkBox of checkBoxes) {
+            checkBox.checked = false
+        } 
+
+        callback([])
+    }
+}
