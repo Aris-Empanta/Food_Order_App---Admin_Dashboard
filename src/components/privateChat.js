@@ -6,7 +6,7 @@ import { showMessage } from "../functions/chat";
 import axios from "axios"   
 
 //Initializing socket.io and url's parameter name object.
-export const socket = io(`http://localhost:5001`)
+export const socket = io(`http://localhost:5000`)
 
 /*Below component is dynamically generated in order to chat with
   a specific customer that sent us a message*/

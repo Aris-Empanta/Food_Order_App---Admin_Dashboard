@@ -5,50 +5,50 @@ import { socket } from "./privateChat"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { combineEndpoints, markAsRead,
+import {  markAsRead, combineEndpoints,
          renderName, renderMessage,
-         selectMessage, selectAllMessages } from "../functions/chat"
+         selectMessage, selectAllMessages,
+         markAsUnread, deleteSelected, 
+         searchConversation } from "../functions/chat"
 
-export const ChatDashboard = () => {
+export const ChatDashboard = () => {   
    
-   
+   //State needed
    const [customers, setCustomers] = useState([])  
    const [markedMessages, setMarkedMessages] = useState([])
    
        
    useEffect(() => {
 
-      //The loading element
-      let loader = document.getElementById("loaderInbox")  
-      
-      let endpoints = [ 'http://localhost:5000/chat-messages/customers', 
-                        'http://localhost:5000/chat-messages/latest-message']
+         //The loading element
+         let loader = document.getElementById("loaderInbox")  
+         
+         let endpoints = [ 'http://localhost:5000/chat-messages/customers', 
+                           'http://localhost:5000/chat-messages/latest-message']
 
-      //Fetching all messages from the database      
-      const fetchMessages = () => {  axios.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
-                                                   (response) => {
+              
+         const fetchMessages = () => {  axios.all(endpoints.map((endpoint) => axios.get(endpoint))).then(
+                                                      (response) => {
 
-                                                      //We combine the data from the endpoints and 
-                                                      // save them to the state
-                                                      combineEndpoints(response, setCustomers)
+                                                         //We combine the data from the endpoints and 
+                                                         // save them to the state
+                                                         combineEndpoints(response, setCustomers)
 
-                                                      //Hide loading element when fetch the data
-                                                      loader.style.display = 'none'
-                                                   },
-                                                )
-                                       }      
-      
-      fetchMessages()
+                                                         //Hide loading element when fetch the data
+                                                         loader.style.display = 'none'
+                                                      },
+                                                   )
+                                          } 
 
-      //Reevaluates unread messages on bellow listener
-      socket.on('new message', () =>  fetchMessages() ) 
+         //Fetching all messages from the database 
+         fetchMessages()
 
-      }, [])   
+         //Reevaluates unread messages on bellow listener
+         socket.on('new message', () =>  fetchMessages()) 
 
-        
+      }, [])       
     
    return(<div className="chatDashboard">
-            <div id="loaderInbox">Loading.....</div>
             <div id="chatTitle">
                <h1>Chat messages</h1>
             </div>
@@ -56,11 +56,21 @@ export const ChatDashboard = () => {
                <input type="checkbox" id="selectAll"
                       onClick={() => selectAllMessages(setMarkedMessages, customers)}/>
                <p id="selectAll">Select all</p>               
-               <button id="markUnread"> Mark as unread </button>
-               <button id="deleteButton"> Delete <FontAwesomeIcon icon={faTrash} /></button>
+               <button id="markUnread" onClick={ () => markAsUnread(axios, markedMessages) }> 
+                    Mark as unread 
+               </button>
+               <button id="deleteButton" onClick={ () => deleteSelected(axios, markedMessages) }> 
+                    Delete <FontAwesomeIcon icon={faTrash} />
+               </button>
                <div id="searchMessageWrapper">
-                  <input type="text" id="searchMessage" />
-                  <button id="searchMessageButton"><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
+                  <input type="text" id="searchMessage" placeholder="Customer's name"/>
+                  <button id="searchMessageButton" onClick={ searchConversation }>
+                     <FontAwesomeIcon icon={faMagnifyingGlass} />
+                  </button>
+               </div>
+            </div>
+            <div id="loaderInbox">
+               <div className="loading-spinner">
                </div>
             </div>
             <ul className="messageList"  id="chatWrapper">

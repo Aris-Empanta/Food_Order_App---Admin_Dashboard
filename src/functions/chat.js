@@ -26,15 +26,6 @@ export const markAsRead = (socket, sender) => {
     socket.emit('message read', sender)
  } 
 
-export const showMessage = (name, msg) => {
-    
-    let message = document.createElement("li")
-    message.innerHTML = name + ": " + msg
-    
-    let messages = document.getElementById("messages")
-    messages.appendChild(message)
- }
-
 //With below function, we allow 8 characters for each customer's name
 export const renderName = (text) => {
 
@@ -88,3 +79,51 @@ export const selectAllMessages = (callback, customersState) => {
         callback([])
     }
 }
+
+//The function to mark selected messages as unread
+export const markAsUnread = (axios, markedMessagesState) => {
+
+    axios.put('http://localhost:5000/chat-messages/mark-as-unread', { customers: markedMessagesState})
+
+    setTimeout(window.location.reload(), 1)
+ }
+
+//The function to delete selected conversations 
+export const deleteSelected = (axios, markedMessagesState) => {
+
+    //We make the array string so that we can send the data through url parameters,
+    //because delete http request doesnt accept body.
+    let customer = markedMessagesState.join('-')
+
+    axios.delete('http://localhost:5000/chat-messages/delete-selected/' + customer)
+
+    setTimeout(window.location.reload(), 1)
+}
+
+
+//Shows all messages in the privateChat component 
+export const showMessage = (name, msg) => {
+    
+    let message = document.createElement("li")
+    message.innerHTML = name + ": " + msg
+    
+    let messages = document.getElementById("messages")
+    messages.appendChild(message)
+ } 
+
+//A function to search a conversation through a customer's name 
+export const searchConversation = () => {
+
+    let text = document.getElementById('searchMessage').value.toLowerCase()
+    let customerNames = document.getElementsByClassName('customersName')
+    let conversation = document.getElementsByClassName('chatList')
+
+    for(let i = 0; i < customerNames.length; i++) {
+
+       let name = customerNames[i].innerText.toLowerCase()
+
+       name.includes(text) || text === ''?
+       conversation[i].style.display = "initial" :
+       conversation[i].style.display = "none" 
+   }        
+ }

@@ -5,11 +5,10 @@ export const filterName = () => {
     let product = document.getElementsByClassName("product")
 
     for(let i = 0; i < product.length; i++) {
-        userInput === names[i].innerText.toLowerCase() || userInput === ''?
-        product[i].style.display = "initial" :
-        product[i].style.display = "none" 
+
+        let name = names[i].innerText.toLowerCase()
+        name.includes(userInput) || userInput === ''?
+        product[i].style.display = "flex" :
+        alert("No such product exists!")
     }
-
-
-
 }
