@@ -2,6 +2,8 @@ import "../css/chat.css"
 import io from 'socket.io-client';
 import {useParams} from 'react-router-dom';
 import { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faPaperPlane } from "@fortawesome/free-regular-svg-icons"
 import { showMessage } from "../functions/chat";
 import axios from "axios"   
 
@@ -36,6 +38,9 @@ export const PrivateChat = () => {
 
                                         //Hide loading element when fetch the data
                                         loader.style.display = 'none'
+
+                                        window.scrollTo(0, document.body.scrollHeight);
+
 
                                         //Updates the unread message indicator on navbar
                                         socket.emit('update navbar')
@@ -83,7 +88,7 @@ export const PrivateChat = () => {
                      message: message,
                      sender: 'admin'
                     }
-        
+         
         if (inputMessage.value) {
 
           socket.emit('chat message', data)
@@ -94,14 +99,16 @@ export const PrivateChat = () => {
     }
 
      return(<div className="chat">
-        <div id="loaderMessages">Loading.....</div>
-                <ul id="messages">
-                    
-                    { messagesHistory.map( item => <li>{(item.Sender === "admin" ? "me" : item.Sender) + ": " + item.Message}</li>) }                    
-                </ul>
-                <div id="userTyping">{params.customer + " typing..."}</div>
-                <form id="form" action="" onSubmit={sendMessage}>
-                    <input id="input" onChange={ userTyping } /><button>Send</button>
-                </form>
+              <div id="loaderMessages">Loading.....</div>
+              <ul id="messages">                          
+                { messagesHistory.map( item => <li>{(item.Sender === "admin" ? "me" : item.Sender) + ": " + item.Message}</li>) }                    
+              </ul>
+              <div id="userTyping">{params.customer + " typing..."}</div>
+              <form id="form" action="" onSubmit={sendMessage}>
+                <input id="input" onChange={ userTyping } />
+                <button id="sendButton">
+                  <FontAwesomeIcon icon={ faPaperPlane } />
+                </button>
+              </form>
             </div>)
 }

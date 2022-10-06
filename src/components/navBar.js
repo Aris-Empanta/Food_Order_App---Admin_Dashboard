@@ -111,7 +111,7 @@ export const NavBar = () => {
                             < FontAwesomeIcon icon={ faComment } className="navbarIcons inboxColor fontsColor" />
                             <span className="inboxColor fontsColor" > Chat </span>                            
                             <span className="inboxColor fontsColor" id="newMessage">
-                                 { unreadMessages !== "" ?
+                                 { unreadMessages !== null && unreadMessages !== "" ?
                                  <div className="unreadMessages">{unreadMessages}</div> :
                                  unreadMessages } 
                             </span>                            

@@ -47,12 +47,6 @@
     font-size: 1.3rem;
 }
 
-.unreadMessages {
-    border-radius: 30px;
-    height: 20px;
-    width: 20px;
-    background-color: red;
-}
 
 .navBar ul li {
     list-style: none;
@@ -127,6 +121,7 @@
     font-size: 1rem;
     color: white;
 }
+
 
 .navBarList {
     padding-left: 20px;
