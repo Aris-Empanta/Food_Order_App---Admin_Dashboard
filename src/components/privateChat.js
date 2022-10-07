@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPaperPlane } from "@fortawesome/free-regular-svg-icons"
 import { showMessage } from "../functions/chat";
 import axios from "axios"   
+import useStateWithCallback from 'use-state-with-callback';
 
 //Initializing socket.io and url's parameter name object.
 export const socket = io(`http://localhost:5000`)
@@ -15,7 +16,7 @@ export const socket = io(`http://localhost:5000`)
 export const PrivateChat = () => {
     
     //The state needed.
-    const [messagesHistory, setMessagesHistory ] = useState([])
+    const [messagesHistory, setMessagesHistory ] = useStateWithCallback([], () => window.scrollTo(0, document.body.scrollHeight) )
     
     const params = useParams();
 
@@ -33,26 +34,32 @@ export const PrivateChat = () => {
                                         //Saving specific customer's fetched messages in a variable             
                                         let messages = res.data.filter(item => item.Customer === customer)
 
+                                        if(messages.length > 0) window.scrollTo(0, document.body.scrollHeight)
+
                                         //Pass above variable to the messages state
                                         if(messagesHistory.length !== messages.length) setMessagesHistory(messages)  
 
                                         //Hide loading element when fetch the data
                                         loader.style.display = 'none'
 
-                                        window.scrollTo(0, document.body.scrollHeight);
-
-
                                         //Updates the unread message indicator on navbar
-                                        socket.emit('update navbar')
+                                        socket.emit('update navbar') 
                                         })
                          .catch(err => console.log(err))
+                        
                      
                    //Handling the socket.io event that will send us a message from admin and displaying it.
                     socket.on('customer '+ params.customer, (data)=> {  let sender = data.sender === 'admin' ? 'me' : data.sender
                                                                         let message = data.message
-                                                                        if(data.sender !== 'admin') showMessage(sender, message)
+                                                                        let date = data.date
+
+                                                                        //Messages appended on screen
+                                                                        sender !== 'admin' ? showMessage(sender, message,date) :
+                                                                                             showMessage('me', message,date) 
                                                                         //Not showing new messages in navbar
                                                                         window.scrollTo(0, document.body.scrollHeight);
+
+                                                                        console.log(date)
                                                                         
                                                                        /* When we receive messages with this component mounted,
                                                                          navbar message indicator should remain zero*/
@@ -63,6 +70,10 @@ export const PrivateChat = () => {
                   socket.on(params.customer + ' is typing', () => userTyping.style.display = 'initial') 
                   
                   socket.on(params.customer + ' not typing', () => userTyping.style.display = 'none') 
+
+                  return () => {
+                    socket.off('customer '+ params.customer)
+                  }
                    
     }, [])
     
@@ -92,7 +103,7 @@ export const PrivateChat = () => {
         if (inputMessage.value) {
 
           socket.emit('chat message', data)
-          showMessage("me", message)
+          socket.emit('Admin not typing', username )
           inputMessage.value = '';
           window.scrollTo(0, document.body.scrollHeight);
         }
@@ -101,9 +112,17 @@ export const PrivateChat = () => {
      return(<div className="chat">
               <div id="loaderMessages">Loading.....</div>
               <ul id="messages">                          
-                { messagesHistory.map( item => <li>{(item.Sender === "admin" ? "me" : item.Sender) + ": " + item.Message}</li>) }                    
+                { messagesHistory.map( item => <li className={"messageInfoWrapper colorOf"+ item.Sender}>
+                                                  <div className="senderAndDate">
+                                                   <p className="senderName">{(item.Sender === "admin" ? "me" : item.Sender)}</p>
+                                                   <p className="sendDate">{item.dateReceived}</p>
+                                                  </div>
+                                                  <div className="messageTextWrapper">
+                                                    <p className="messageText">&nbsp;{item.Message}</p>
+                                                  </div>
+                                               </li>) }                    
               </ul>
-              <div id="userTyping">{params.customer + " typing..."}</div>
+              <div id="userTyping">{params.customer + " is typing..."}</div>
               <form id="form" action="" onSubmit={sendMessage}>
                 <input id="input" onChange={ userTyping } />
                 <button id="sendButton">

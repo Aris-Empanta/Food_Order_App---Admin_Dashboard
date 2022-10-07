@@ -186,6 +186,7 @@
 
 .chat {
     margin-left: 230px;
+    padding-top: 30px;
 }
 
 .load {
@@ -238,10 +239,59 @@
 #userTyping {
         position: fixed; 
         bottom: 60px; 
-        left: 220px;
+        left: auto;
+        right: 20px;
         display: none;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1.2rem;
     }
 
 #messages {
-    margin-bottom: 80px;
+    margin-bottom: 100px;
+}
+
+.messageInfoWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 0 30% 35px 3%;
+    border-radius: 50px;
+    background-color: #D8BFD8;
+}
+
+.colorOfadmin {
+    background-color: #c9a0dc;
+    margin: 0 3% 35px 30%;
+}
+
+.senderAndDate {
+    display: flex;
+}
+
+.sendDate {
+    margin-right: 10px;
+    margin-left: auto;
+    font-size: 1.2rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #404040;
+}
+
+.senderName {
+    font-size: 1.2rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #404040;
+}
+
+.messageTextWrapper {
+    display: flex;
+    width: 95%;
+    flex-wrap: wrap;
+}
+
+.messageText {
+    font-size: 1.4rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #101010;
+    max-width: 100%;
+    overflow-wrap: break-word;
 }

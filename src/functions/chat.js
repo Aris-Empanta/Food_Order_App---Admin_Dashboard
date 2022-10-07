@@ -102,11 +102,22 @@ export const deleteSelected = (axios, markedMessagesState) => {
 
 
 //Shows all messages in the privateChat component 
-export const showMessage = (name, msg) => {
+export const showMessage = (name, msg, date) => {
     
     let message = document.createElement("li")
-    message.innerHTML = name + ": " + msg
+
+    message.classList.add("messageInfoWrapper")
+
+    if(name === 'me')message.classList.add("colorOfadmin")
     
+    message.innerHTML = `<div class="senderAndDate">
+                            <p class="senderName">${(name === "admin" ? "me" : name)}</p>
+                            <p class="sendDate">${date}</p>
+                         </div>
+                         <div class="messageTextWrapper">
+                            <p class="messageText">&nbsp;${msg}</p>
+                         </div>`
+            
     let messages = document.getElementById("messages")
     messages.appendChild(message)
  } 
