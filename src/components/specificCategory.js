@@ -106,9 +106,9 @@ export const SpecificCategory = () => {
             }
     
     //-------> The function to change a product image  <------      
-    const updateImage = (event, index) => {
+    const updateImage = (event, index) => { 
                 
-                let type = /\.(jpe?g|tiff?|png|webp|bmp)$/i
+                let type = /\.(jpe?g|tiff?|png|webp|bmp|avif)$/i
                 let name = event.target.files[0].name
                 let size = event.target.files[0].size
                 let input = document.getElementsByClassName("updateImage" + index)[0]
@@ -124,7 +124,7 @@ export const SpecificCategory = () => {
                     let newName = Date.now() + "-" + event.target.files[0].name
                     let date = new Date()
                     date = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear() +
-                             "_" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
+                             "_" + date.getHours() + ":" + date.getMinutes() 
 
                     newImage.append("newImage", event.target.files[0], newName )     
                     
@@ -154,13 +154,13 @@ export const SpecificCategory = () => {
   //----------------------------------------------------------------------------------------->
   
   return(<div className="preview">
-             <div className="productsHeader">
-               <p id="productsTitle"> Dish types / {params.category}</p>
-               <div id="searchWrapper">
-                <input id="searchBar" type="text" placeholder="product's name" />
-                <button id="searchButton" onClick={ filterName }><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
-               </div>
-             </div>
+            <div className="productsHeader">
+              <p id="productsTitle"> Dish types / {params.category}</p>
+              <div id="searchWrapper">
+              <input id="searchBar" type="text" placeholder="product's name" />
+              <button id="searchButton" onClick={ filterName }><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
+              </div>
+            </div>
             <div id="productsWrapper">              
               {products.map((item, index) => 
                               <div className={ "product product" + index }>

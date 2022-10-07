@@ -37,7 +37,7 @@ export const AddProduct = () => {
     //------> Capturing the uploaded image in the state. <------
     const handleImage = (event) => {
 
-                                    let type = /\.(jpe?g|tiff?|png|webp|bmp)$/i
+                                    let type = /\.(jpe?g|tiff?|png|webp|bmp|avif)$/i
                                     let name = event.target.files[0].name
                                     let size = event.target.files[0].size
                                     let input = document.getElementById("imageInput")
@@ -139,34 +139,35 @@ export const AddProduct = () => {
                     <h1 id="formTitle" className="formComponents" >ADD PRODUCT FORM</h1>
                     <hr id="formLine"></hr>                    
                     <label id="categoryLabel" className="formComponents" >Product Category</label>
-                    <input placeholder="Pizza" id="categoryInput" className="formComponents inputs" onChange={ (e) => { let category = e.target.value
-                                                                                                                 setCategory(category)                                
-                                                                                                                 setStringData({...stringData, category: category})                                
-                                                                                                                }}/>
+                    <input placeholder="Pizza" id="categoryInput" className="formComponents inputs" 
+                           type="text" onChange={ (e) => { let category = e.target.value
+                                                           setCategory(category)                                
+                                                           setStringData({...stringData, category: category}) }}/>
                     <label id="productLabel" className="formComponents">Product ID</label>
-                    <input id="productId" className="formComponents inputs"  placeholder="ID" onChange={ (e) => { let id = e.target.value
-                                                                                                                 setId(id)                                
-                                                                                                                 setStringData({...stringData, id: id})                                
-                                                                                                                }}/>
+                    <input id="productId" className="formComponents inputs"  placeholder="ID" 
+                           type='number' onChange={ (e) => { let id = e.target.value
+                                                             setId(id)                                
+                                                             setStringData({...stringData, id: id}) }}/>
                     <label id="nameLabel" className="formComponents">Product Name</label>
-                    <input id="nameInput" className="formComponents inputs"  placeholder="Margarita" onChange={ (e) => { let name = e.target.value
-                                                                                                                 setName(name)                                
-                                                                                                                 setStringData({...stringData, name: name})                                
-                                                                                                                }}/>    
+                    <input id="nameInput" className="formComponents inputs"  placeholder="Margarita" 
+                           type="text" onChange={ (e) => { let name = e.target.value
+                                                           setName(name)                                
+                                                           setStringData({...stringData, name: name}) }}/>    
                     <label id="priceLabel"  className="formComponents" >Price</label>
-                    <input placeholder="10" id="priceInput"  className="formComponents inputs" onChange={(e) => { let price = e.target.value
-                                                                                                                      setPrice(price)                                
-                                                                                                                      setStringData({...stringData, price: price})                                
-                                                                                                                    }}/>
+                    <input placeholder="10" id="priceInput"  className="formComponents inputs" 
+                           type="number" onChange={(e) => { let price = e.target.value
+                                                            setPrice(price)                                
+                                                            setStringData({...stringData, price: price}) }}/>
                     <label id="descriptionLabel" className="formComponents" >Description</label>
-                    <textarea id="descriptionInput"  rows="8" placeholder="Description" className="formComponents inputs" onChange={(e) => { let description = e.target.value
-                                                                                                                            setDescription(description)                                
-                                                                                                                            setStringData({...stringData, description: description})                                
-                                                                                                                            }}/>
+                    <textarea id="descriptionInput"  rows="8" placeholder="Description" className="formComponents inputs" 
+                              type="text" onChange={(e) => { let description = e.target.value
+                                                             setDescription(description)                                
+                                                             setStringData({...stringData, description: description}) }}/>
                     <label id="imageLabel" className="formComponents" >Product Image</label>    
                     <label id="uploadWrapper">
                         <button id="uploadImage" >Select image</button>   
-                        <input type="file"   name="image" id="imageInput" className="formComponents inputs" onChange={ handleImage } />                                                                                                                           
+                        <input type="file"   name="image" id="imageInput" className="formComponents inputs" 
+                               onChange={ handleImage } />                                                                                                                           
                     </label>
                     <div id="submitWrapper">
                         <button id="submit" className="formComponents" onClick={ addProduct }>ADD PRODUCT</button>

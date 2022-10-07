@@ -1,17 +1,16 @@
 /*The component where you can check and modify the menu*/
 .preview {
-  margin-left: 250px;
+  margin-left: 230px;
   display: flex;
   flex-direction: column;
-  height: 100vh;
 }
 
 .productsHeader {
   display: flex;
   height: 180px;
   align-items: center;
-  justify-content: space-between;
-  margin-right: 100px;
+  justify-content: space-evenly;
+  gap:50%;
 }
 
 #productsTitle {
@@ -63,6 +62,7 @@
   border-radius: 3px;
   position: relative;
   padding: 5px;
+  margin-bottom: 50px;
 }
 
 /*The product's image*/
