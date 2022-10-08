@@ -60,8 +60,8 @@ export const NavBar = () => {
                             <FontAwesomeIcon icon={ faLemon } id="logo"/>                            
                         </div>
                         <div>
-                            <p class="restaurantName">Aris</p>
                             <p class="restaurantName">Restaurant</p>
+                            <p class="restaurantName">Dashboard</p>
                         </div>
                     </li>
                     <li id="dashboard"  className="navBarList">

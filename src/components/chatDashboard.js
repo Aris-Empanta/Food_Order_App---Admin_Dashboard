@@ -36,7 +36,7 @@ export const ChatDashboard = () => {
 
                                                          //Hide loading element when fetch the data
                                                          loader.style.display = 'none'
-                                                      },
+                                                      }, 
                                                    )
                                           } 
 

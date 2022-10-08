@@ -10,12 +10,13 @@
 .customersWrapper {
     background-color: white;
     padding: 20px;
-    width: 90%; 
+    width: 95%; 
+    min-height: 80vh;
     box-shadow: 1px 1px 4px #808080;
 }
 
 .customersTitle {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-family: Arial, Helvetica, sans-serif;
     margin-bottom: 30px;
     margin-top: 20px

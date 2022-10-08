@@ -5,13 +5,25 @@ export const fetchOrders = (axios, callback) => {
        .then((res) => {
                       callback(res.data)
                       for(let i=0; i < res.data.length; i++){
-
+                        console.log(res.data)
                         let checkedStatus = document.getElementById("checkedStatus" + i)
 
                         checkedStatus.innerText === "unChecked" ? checkedStatus.classList.add("bold") :
                                                                   checkedStatus.classList.remove("bold")
                       }
                     })
+}
+
+//The function to fetch an orders total price
+
+export const fetchTotalPrice = (axios, id) => {
+
+    
+
+     axios.get("http://localhost:5000/orders/price-of-" + id)
+          .then((res) => res.data.totalPrice)
+
+    
 }
 
  //With below function, when we click on an order, it is marked as checked                

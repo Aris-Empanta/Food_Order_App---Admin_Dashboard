@@ -19,7 +19,7 @@ export const AllCategories = () => {
 
         navigate("./" + category, { replace: false} )
     }
-
+ 
 
     return (<div>
               <div id="typesTitle">

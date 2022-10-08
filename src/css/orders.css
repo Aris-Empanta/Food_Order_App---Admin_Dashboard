@@ -7,6 +7,14 @@
     margin-left: 230px;
 }
 
+#ordersWrapper {
+    background-color: white;
+    padding: 20px;
+    width: 95%; 
+    box-shadow: 1px 1px 4px #808080;
+    min-height: 80vh
+}
+
 .unChecked {
     font-weight: 600;
 }
@@ -17,21 +25,16 @@
 
 #ordersListTitle {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    height: 200px;
+    height: 100px;
 }
 
 #ordersListTitle h1 {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 2rem;
+    font-size: 1.3rem;
     color: #303030;
 }
-
-#ordersWrapper {
-    background-color: white;
-}
-
 
 .ordersTable  th {
     font-family: Arial, Helvetica, sans-serif;
