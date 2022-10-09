@@ -127,7 +127,8 @@
   }
 
 #searchMessageWrapper {
-    margin-left: 46%;
+   width: 65%;
+   text-align: right;
 }
 
 #searchMessage {
