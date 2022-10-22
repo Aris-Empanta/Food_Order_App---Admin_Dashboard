@@ -11,7 +11,7 @@ export const AddProduct = () => {
     const [id, setId] = useState("")
     const [allIds, setAllIds] = useState([])
     const [ name, setName] = useState("")
-    const [ price, setPrice] = useState("")
+    const [ price, setPrice] = useState("") 
     const [ description, setDescription] = useState("")
     const [ imageName, setImageName] = useState("")
     const [ stringData, setStringData] = useState({})
@@ -149,7 +149,8 @@ export const AddProduct = () => {
                                                              setId(id)                                
                                                              setStringData({...stringData, id: id}) }}/>
                     <label id="nameLabel" className="formComponents">Product Name</label>
-                    <input id="nameInput" className="formComponents inputs"  placeholder="Margarita" 
+                    <input id="nameInput" className="formComponents inputs"  
+                           placeholder="Margarita" maxLength={ 35 } 
                            type="text" onChange={ (e) => { let name = e.target.value
                                                            setName(name)                                
                                                            setStringData({...stringData, name: name}) }}/>    

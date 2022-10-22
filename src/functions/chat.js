@@ -106,7 +106,7 @@ export const showMessage = (name, msg, date) => {
     
     let message = document.createElement("li")
 
-    message.classList.add("messageInfoWrapper")
+    message.classList.add("messageInfoWrapper") 
 
     if(name === 'me')message.classList.add("colorOfadmin")
     

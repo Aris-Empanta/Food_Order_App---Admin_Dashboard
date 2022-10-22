@@ -176,10 +176,11 @@ export const SpecificCategory = () => {
                                   <p className="productInfo"><b>Category: </b><span className={"category" + index}>{item.Category}</span></p>
                                   <p className="productInfo"><b>Name: </b><span className={"productName characteristics" + index} >{item.Name}</span>
                                             <input defaultValue={item.Name} 
-                                                  className={"edit edit" + index }
-                                                  onChange = {(e) => {(e.target.value !== "") ? 
-                                                                      setName(e.target.value) : 
-                                                                      setName(item.Name)}  } /> 
+                                                   maxLength={ 35 }  
+                                                   className={"edit edit" + index }
+                                                   onChange = {(e) => {(e.target.value !== "") ? 
+                                                                       setName(e.target.value) : 
+                                                                        setName(item.Name)}  } /> 
                                   </p>
                                   <p className="productInfo"><b>Price: </b><span className={"characteristics" + index} >{item.Price}</span>
                                             <input defaultValue={item.Price} 

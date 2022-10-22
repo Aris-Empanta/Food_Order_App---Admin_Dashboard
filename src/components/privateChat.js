@@ -1,7 +1,7 @@
 import "../css/chat.css"
 import io from 'socket.io-client';
 import {useParams} from 'react-router-dom';
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPaperPlane } from "@fortawesome/free-regular-svg-icons"
 import { showMessage } from "../functions/chat";
@@ -121,7 +121,7 @@ export const PrivateChat = () => {
                                                     <p className="messageText">&nbsp;{item.Message}</p>
                                                   </div>
                                                </li>) }                    
-              </ul>
+              </ul> 
               <div id="userTyping">{params.customer + " is typing..."}</div>
               <form id="form" action="" onSubmit={sendMessage}>
                 <input id="input" onChange={ userTyping } />
