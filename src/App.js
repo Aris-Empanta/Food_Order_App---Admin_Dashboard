@@ -1,6 +1,7 @@
 import './App.css';
 import {Route,  Routes} from 'react-router-dom';
 import { NavBar } from "./components/navBar"
+import { FrontDashboard } from './components/frontDashboard';
 import { AddProduct } from "./components/addProduct"
 import { SpecificCategory } from "./components/specificCategory"
 import { ChatDashboard } from './components/chatDashboard';
@@ -16,6 +17,7 @@ function App() {
   return(<div>
           <NavBar />
           <Routes>       
+            <Route path="" element={<FrontDashboard />}/>
             <Route path="add-product" element={<AddProduct />} />
             <Route path="all-categories" element={<AllCategories />} />            
             <Route path="all-categories/:category" element={<SpecificCategory />} />
