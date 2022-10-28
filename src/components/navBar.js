@@ -1,12 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faAngleRight,
-          faTableColumns,
-          faUtensils,
-          faMotorcycle,
-          faUsers,
-          faBars,
-          faComment
-         } from "@fortawesome/free-solid-svg-icons"
+import { faAngleRight, faTableColumns,
+          faUtensils, faMotorcycle,
+          faUsers, faBars,
+          faComment, faBell} from "@fortawesome/free-solid-svg-icons"
 import { faLemon } from "@fortawesome/free-regular-svg-icons"
 import "../css/navBar.css"
 import { useEffect, useState } from "react"
@@ -73,7 +69,7 @@ export const NavBar = () => {
                     </li>
                     <li id="dashboard"  className="navBarList">
                         <a href="#/" id="dashboardLink"                          
-                           onClick={ () => focus("dashboard", "dashboardColor") }>
+                           onClick={ () => { focus("dashboard", "dashboardColor"); handleNavbar() }}>
                             < FontAwesomeIcon icon={ faTableColumns } className="navbarIcons dashboardColor fontsColor" />
                             <span className="dashboardColor fontsColor" >Dashboard</span>
                         </a>
@@ -134,6 +130,9 @@ export const NavBar = () => {
                     <div id="smallLogo">
                         <FontAwesomeIcon icon={ faLemon }/>                            
                     </div>
+                    <button id="notifications">
+                        <FontAwesomeIcon icon={ faBell }/>                            
+                    </button>
                 </div>
                 <audio id="orderNotification">
                     <source  src={orderNotification} type="audio/mp3" />
