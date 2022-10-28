@@ -1,6 +1,7 @@
 import "../css/addProduct.css"
 import axios from "axios"
 import { useEffect, useState } from  'react'
+import { hideNotifications } from "../functions/navBar"
 
 //The component where we add new products to the restaurant menu.
 export const AddProduct = () => {
@@ -134,7 +135,7 @@ export const AddProduct = () => {
                     }      
     //---------------------------------------------------------------------------------------------------->
 
-    return(<div className="addProduct components" >
+    return(<div className="addProduct" onClick={ hideNotifications }>
                 <form encType= "multipart/form-data" >
                     <h1 id="formTitle" className="formComponents" >ADD PRODUCT FORM</h1>
                     <hr id="formLine"></hr>                    

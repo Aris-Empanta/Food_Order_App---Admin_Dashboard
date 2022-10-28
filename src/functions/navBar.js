@@ -91,6 +91,7 @@ export const showHideNavbar = () => {
     let navBarList = document.getElementById("navBarList")
     let darkFilter = document.getElementById("darkFilter")
     let arrow = document.getElementById("expandArrow")
+    let notifications = document.getElementById("notificationsComponent")
     
 
     const hide = () => {
@@ -107,6 +108,7 @@ export const showHideNavbar = () => {
 
         navBarList.style.display = "flex"
         darkFilter.style.display = "initial"
+        notifications.style.display = "none"
         setTimeout( () => navBarList.style.transform = "translateX(0)", 1)
     }
 
@@ -120,12 +122,14 @@ export const handleNavbar = () => {
     let navBarList = document.getElementById("navBarList")
     let darkFilter = document.getElementById("darkFilter") 
     let arrow = document.getElementById("expandArrow")
+    let notifications = document.getElementById("notificationsComponent")
 
     const hide = () => {
 
         navBarList.style.transform = "translateX(-105%)"
         darkFilter.style.display = "none"
         navBarList.style.display = "none"
+        notifications.style.display = "none"
         //Once the navbar closes, the catalogue submenu closes to
         if(arrow.style.transform === "rotate(90deg)") catalogueChoices()
     }
@@ -137,4 +141,24 @@ export const handleNavbar = () => {
     }
 
     media.matches ? hide() : show()
+}
+
+//The function to show or hide notifications
+export const handleNotifications = () => {
+
+    let notifications = document.getElementById("notificationsComponent")
+    let navBarList = document.getElementById("navBarList")
+
+      notifications.style.display === "none" && 
+          navBarList.style.display === "none" ? 
+         notifications.style.display = "flex" :
+         notifications.style.display = "none"
+}
+
+//The function to hide the notifications
+export const hideNotifications = () => {
+
+    let notifications = document.getElementById("notificationsComponent")
+
+    notifications.style.display = "none"
 }

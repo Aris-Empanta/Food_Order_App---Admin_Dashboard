@@ -2,6 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import "../css/allCategories.css"
 import { useNavigate } from "react-router-dom";
+import { hideNotifications } from "../functions/navBar"
 
 export const AllCategories = () => {
 
@@ -21,7 +22,7 @@ export const AllCategories = () => {
     }
  
 
-    return (<div className="components">
+    return (<div onClick={ hideNotifications }>
               <div id="typesTitle">
                 <h1>Dish types</h1>
               </div>

@@ -6,13 +6,13 @@ import { faAngleRight, faTableColumns,
 import { faLemon } from "@fortawesome/free-regular-svg-icons"
 import "../css/navBar.css"
 import { useEffect, useState } from "react"
-import { Link } from 'react-router-dom';
+import { Notifications } from "./notifications"
 import { socket } from "./privateChat";
 import axios from 'axios'
 import { catalogueChoices, showHideNavbar,
          fetchUnread, fetchUncheckedOrders, 
          focus, soundNotification,
-         handleNavbar } from "../functions/navBar";
+         handleNavbar, handleNotifications } from "../functions/navBar";
 import  orderNotification  from "../mp3/orderNotification.mp3";
 import messageNotification from "../mp3/messageNotification.mp3"
  
@@ -53,6 +53,7 @@ export const NavBar = () => {
                         socket.on('re-evaluate orders', () => fetchUncheckedOrders(axios, setUncheckedOrders) )
                     }, [])
 
+    //We hide the navbar on screen resize
     window.addEventListener('resize', handleNavbar)
 
     return( <div className="navBar">
@@ -130,10 +131,11 @@ export const NavBar = () => {
                     <div id="smallLogo">
                         <FontAwesomeIcon icon={ faLemon }/>                            
                     </div>
-                    <button id="notifications">
+                    <button id="notifications" onClick={ handleNotifications }>
                         <FontAwesomeIcon icon={ faBell }/>                            
                     </button>
                 </div>
+                <Notifications />
                 <audio id="orderNotification">
                     <source  src={orderNotification} type="audio/mp3" />
                 </audio>

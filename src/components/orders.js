@@ -3,8 +3,9 @@ import "../css/orders.css"
 import { socket } from "./privateChat"
 import axios from "axios"
 import { fetchOrders, markAsChecked, 
-         renderCharacters, fetchTotalPrice } from "../functions/orders"
+         renderCharacters } from "../functions/orders"
 import { useNavigate } from "react-router-dom"; 
+import { hideNotifications } from "../functions/navBar"
 
 export const Orders = () => {
  
@@ -21,7 +22,7 @@ export const Orders = () => {
                     }, [])
    
 
-    return(<div className="orders components">              
+    return(<div className="orders" onClick={ hideNotifications }>              
               <div id="ordersWrapper">
                <div id="ordersListTitle"><h1>Orders' list</h1></div>
                <table className="ordersTable" cellspacing="0">

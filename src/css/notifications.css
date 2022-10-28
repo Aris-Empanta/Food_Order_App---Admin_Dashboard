@@ -1,0 +1,11 @@
+#notificationsComponent {
+    display: none;
+    width: 400px;
+    height: 500px;
+    position: fixed;
+    background-color: white;
+    z-index: 1;
+    right: 20px;
+    left: auto;
+    box-shadow: 1px 1px 4px silver;
+}

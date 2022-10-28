@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { socket } from "./privateChat"
 import { generateOrderId } from "../functions/orders"
-
+import { hideNotifications } from "../functions/navBar"
 
 export const SpecificOrder = () => {
 
@@ -43,7 +43,7 @@ export const SpecificOrder = () => {
                      .then((res) => setTotalPrice(res.data.totalPrice))
                }, [] )
 
-    return(<div className="specificOrder components">
+    return(<div className="specificOrder" onClick={ hideNotifications }>
               <div className="ordersWrapper">              
                 <div className="header customerInfo">
                     <p className="ordersInfo"><b>Order Info</b></p>

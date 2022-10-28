@@ -10,6 +10,7 @@ import {  markAsRead, combineEndpoints,
          selectMessage, selectAllMessages,
          markAsUnread, deleteSelected, 
          searchConversation } from "../functions/chat"
+import { hideNotifications } from "../functions/navBar"
 
 export const ChatDashboard = () => {   
    
@@ -48,7 +49,7 @@ export const ChatDashboard = () => {
 
       }, [])       
     
-   return(<div className="chatDashboard components">
+   return(<div className="chatDashboard" onClick={ hideNotifications }>
             <div id="chatTitle">
                <h1>Chat messages</h1>
             </div>

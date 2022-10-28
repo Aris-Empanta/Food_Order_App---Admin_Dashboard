@@ -8,6 +8,7 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { faCamera} from "@fortawesome/free-solid-svg-icons"
 import { faPencil } from "@fortawesome/free-solid-svg-icons"
 import { faTrash } from "@fortawesome/free-solid-svg-icons"
+import { hideNotifications } from "../functions/navBar"
 
 //The component where we can check and modify the menu.
 export const SpecificCategory = () => {
@@ -153,7 +154,7 @@ export const SpecificCategory = () => {
 
   //----------------------------------------------------------------------------------------->
   
-  return(<div className="preview components">
+  return(<div className="preview" onClick={ hideNotifications }>
             <div className="productsHeader">
               <p id="productsTitle"> Dish types / {params.category}</p>
               <div id="searchWrapper">

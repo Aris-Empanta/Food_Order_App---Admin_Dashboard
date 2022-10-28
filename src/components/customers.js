@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useEffect, useState } from "react";
 import "../css/customers.css"
+import { hideNotifications } from "../functions/navBar"
 
 export const Customers = () => {
 
@@ -12,7 +13,7 @@ export const Customers = () => {
              .then( res => setCustomerData(res.data))
     })
 
-    return(<div className='customersComponent components'>
+    return(<div className='customersComponent' onClick={ hideNotifications }>
              <div className='customersWrapper'>
                 <h1 className='customersTitle'>Customer List</h1>
                 <table className="customersTable" cellspacing="0">
