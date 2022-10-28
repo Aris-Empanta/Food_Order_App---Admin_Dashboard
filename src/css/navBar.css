@@ -1,14 +1,26 @@
 /*Styling the side navBar*/
-.navBar ul {
+#navBarList {
     display: flex;
     flex-direction: column;
     justify-content:baseline;
-    height: 100vh;
+    height: 100%;
     width: 230px;
     background-color: white;
     padding-top: 20px;
     position: fixed;
     box-shadow: 1px 1px 4px gray;
+    transition: transform 0.5s;
+    z-index: 1;
+}
+
+#darkBackground {
+    background-color: black;
+    opacity: 0.8;
+    width: 1000px;
+}
+
+#smallScreenNavbar {
+    display: none;
 }
 
 #firmWrapper {
@@ -135,4 +147,45 @@
 
 #preview {
     margin-bottom: 30px;
+}
+
+@media ( max-width: 1100px ) {
+
+    #navBarList {
+        transform: translateX(-105%);
+    }
+
+    #smallScreenNavbar {
+        display: flex;
+        position: fixed;
+        align-items: center;
+        justify-content: space-between;
+        background-color: white;
+        width: 100%;
+        height: 80px;
+        margin-top: 0;
+        margin-bottom: 80px;
+        z-index: 2;
+    }
+
+    #barsIcon {
+        margin-left: 2%;
+        font-size: 1.7rem;
+        color: rgb(64, 84, 178);
+        background-color: transparent;
+        border: none;
+    }
+
+    #smallLogo {
+        display: flex;
+        margin-right: 45%;
+        justify-content: center;
+        align-items: center;
+        height: 55px;
+        width: 55px;
+        background: linear-gradient( to bottom right, rgb(64, 84, 178), rgb(219, 2, 234));
+        border-radius: 10px;
+        color: whitesmoke;
+        font-size: 1.4rem;
+    }
 }

@@ -3,3 +3,10 @@
     justify-content: center;
     margin-left: 230px;    
 }
+
+@media ( max-width: 1100px ) {
+
+    #frontDashboard {
+        margin-left: 0;
+    }
+}

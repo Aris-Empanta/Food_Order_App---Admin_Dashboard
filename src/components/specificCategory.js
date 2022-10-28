@@ -153,7 +153,7 @@ export const SpecificCategory = () => {
 
   //----------------------------------------------------------------------------------------->
   
-  return(<div className="preview">
+  return(<div className="preview components">
             <div className="productsHeader">
               <p id="productsTitle"> Dish types / {params.category}</p>
               <div id="searchWrapper">

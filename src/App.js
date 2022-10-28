@@ -10,12 +10,14 @@ import { Orders } from "./components/orders"
 import { SpecificOrder } from "./components/specificOrder"
 import { Customers } from "./components/customers"
 import { AllCategories } from "./components/allCategories"
+import { DarkFilter } from "./components/darkFilter"
 
 //The parent component
 function App() {
 
   return(<div>
           <NavBar />
+          <DarkFilter />
           <Routes>       
             <Route path="" element={<FrontDashboard />}/>
             <Route path="add-product" element={<AddProduct />} />

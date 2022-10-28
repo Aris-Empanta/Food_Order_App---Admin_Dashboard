@@ -21,7 +21,7 @@ export const AllCategories = () => {
     }
  
 
-    return (<div>
+    return (<div className="components">
               <div id="typesTitle">
                 <h1>Dish types</h1>
               </div>

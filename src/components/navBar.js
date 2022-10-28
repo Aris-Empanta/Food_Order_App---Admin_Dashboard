@@ -4,6 +4,7 @@ import { faAngleRight,
           faUtensils,
           faMotorcycle,
           faUsers,
+          faBars,
           faComment
          } from "@fortawesome/free-solid-svg-icons"
 import { faLemon } from "@fortawesome/free-regular-svg-icons"
@@ -12,11 +13,10 @@ import { useEffect, useState } from "react"
 import { Link } from 'react-router-dom';
 import { socket } from "./privateChat";
 import axios from 'axios'
-import { catalogueChoices, 
-         fetchUnread, 
-         fetchUncheckedOrders, 
-         focus,
-         soundNotification } from "../functions/navBar";
+import { catalogueChoices, showHideNavbar,
+         fetchUnread, fetchUncheckedOrders, 
+         focus, soundNotification,
+         handleNavbar } from "../functions/navBar";
 import  orderNotification  from "../mp3/orderNotification.mp3";
 import messageNotification from "../mp3/messageNotification.mp3"
  
@@ -31,6 +31,10 @@ export const NavBar = () => {
 
                         addProduct.style.display = "none"
                         preview.style.display = "none"
+
+                        // We set the position of the navbar depending on the screen size, so  
+                        //that in smaller screens we the navbar shows with the first click.
+                        handleNavbar()
 
                         //Fetching new unchecked orders
                         fetchUncheckedOrders(axios, setUncheckedOrders)
@@ -53,14 +57,17 @@ export const NavBar = () => {
                         socket.on('re-evaluate orders', () => fetchUncheckedOrders(axios, setUncheckedOrders) )
                     }, [])
 
+    window.addEventListener('resize', handleNavbar)
+
     return( <div className="navBar">
-                <ul>
+                <div id="darkBackground"></div>
+                <ul id="navBarList">
                     <li id="firmWrapper">
                         <div id="logoWrapper">
                             <FontAwesomeIcon icon={ faLemon } id="logo"/>                            
                         </div>
                         <div>
-                            <p class="restaurantName">Restaurant</p>
+                            <p class="restaurantName">Snack Bar</p>
                             <p class="restaurantName">Dashboard</p>
                         </div>
                     </li>
@@ -83,12 +90,14 @@ export const NavBar = () => {
                                 </span>
                             </p>
                         </div>
-                        <Link id="addProduct" className="products" to="add-product">Add Product</Link>
-                        <Link id="preview" className="products" to="all-categories">Preview</Link>
+                        <a id="addProduct" onClick={ handleNavbar}
+                           className="products" href="#/add-product">Add Product</a>
+                        <a id="preview" onClick={ handleNavbar}
+                           className="products" href="#/all-categories">Preview</a>
                     </li>                  
                     <li id="orders"  className="navBarList">
                         <a href="#/orders"                         
-                           onClick={ () => focus("orders", "ordersColor") }>
+                           onClick={ () => { focus("orders", "ordersColor"); handleNavbar() } }>
                             < FontAwesomeIcon icon={ faMotorcycle } className="navbarIcons ordersColor fontsColor" />
                             <span className="ordersColor fontsColor" >Orders </span>                          
                             <span id="newOrder" className="ordersColor fontsColor">
@@ -100,14 +109,14 @@ export const NavBar = () => {
                     </li>
                     <li id="customers"  className="navBarList">
                         <a href="#/customers"                            
-                           onClick={ () => focus("customers", "customersColor") }>
+                           onClick={ () => { focus("customers", "customersColor"); handleNavbar() }}>
                             < FontAwesomeIcon icon={ faUsers } className="navbarIcons customersColor fontsColor" />
                             <span className="customersColor fontsColor">Customers</span>
                         </a>
                     </li>
                     <li id="inbox"  className="navBarList inboxColor">
                         <a  href="#/chat"                           
-                            onClick={ () => focus("inbox", "inboxColor") }>
+                            onClick={ () => { focus("inbox", "inboxColor"); handleNavbar() } }>
                             < FontAwesomeIcon icon={ faComment } className="navbarIcons inboxColor fontsColor" />
                             <span className="inboxColor fontsColor" > Chat </span>                            
                             <span className="inboxColor fontsColor" id="newMessage">
@@ -118,6 +127,14 @@ export const NavBar = () => {
                         </a>
                     </li>                    
                 </ul>
+                <div id="smallScreenNavbar">
+                    <button id="barsIcon" onClick={ showHideNavbar }>
+                        <FontAwesomeIcon icon={ faBars }/> 
+                    </button>
+                    <div id="smallLogo">
+                        <FontAwesomeIcon icon={ faLemon }/>                            
+                    </div>
+                </div>
                 <audio id="orderNotification">
                     <source  src={orderNotification} type="audio/mp3" />
                 </audio>

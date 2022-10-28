@@ -43,7 +43,7 @@ export const SpecificOrder = () => {
                      .then((res) => setTotalPrice(res.data.totalPrice))
                }, [] )
 
-    return(<div className="specificOrder">
+    return(<div className="specificOrder components">
               <div className="ordersWrapper">              
                 <div className="header customerInfo">
                     <p className="ordersInfo"><b>Order Info</b></p>

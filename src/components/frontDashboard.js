@@ -4,7 +4,7 @@ import { faLemon } from "@fortawesome/free-regular-svg-icons"
 
 export const FrontDashboard = () => {
 
-    return(<div id="frontDashboard">
+    return(<div id="frontDashboard components">
               
             </div>)
 }

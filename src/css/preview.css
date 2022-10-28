@@ -157,3 +157,10 @@
   color: white;
   font-size: 1rem;
 }
+
+@media ( max-width: 1100px ) {
+
+  .preview {
+    margin-left: 0;
+  }   
+}

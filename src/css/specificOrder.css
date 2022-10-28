@@ -71,3 +71,10 @@
 .totalPriceRow td{
     border-bottom: none;
 }
+
+@media ( max-width: 1100px ) {
+
+    .specificOrder {
+        margin-left: 0;
+    }
+}

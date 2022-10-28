@@ -13,7 +13,7 @@ export const catalogueChoices = () => {
         catalogue.style.marginBottom = "30px"
         catalogue.style.marginTop = "40px"
         arrow.style.transform = "rotate(90deg)"
-    } else {
+    } else { 
         addProduct.style.display = "none"
         preview.style.display = "none"
         catalogue.style.marginBottom = "0"
@@ -83,4 +83,58 @@ export const focus = (id, className ) => {
 export const soundNotification = (id) => {
 
     document.getElementById(id).play()
+}
+
+//The function to shoq the navbar in smaller screens
+export const showHideNavbar = () => {
+
+    let navBarList = document.getElementById("navBarList")
+    let darkFilter = document.getElementById("darkFilter")
+    let arrow = document.getElementById("expandArrow")
+    
+
+    const hide = () => {
+
+        navBarList.style.transform = "translateX(-105%)"
+        darkFilter.style.display = "none"
+        setTimeout( () => navBarList.style.display = "none", 500 )
+        //Once the navbar closes, the catalogue submenu closes to
+        if(arrow.style.transform === "rotate(90deg)") catalogueChoices()
+    }
+
+    const show = () => {
+       
+
+        navBarList.style.display = "flex"
+        darkFilter.style.display = "initial"
+        setTimeout( () => navBarList.style.transform = "translateX(0)", 1)
+    }
+
+    navBarList.style.display === "flex" ? hide() : show() 
+}
+
+//With below function we hide / show navbar depending the screen size
+export const handleNavbar = () => {
+
+    let media = window.matchMedia("(max-width: 1100px)")
+    let navBarList = document.getElementById("navBarList")
+    let darkFilter = document.getElementById("darkFilter") 
+    let arrow = document.getElementById("expandArrow")
+
+    const hide = () => {
+
+        navBarList.style.transform = "translateX(-105%)"
+        darkFilter.style.display = "none"
+        navBarList.style.display = "none"
+        //Once the navbar closes, the catalogue submenu closes to
+        if(arrow.style.transform === "rotate(90deg)") catalogueChoices()
+    }
+
+    const show = () => {
+
+        navBarList.style.transform = "translateX(0)"
+        navBarList.style.display = "flex"
+    }
+
+    media.matches ? hide() : show()
 }

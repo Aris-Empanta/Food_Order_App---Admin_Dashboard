@@ -3,16 +3,22 @@
     justify-content: center;
     flex-direction: column;
     align-items: center;    
-    height: 100vh;
+    height: 100%;
     margin-left: 230px;
 }
 
 .customersWrapper {
+    margin-top: 100px;
     background-color: white;
     padding: 20px;
     width: 95%; 
-    min-height: 80vh;
+    min-height: 80%;
     box-shadow: 1px 1px 4px #808080;
+    
+}
+
+.customersTable {
+    overflow-x: scroll;
 }
 
 .customersTitle {
@@ -28,6 +34,7 @@
     background-color: #9370db;
     color: white;
     text-align: left;
+    font-size: 0.9rem;
 }
 
 .customersTable td {
@@ -37,4 +44,12 @@
     color: #303030;
     border-bottom: 1px ridge silver;
     text-align: left;
+    font-size: 0.9rem;
+}
+
+@media ( max-width: 1100px ) {
+
+    .customersComponent {
+        margin-left: 0;
+    }
 }

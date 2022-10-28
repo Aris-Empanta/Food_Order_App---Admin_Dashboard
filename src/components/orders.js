@@ -21,7 +21,7 @@ export const Orders = () => {
                     }, [])
    
 
-    return(<div className="orders">              
+    return(<div className="orders components">              
               <div id="ordersWrapper">
                <div id="ordersListTitle"><h1>Orders' list</h1></div>
                <table className="ordersTable" cellspacing="0">

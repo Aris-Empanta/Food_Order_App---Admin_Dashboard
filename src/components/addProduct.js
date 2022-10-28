@@ -134,7 +134,7 @@ export const AddProduct = () => {
                     }      
     //---------------------------------------------------------------------------------------------------->
 
-    return(<div className="addProduct">
+    return(<div className="addProduct components" >
                 <form encType= "multipart/form-data" >
                     <h1 id="formTitle" className="formComponents" >ADD PRODUCT FORM</h1>
                     <hr id="formLine"></hr>                    

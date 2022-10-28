@@ -12,7 +12,7 @@ export const Customers = () => {
              .then( res => setCustomerData(res.data))
     })
 
-    return(<div className='customersComponent'>
+    return(<div className='customersComponent components'>
              <div className='customersWrapper'>
                 <h1 className='customersTitle'>Customer List</h1>
                 <table className="customersTable" cellspacing="0">

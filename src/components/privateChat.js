@@ -109,7 +109,7 @@ export const PrivateChat = () => {
         }
     }
 
-     return(<div className="chat">
+     return(<div className="chat components">
               <div id="loaderMessages">Loading.....</div>
               <ul id="messages">                          
                 { messagesHistory.map( item => <li className={"messageInfoWrapper colorOf"+ item.Sender}>

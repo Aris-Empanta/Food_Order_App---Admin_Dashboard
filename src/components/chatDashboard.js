@@ -48,7 +48,7 @@ export const ChatDashboard = () => {
 
       }, [])       
     
-   return(<div className="chatDashboard">
+   return(<div className="chatDashboard components">
             <div id="chatTitle">
                <h1>Chat messages</h1>
             </div>
