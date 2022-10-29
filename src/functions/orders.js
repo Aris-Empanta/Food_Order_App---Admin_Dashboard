@@ -5,7 +5,7 @@ export const fetchOrders = (axios, callback) => {
        .then((res) => {
                       callback(res.data)
                       for(let i=0; i < res.data.length; i++){
-                        console.log(res.data)
+                        
                         let checkedStatus = document.getElementById("checkedStatus" + i)
 
                         checkedStatus.innerText === "unChecked" ? checkedStatus.classList.add("bold") :

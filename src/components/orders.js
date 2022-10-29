@@ -25,7 +25,7 @@ export const Orders = () => {
     return(<div className="orders" onClick={ hideNotifications }>              
               <div id="ordersWrapper">
                <div id="ordersListTitle"><h1>Orders' list</h1></div>
-               <table className="ordersTable" cellspacing="0">
+               <table className="ordersTable" cellSpacing="0">
                   <tr>
                     <th>Order ID</th>
                     <th>Customer's name</th>

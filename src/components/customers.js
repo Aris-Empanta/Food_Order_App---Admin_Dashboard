@@ -16,7 +16,7 @@ export const Customers = () => {
     return(<div className='customersComponent' onClick={ hideNotifications }>
              <div className='customersWrapper'>
                 <h1 className='customersTitle'>Customer List</h1>
-                <table className="customersTable" cellspacing="0">
+                <table className="customersTable" cellSpacing="0">
                   <tr>                    
                     <th>Customer's name</th>
                     <th>Address</th>

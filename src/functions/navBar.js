@@ -160,5 +160,14 @@ export const hideNotifications = () => {
 
     let notifications = document.getElementById("notificationsComponent")
 
-    notifications.style.display = "none"
+    notifications.style.opacity = 0
+}
+
+//The function to render the unchecked notifications
+export const getNotifications = (messages, orders) => {
+
+    let messageAmount = messages === "" ? 0 : parseInt(messages)
+    let ordersAmount = orders === "" ? 0 : parseInt(orders)
+
+    return messageAmount + ordersAmount
 }

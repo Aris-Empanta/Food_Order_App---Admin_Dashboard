@@ -11,8 +11,9 @@ import { socket } from "./privateChat";
 import axios from 'axios'
 import { catalogueChoices, showHideNavbar,
          fetchUnread, fetchUncheckedOrders, 
-         focus, soundNotification,
-         handleNavbar, handleNotifications } from "../functions/navBar";
+         focus, soundNotification, hideNotifications,
+         handleNavbar, handleNotifications,
+         getNotifications } from "../functions/navBar";
 import  orderNotification  from "../mp3/orderNotification.mp3";
 import messageNotification from "../mp3/messageNotification.mp3"
  
@@ -131,9 +132,17 @@ export const NavBar = () => {
                     <div id="smallLogo">
                         <FontAwesomeIcon icon={ faLemon }/>                            
                     </div>
-                    <button id="notifications" onClick={ handleNotifications }>
-                        <FontAwesomeIcon icon={ faBell }/>                            
-                    </button>
+                    <button id="notifications" 
+                            onClick={ handleNotifications }>
+                        <FontAwesomeIcon icon={ faBell }/>   
+                        { getNotifications(unreadMessages, uncheckedOrders) > 0 ? 
+                        <div id="notificationsCircle">
+                            <p>{ getNotifications(unreadMessages, uncheckedOrders) }</p>  
+                        </div> 
+                        : 
+                        null
+                        }                                        
+                    </button>                                       
                 </div>
                 <Notifications />
                 <audio id="orderNotification">

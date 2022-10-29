@@ -10,4 +10,65 @@
     left: auto;
     box-shadow: 1px 1px 4px silver;
     overflow-y: scroll;
+    padding: 8px;
+    top: 80px;
+}
+ 
+.notificationsWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.notificationsWrapper:hover {
+    background-color: whitesmoke;
+}
+
+.orderType {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(64, 84, 178);
+    color: whitesmoke;
+    font-size: 1.1rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.messageType {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #9370db;
+    color: whitesmoke;
+    font-size: 1.1rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.descriptionWrapper {
+    padding: 10px;
+}
+
+.notificationName {
+    color: rgb(64, 84, 178);
+    font-weight: 600;
+    font-size: 0.9;
+}
+
+.notificationDescription {
+    font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 8px;
+    color: #252525;
+}
+
+.notificationDate {
+    font-size: 0.8rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #606060;
+    font-weight: 600;
 }
