@@ -13,3 +13,8 @@ export const fetchNotifications = (axios, callback) => {
     axios.get("http://localhost:5000/notifications/customers-info")
              .then( res => callback(res.data))
 }
+
+export const createLink = (type) => {
+ 
+    return type === 'order' ? '#/orders' : '#/chat'
+}

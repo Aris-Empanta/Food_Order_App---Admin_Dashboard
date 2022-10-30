@@ -2,7 +2,8 @@ import "../css/notifications.css"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { notificationType, renderClass,
-         fetchNotifications } from "../functions/notifications"
+         fetchNotifications, createLink } from "../functions/notifications"
+import { hideNotifications } from "../functions/navBar"
 import { socket } from "./privateChat";
 
 export const Notifications = () => {
@@ -19,19 +20,31 @@ export const Notifications = () => {
         
         //Reevaluates notifications list when receiving new order
         socket.on('new order', () => fetchNotifications(axios, setNotifications)) 
+
+        //Reevaluates unread messages  when admin's chat opens
+       socket.on('re-evaluate unread',  () => fetchNotifications(axios, setNotifications))  
+
+        //Reevaluates unchecked orders when we open an order
+        socket.on('re-evaluate orders', () => fetchNotifications(axios, setNotifications))
     }, [])
 
     return(<div id="notificationsComponent">
-            { notifications.map( item => <div className="notificationsWrapper">
-                                            <div className={ renderClass(item.type) } >{ notificationType(item.type) }</div>
-                                            <div className="descriptionWrapper">
-                                                <p className="notificationDescription">New { item.type } from 
-                                                    <span className="notificationName"> { item.customerName}</span>
-                                                </p>
-                                                <p className="notificationDate">{ item.dateReceived }</p>
+            { notifications.map( item => <a className="notificationLinks" href={ createLink(item.type) }
+                                            onClick = { hideNotifications } >
+                                            <div className="notificationsWrapper">
+                                                <div className={ renderClass(item.type) } >{ notificationType(item.type) }</div>
+                                                <div className="descriptionWrapper">
+                                                    <p className="notificationDescription">New { item.type } from 
+                                                        <span className="notificationName"> { item.customerName}</span>
+                                                    </p>
+                                                    <p className="notificationDate">{ item.dateReceived } 
+                                                        { item.checkedStatus === 'unChecked' ||
+                                                            item.checkedStatus === 'unread' ? 
+                                                            <span className="newNotification">new</span> : null }
+                                                    </p>
+                                                </div>
                                             </div>
-                                            <hr />
-                                         </div>
+                                         </a>
                                         )
                                     }
            </div>)
