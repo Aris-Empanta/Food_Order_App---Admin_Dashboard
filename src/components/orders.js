@@ -25,34 +25,36 @@ export const Orders = () => {
     return(<div className="orders" onClick={ hideNotifications }>              
               <div id="ordersWrapper">
                <div id="ordersListTitle"><h1>Orders' list</h1></div>
-               <table className="ordersTable" cellSpacing="0">
-                  <tr>
-                    <th>Order ID</th>
-                    <th>Customer's name</th>
-                    <th>Address</th>
-                    <th>Phone number</th>
-                    <th>Date received</th>
-                    <th>Total price</th>
-                    <th>Check Order</th>
-                  </tr>              
-                { ordersDetails.map( item => <tr>                                               
-                                                  <td className={item.checkedStatus }>{ item.orderId }</td>
-                                                  <td className={item.checkedStatus }>{ renderCharacters(item.customerName) }</td>
-                                                  <td className={item.checkedStatus }>{ renderCharacters(item.address) }</td>
-                                                  <td className={item.checkedStatus }>{ item.phone }</td>
-                                                  <td className={item.checkedStatus }>{ item.date }</td>
-                                                  <td className={item.checkedStatus }>{ item.totalPrice }</td>
-                                                  <td>
-                                                      <button className={"checkOrderButton " + item.checkedStatus +"Order" }
-                                                              onClick={ () => { markAsChecked(socket, item.orderId)
-                                                                navigate("./order-number-" + item.orderId, { replace: false} )}
-                                                                }>                                                                
-                                                          Check order                                                             
-                                                      </button>
-                                                  </td>                                                  
-                                              </tr>                                                                                                                               
-                                            ) } 
-                </table>
+               <div id="tableWrapper">
+                <table className="ordersTable" cellSpacing="0"> 
+                    <tr>
+                      <th>Order ID</th>
+                      <th>Customer's name</th>
+                      <th>Address</th>
+                      <th>Phone number</th>
+                      <th>Date received</th>
+                      <th>Total price</th>
+                      <th>Check Order</th>
+                    </tr>              
+                  { ordersDetails.map( item => <tr>                                               
+                                                    <td className={item.checkedStatus }>{ item.orderId }</td>
+                                                    <td className={item.checkedStatus }>{ renderCharacters(item.customerName) }</td>
+                                                    <td className={item.checkedStatus }>{ renderCharacters(item.address) }</td>
+                                                    <td className={item.checkedStatus }>{ item.phone }</td>
+                                                    <td className={item.checkedStatus }>{ item.date }</td>
+                                                    <td className={item.checkedStatus }>{ item.totalPrice }</td>
+                                                    <td>
+                                                        <button className={"checkOrderButton " + item.checkedStatus +"Order" }
+                                                                onClick={ () => { markAsChecked(socket, item.orderId)
+                                                                  navigate("./order-number-" + item.orderId, { replace: false} )}
+                                                                  }>                                                                
+                                                            Check order                                                             
+                                                        </button>
+                                                    </td>                                                  
+                                                </tr>                                                                                                                               
+                                              ) } 
+                  </table>
+                </div>
               </div>
            </div>)
 }

@@ -129,9 +129,9 @@ export const NavBar = () => {
                     <button id="barsIcon" onClick={ showHideNavbar }>
                         <FontAwesomeIcon icon={ faBars }/> 
                     </button>
-                    <div id="smallLogo">
+                    <a id="smallLogo" href="#">
                         <FontAwesomeIcon icon={ faLemon }/>                            
-                    </div>
+                    </a>
                     <button id="notifications" 
                             onClick={ handleNotifications }>
                         <FontAwesomeIcon icon={ faBell }/>   

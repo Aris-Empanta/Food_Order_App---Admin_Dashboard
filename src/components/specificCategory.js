@@ -1,4 +1,4 @@
-import "../css/preview.css"
+import "../css/specificCategory.css"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
@@ -151,15 +151,17 @@ export const SpecificCategory = () => {
         axios.delete("http://localhost:5000/products/delete-product/" + id)
         window.location.reload()
     }
-
+ 
   //----------------------------------------------------------------------------------------->
   
   return(<div className="preview" onClick={ hideNotifications }>
             <div className="productsHeader">
               <p id="productsTitle"> Dish types / {params.category}</p>
               <div id="searchWrapper">
-              <input id="searchBar" type="text" placeholder="product's name" />
-              <button id="searchButton" onClick={ filterName }><FontAwesomeIcon icon={faMagnifyingGlass} /></button>
+                <input id="searchBar" type="text" placeholder="product's name" />
+                <button id="searchButton" onClick={ filterName }>
+                  <FontAwesomeIcon icon={faMagnifyingGlass} />
+                </button>
               </div>
             </div>
             <div id="productsWrapper">              

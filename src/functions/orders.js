@@ -46,3 +46,9 @@ export const generateOrderId = (id) => {
                            "#0" + id :
                            "#00" + id 
 }
+
+export const renderComments = (comments) => {
+
+  return comments === "" || comments === null ? "No comments" :
+                                                comments
+ }

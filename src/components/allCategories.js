@@ -23,7 +23,7 @@ export const AllCategories = () => {
  
 
     return (<div onClick={ hideNotifications }>
-              <div id="typesTitle">
+              <div id="typesTitle"> 
                 <h1>Dish types</h1>
               </div>
               <div className="allCategories">

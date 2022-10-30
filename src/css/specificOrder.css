@@ -1,6 +1,5 @@
 .specificOrder {
     display: flex;
-    height: 100vh;
     justify-content: center;
     align-items: center;
     margin-left: 230px;
@@ -10,8 +9,10 @@
     display: flex;
     flex-direction: column;
     background-color: white;
-    width: 80%;
+    width: 95%;
     padding: 20px;
+    min-height: 80vh;
+    margin-top: 110px;
     box-shadow: 1px 1px 4px #808080;
 }
 
@@ -48,8 +49,17 @@
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-.specificAddress {
+.comments {
     margin-bottom: 50px;
+    max-width: 90%;
+}
+
+.specificOrderTable {
+    overflow-x: scroll;
+}
+
+.allOrdersTable {
+    width: 100%;
 }
 
 .allOrdersTable th {
@@ -76,5 +86,21 @@
 
     .specificOrder {
         margin-left: 0;
+    }
+}
+
+@media (max-width: 550px) {
+    .nameAndDate {
+        flex-direction: column;
+        gap: 30px;
+        margin-bottom: 40px;
+    }
+
+    .customerInfo {
+        font-size: 1rem;
+    }
+
+    .receiver {
+        font-size: 1.5rem;
     }
 }
