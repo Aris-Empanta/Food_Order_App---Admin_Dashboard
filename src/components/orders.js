@@ -3,7 +3,7 @@ import "../css/orders.css"
 import { socket } from "./privateChat"
 import axios from "axios"
 import { fetchOrders, markAsChecked, 
-         renderCharacters } from "../functions/orders"
+         renderCharacters, generateOrderId } from "../functions/orders"
 import { useNavigate } from "react-router-dom"; 
 import { hideNotifications } from "../functions/navBar"
 
@@ -37,12 +37,12 @@ export const Orders = () => {
                       <th>Check Order</th>
                     </tr>              
                   { ordersDetails.map( item => <tr>                                               
-                                                    <td className={item.checkedStatus }>{ item.orderId }</td>
+                                                    <td className={item.checkedStatus }>{ generateOrderId(String(item.orderId)) }</td>
                                                     <td className={item.checkedStatus }>{ renderCharacters(item.customerName) }</td>
                                                     <td className={item.checkedStatus }>{ renderCharacters(item.address) }</td>
                                                     <td className={item.checkedStatus }>{ item.phone }</td>
                                                     <td className={item.checkedStatus }>{ item.date }</td>
-                                                    <td className={item.checkedStatus }>{ item.totalPrice }</td>
+                                                    <td className={item.checkedStatus }>{ item.totalPrice +" " + item.currency}</td>
                                                     <td>
                                                         <button className={"checkOrderButton " + item.checkedStatus +"Order" }
                                                                 onClick={ () => { markAsChecked(socket, item.orderId)

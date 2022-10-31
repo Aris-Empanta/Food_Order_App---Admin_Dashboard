@@ -41,10 +41,12 @@ export const renderCharacters = (text) => {
 //Below function will generate the id number for each order
 export const generateOrderId = (id) => {
 
-  return id.length === 3 ? "#" + id :
+  return id.length === 1 ? "#000" + id :
                            id.length === 2 ?
+                           "#00" + id :
+                           id.length === 3 ?
                            "#0" + id :
-                           "#00" + id 
+                           "#" + id 
 }
 
 export const renderComments = (comments) => {
