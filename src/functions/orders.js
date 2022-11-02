@@ -1,7 +1,7 @@
 //The function to fetch all the orders sorted by order's id reversed
-export const fetchOrders = (axios, callback) => {
+export const fetchOrders = (axios, number, callback) => {
 
-  axios.get("http://localhost:5000/orders/orders-by-id")
+  axios.get("http://localhost:5000/orders/orders-by-id?number=" + number)
        .then((res) => {
                       callback(res.data)
                       for(let i=0; i < res.data.length; i++){
@@ -14,8 +14,15 @@ export const fetchOrders = (axios, callback) => {
                     })
 }
 
-//The function to fetch an orders total price
+//The function to fetch the amount of orders groups of ten, 
+//so that we create the appropriate buttons
+export const fetchOrdersGroups = (axios, callback) => {
 
+  axios.get("http://localhost:5000/orders/orders-amount")
+       .then((res) => callback(res.data))
+}
+
+//The function to fetch an orders total price
 export const fetchTotalPrice = (axios, id) => {
 
     

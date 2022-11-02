@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import "../css/orders.css"
 import { socket } from "./privateChat"
 import axios from "axios"
-import { fetchOrders, markAsChecked, 
+import { fetchOrders, markAsChecked, fetchOrdersGroups,
          renderCharacters, generateOrderId } from "../functions/orders"
 import { useNavigate } from "react-router-dom"; 
 import { hideNotifications } from "../functions/navBar"
@@ -10,21 +10,27 @@ import { hideNotifications } from "../functions/navBar"
 export const Orders = () => {
  
     const [ ordersDetails, setOrdersDetails ] = useState([])
+    const [ ordersGroups, setOrdersGroups ] = useState([])
 
     const navigate = useNavigate()
  
     useEffect(() => {                      
                       //The function to fetch all the orders sorted by order's id reversed
-                      fetchOrders(axios, setOrdersDetails)
+                      fetchOrders(axios, 1, setOrdersDetails)
+
+                      fetchOrdersGroups(axios, setOrdersGroups)
                       
                       //Real time push notification for a new order
-                      socket.on('new order', () => fetchOrders(axios, setOrdersDetails))  
+                      socket.on('new order', () => { 
+                                                      fetchOrders(axios, 1, setOrdersDetails)
+                                                      fetchOrdersGroups(axios, setOrdersGroups)
+                                                    })  
                     }, [])
-   
 
     return(<div className="orders" onClick={ hideNotifications }>              
               <div id="ordersWrapper">
                <div id="ordersListTitle"><h1>Orders' list</h1></div>
+               { ordersGroups.map( item => <button onClick={ () => fetchOrders(axios, item, setOrdersDetails) }>{ item }</button>) }
                <div id="tableWrapper">
                 <table className="ordersTable" cellSpacing="0"> 
                     <tr>

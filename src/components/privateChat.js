@@ -121,7 +121,7 @@ export const PrivateChat = () => {
                                                   <div className="messageTextWrapper">
                                                     <p className="messageText">&nbsp;{item.Message}</p>
                                                   </div>
-                                               </li>) }                    
+                                               </li>) }    
               </ul> 
               <div id="userTyping">{params.customer + " is typing..."}</div>
               <form id="form" action="" onSubmit={sendMessage}>
