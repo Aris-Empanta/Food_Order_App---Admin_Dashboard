@@ -1,6 +1,16 @@
 //The function to fetch all the orders sorted by order's id reversed
 export const fetchOrders = (axios, number, callback) => {
 
+  let sectionButtons = document.getElementsByClassName("sectionButtons")
+  
+  for(let i=0; i < sectionButtons.length; i++) {
+
+    if(i+1 === number) { sectionButtons[i].style.backgroundColor = "rgb(64, 84, 178)"
+  } else {
+    sectionButtons[i].style.backgroundColor = "#ba55d3"
+  }
+  }
+
   axios.get("http://localhost:5000/orders/orders-by-id?number=" + number)
        .then((res) => {
                       callback(res.data)
@@ -16,7 +26,9 @@ export const fetchOrders = (axios, number, callback) => {
 
 //The function to fetch the amount of orders groups of ten, 
 //so that we create the appropriate buttons
-export const fetchOrdersGroups = (axios, callback) => {
+export const fetchOrdersSections = (axios, callback) => {
+
+  
 
   axios.get("http://localhost:5000/orders/orders-amount")
        .then((res) => callback(res.data))
