@@ -2,6 +2,9 @@ import axios from 'axios'
 import { useEffect, useState } from "react";
 import "../css/customers.css"
 import { hideNotifications } from "../functions/navBar"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { searchCustomer } from '../functions/customers';
 
 export const Customers = () => {
 
@@ -15,8 +18,16 @@ export const Customers = () => {
 
     return(<div className='customersComponent' onClick={ hideNotifications }>
              <div className='customersWrapper'>
-                <h1 className='customersTitle'>Customer List</h1>
-                <div id='customersTableWrapper'>
+                <div id='customerListWrapper'>
+                  <h1 className='customersTitle'>Customer List</h1>
+                  <div id='customerSearchWrapper'>
+                    <input type="text" id='desiredCustomer' placeholder="Customer's name"/>
+                    <button id='customerSearchInput' onClick={ searchCustomer }>
+                      <FontAwesomeIcon icon={faMagnifyingGlass} />
+                    </button>
+                  </div>
+                </div>                
+                <div id='customersTableWrapper'> 
                   <table className="customersTable" cellSpacing="0">
                     <tr>                    
                       <th>Customer's name</th>
@@ -26,8 +37,8 @@ export const Customers = () => {
                       <th>Floor</th>
                       <th>Date registered</th>
                     </tr>
-                    {customerData.map(item => <tr>
-                                                  <td>{ item.Name }</td>
+                    {customerData.map(item => <tr className='customersData'>
+                                                  <td className='customerName'>{ item.Name }</td>
                                                   <td>{ item.Address }</td>
                                                   <td>{ item.Phone }</td>
                                                   <td>{ item.Email }</td>
