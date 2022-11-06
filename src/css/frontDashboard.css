@@ -1,7 +1,106 @@
 #frontDashboard {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     margin-left: 230px;    
+    gap: 40px;
+}
+
+#welcomeTitle {
+    font-size: 1.7rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #303030;
+    margin-left: 50px;
+    margin-right: auto;
+    margin-top: 80px;
+}
+
+#statistics {
+    display: flex;
+}
+
+#dailyTargetIncome {
+    margin-left: 50px;
+    width: 300px;
+    height: 500px;
+    background-color: white;
+    box-shadow: 1px 1px 4px gray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding-top: 30px;
+    padding-bottom: 50px;
+    color:#303030;
+}
+
+
+#dailyTargetTitle {
+    font-size: 1.3rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #303030;
+    font-weight: 600;
+}
+
+#targetWrapper {
+    position: relative;
+}
+
+
+
+.circleWrapper {
+    position: relative;
+    transform: rotateZ(-90deg);
+}
+
+/*The inner invisible circle of the progress rings*/
+.track{
+    fill: none;
+    stroke: rgb(64, 84, 178, 0.2);
+    stroke-width: 16;
+}
+
+/*The circle that fills up with the percentage of the 3 guarantees*/
+#progressCircle{
+    fill: none;
+    stroke: rgb(64, 84, 178);
+    stroke-width: 16;
+    stroke-dasharray: 565; 
+    stroke-dashoffset: 565; 
+    transition: stroke-dashoffset 2s;
+}
+
+#dailyIncome {
+    font-size: 2.5rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #101010;
+}
+
+#targetIncomeAmount {
+    font-size: 1.1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #505050;
+}
+
+#inner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    box-shadow: 2px 2px 10px gray;
+    transform: translate(-50%, -50%);
+}
+
+#percentage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.4rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #303030;
+    font-weight: 600;
 }
 
 @media ( max-width: 1100px ) {
