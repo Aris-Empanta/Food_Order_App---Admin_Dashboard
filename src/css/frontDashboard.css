@@ -16,6 +16,7 @@
 
 #statistics {
     display: flex;
+    justify-content: space-evenly;
 }
 
 #dailyTargetIncome {
@@ -101,6 +102,15 @@
     font-family: Arial, Helvetica, sans-serif;
     color: #303030;
     font-weight: 600;
+}
+
+#revenueChart {
+    height: 400px;
+    width: 400px;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 @media ( max-width: 1100px ) {
