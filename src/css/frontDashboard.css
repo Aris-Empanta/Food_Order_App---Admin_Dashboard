@@ -5,13 +5,18 @@
     gap: 40px;
 }
 
+#welcomeTitleWrapper {
+    width: 100%;
+}
+
 #welcomeTitle {
     font-size: 1.7rem;
     font-family: Arial, Helvetica, sans-serif;
     color: #303030;
-    margin-left: 50px;
+    margin-left: 75px;
     margin-right: auto;
-    margin-top: 80px;
+    margin-top: 110px;
+    margin-bottom: 20px;
 }
 
 #statistics {
@@ -20,11 +25,11 @@
 }
 
 #dailyTargetIncome {
-    margin-left: 50px;
     width: 300px;
-    height: 500px;
+    height: 530px;
     background-color: white;
-    box-shadow: 1px 1px 4px gray;
+    max-width: 100%; 
+    box-shadow: 1px 1px 4px silver;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -36,7 +41,7 @@
 
 
 #dailyTargetTitle {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-family: Arial, Helvetica, sans-serif;
     color: #303030;
     font-weight: 600;
@@ -104,18 +109,161 @@
     font-weight: 600;
 }
 
-#revenueChart {
-    height: 400px;
-    width: 400px;
+#chartTitle {
+    font-size: 1.2rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #303030;
+    font-weight: 600;
+}
+
+.statistcsWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.ordersCustomers {
+    width: 350px;
+    height: 150px;
+    background: linear-gradient( to bottom right, rgb(64, 84, 178) 30%, rgb(219, 2, 234));
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.amountLabelWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#totalOrders {
+    font-size: 2.8rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+#ordersWord {
+    font-size: 1.3rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+#ordersIconWrapper {
+    height: 5rem;
+    width: 5rem;
+    border-radius: 50%;
     background-color: white;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: #7f00ff ;
+}
+
+#totalCustomers {
+    font-size: 2.8rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+#customersWord {
+    font-size: 1.3rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+#customersIconWrapper {
+    height: 5rem;
+    width: 5rem;
+    border-radius: 50%;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: #7f00ff ;
+}
+
+#revenueChart {
+    height: 340px;
+    width: 350px;
+    background-color: white;  
+    max-width: 100%;  
+    box-shadow: 1px 1px 4px silver;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#totalRevenue {
+    height: 340px;
+    width: 350px;
+    background-color: white;  
+    max-width: 100%;  
+    box-shadow: 1px 1px 4px silver;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#totalRevenueTitle {
+    font-size: 1.2rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #303030;
+    font-weight: 600;
+}
+
+#walletIcon {
+    display: flex;
+    gap: 20px;
+    font-size: 5rem;
+    color: rgb(64, 84, 178) ;
+}
+
+#totalRevenueAmount {
+    font-size: 2.5rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #101010;
+}
+
+#chartWrapper {
+    overflow-y: hidden;
+    padding: 10px 30px 30px 30px;
+}
+
+@media ( max-width: 750px ) {
+
+    #statistics {
+        flex-direction: column;
+        align-items: center;
+        gap: 50px;
+    }
+
+    #welcomeTitle {
+        margin-left: 0;
+        text-align: center;
+    }
+
+    #dailyTargetIncome {
+        margin-left: 0;
+    }
 }
 
 @media ( max-width: 1100px ) {
 
     #frontDashboard {
         margin-left: 0;
+    }
+
+    #statistics {
+        justify-content: space-around;
+    }
+
+    #welcomeTitle {
+        text-align: center;
+        margin-top: 110px;
     }
 }

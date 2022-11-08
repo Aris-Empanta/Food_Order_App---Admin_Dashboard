@@ -25,8 +25,8 @@ export const progressCirclePercentage = (income) => {
 export const createChart = (d3, weeklyRevenues, days, chartRef) => {
 
     //set up svg container
-    const width = 300
-    const height = 250
+    const width = 220
+    const height = 200
 
     const svg = d3.select(chartRef.current)
                   .attr('width', width)
@@ -37,25 +37,25 @@ export const createChart = (d3, weeklyRevenues, days, chartRef) => {
     const xScale = d3.scaleBand()
                      .domain(days.map((val, i) => i))
                      .range([0, width])
-                     .padding(0.3)
+                     .padding(0.2)
 
     const yScale = d3.scaleLinear()
-                     .domain([0, 3000])
+                     .domain([0, 500])
                      .range([height, 0])
                      
     //setting the axes
-    const xAxis = d3.axisBottom(xScale)
-                    
-                    .tickFormat((d, i) => days[i])  
-                    
+    const xAxis = d3.axisBottom(xScale)                    
+                    .tickFormat((d, i) => days[i])                 
                     
     const yAxis = d3.axisLeft(yScale)
                     .ticks(weeklyRevenues.length)  
 
     svg.append('g').call(xAxis)
-                   .attr('transform', `translate(0, ${height})`)                   
+                   .attr('transform', `translate(0, ${height})`)    
+                   .attr('color', '#101010')               
 
     svg.append('g').call(yAxis)
+                   .attr('color', '#101010')  
 
     //setting the svg data
     svg.selectAll('.bar')

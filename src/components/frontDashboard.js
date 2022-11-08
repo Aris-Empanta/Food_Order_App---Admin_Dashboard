@@ -5,6 +5,11 @@ import { useEffect, useRef} from  'react'
 import useStateWithCallback from 'use-state-with-callback';
 import { dailyTargetPercentage, progressCirclePercentage, createChart } from "../functions/statistics";
 import * as d3 from 'd3';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faCoins } from "@fortawesome/free-solid-svg-icons";
+import { faMoneyBillWave } from "@fortawesome/free-solid-svg-icons";
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { faUsers } from "@fortawesome/free-solid-svg-icons";
 
 export const FrontDashboard = () => {
 
@@ -28,8 +33,7 @@ export const FrontDashboard = () => {
 
                                     let days = response[1].data.map( item => item.day.split('')
                                                                                       .splice(0, 3)
-                                                                                      .join('')
-                                                                                      .toUpperCase())
+                                                                                      .join(''))
                                                                 .reverse()
 
                                     
@@ -42,7 +46,9 @@ export const FrontDashboard = () => {
     }, [setDailyIncome, setWeeklyRevenues])
 
     return(<div id="frontDashboard" onClick={ hideNotifications }>
-               <h1 id="welcomeTitle">Welcome!</h1>
+               <div id="welcomeTitleWrapper">
+                  <h1 id="welcomeTitle">Welcome!</h1>
+               </div>               
                <div id="statistics">
                  <div id="dailyTargetIncome">
                     <p id="dailyTargetTitle">Daily Target Income</p>
@@ -60,9 +66,42 @@ export const FrontDashboard = () => {
                         <p id="targetIncomeAmount">from &euro;500</p>
                     </div>    
                  </div>
-                 <div id="revenueChart">
-                    <svg ref={ chartRef}></svg>
-                 </div>                 
+                 <div className="statistcsWrapper">
+                    <div className="ordersCustomers">
+                        <div className="amountLabelWrapper">
+                            <p id="totalOrders">100</p>
+                            <p id="ordersWord">Orders</p>
+                        </div> 
+                        <div id="ordersIconWrapper">
+                            <FontAwesomeIcon icon={ faShoppingCart }/>
+                        </div>
+                    </div>
+                    <div id="revenueChart">
+                        <p id="chartTitle">Weekly Revenue</p>
+                        <div id="chartWrapper">
+                            <svg ref={ chartRef} id="barChart"></svg>
+                        </div>
+                    </div> 
+                 </div>  
+                 <div className="statistcsWrapper">
+                    <div className="ordersCustomers"> 
+                        <div className="amountLabelWrapper">
+                            <p id="totalCustomers">64</p>
+                            <p id="customersWord">Customers</p>
+                        </div> 
+                        <div id="customersIconWrapper">
+                            <FontAwesomeIcon icon={ faUsers }/>
+                        </div>
+                    </div>
+                    <div id="totalRevenue">
+                        <p id="totalRevenueTitle">Total Revenue</p>
+                        <p id="totalRevenueAmount">&euro;25848</p>
+                        <div id="walletIcon">
+                            <FontAwesomeIcon icon={ faCoins }/>
+                            <FontAwesomeIcon icon={ faMoneyBillWave }/>
+                        </div>
+                    </div> 
+                 </div>                
                </div>
             </div>)
 }
