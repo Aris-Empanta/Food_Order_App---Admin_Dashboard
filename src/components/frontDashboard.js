@@ -66,7 +66,7 @@ export const FrontDashboard = () => {
                         <p id="targetIncomeAmount">from &euro;500</p>
                     </div>    
                  </div>
-                 <div className="statistcsWrapper">
+                 <div className="statisticsWrapper" id="orderTab">
                     <div className="ordersCustomers">
                         <div className="amountLabelWrapper">
                             <p id="totalOrders">100</p>
@@ -83,7 +83,7 @@ export const FrontDashboard = () => {
                         </div>
                     </div> 
                  </div>  
-                 <div className="statistcsWrapper">
+                 <div className="statisticsWrapper" id="customerTab">
                     <div className="ordersCustomers"> 
                         <div className="amountLabelWrapper">
                             <p id="totalCustomers">64</p>
