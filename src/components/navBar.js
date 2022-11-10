@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faAngleRight, faTableColumns,
-          faUtensils, faMotorcycle,
+          faUtensils, faShoppingCart,
           faUsers, faBars,
           faComment, faBell} from "@fortawesome/free-solid-svg-icons"
 import { faLemon } from "@fortawesome/free-regular-svg-icons"
@@ -96,7 +96,7 @@ export const NavBar = () => {
                     <li id="orders"  className="navBarList">
                         <a href="#/orders"                         
                            onClick={ () => { focus("orders", "ordersColor"); handleNavbar() } }>
-                            < FontAwesomeIcon icon={ faMotorcycle } className="navbarIcons ordersColor fontsColor" />
+                            < FontAwesomeIcon icon={ faShoppingCart } className="navbarIcons ordersColor fontsColor" />
                             <span className="ordersColor fontsColor" >Orders </span>                          
                             <span id="newOrder" className="ordersColor fontsColor">
                                 { uncheckedOrders !== "" ?

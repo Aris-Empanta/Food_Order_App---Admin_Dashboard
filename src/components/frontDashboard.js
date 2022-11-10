@@ -1,7 +1,7 @@
 import "../css/frontDashboard.css"
 import { hideNotifications } from "../functions/navBar"
 import axios from "axios"
-import { useEffect, useRef} from  'react'
+import { useEffect, useRef, useState} from  'react'
 import useStateWithCallback from 'use-state-with-callback';
 import { dailyTargetPercentage, progressCirclePercentage, createChart } from "../functions/statistics";
 import * as d3 from 'd3';
@@ -17,13 +17,19 @@ export const FrontDashboard = () => {
 
     const [ dailyIncome, setDailyIncome ] = useStateWithCallback(0, () => progressCirclePercentage(dailyIncome))
     const [weeklyRevenues, setWeeklyRevenues ] = useStateWithCallback([], () => createChart(d3, weeklyRevenues, days, chartRef))
-    const [days, setDays ] = useStateWithCallback([], () => console.log("hey"))  
+    const [days, setDays ] = useState([])
+    const [totalOrders, setTotalOrders ] = useState(0)  
+    const [totalCustomers, setTotalCustomers ] = useState(0)  
+    const [totalRevenue, setTotalRevenue ] = useState(0)
+    const [ trendingOrders, setTrendingOrders] = useState([])
 
     useEffect(() => {
 
         const endpoints = [
                             "http://localhost:5000/statistics/daily-income",
                             "http://localhost:5000/statistics/weekly-income",
+                            "http://localhost:5000/statistics/total-orders-amount",
+                            "http://localhost:5000/statistics/total-customers-amount",
                             "http://localhost:5000/statistics/total-revenue",
                             "http://localhost:5000/statistics/trending-orders"
                         ]
@@ -35,15 +41,18 @@ export const FrontDashboard = () => {
                                                                                       .splice(0, 3)
                                                                                       .join(''))
                                                                 .reverse()
-
                                     
-                                    console.log(dailyRevenues)
                                     setDailyIncome(response[0].data.dailyIncome)
                                     setWeeklyRevenues(dailyRevenues)
                                     setDays(days)
+                                    setTotalOrders(response[2].data.ordersAmount)
+                                    setTotalCustomers(response[3].data.customersAmount)
+                                    setTotalRevenue(response[4].data.revenue)
+                                    setTrendingOrders(response[5].data)
                                 })             
                  
-    }, [setDailyIncome, setWeeklyRevenues])
+    }, [setDailyIncome, setWeeklyRevenues, setDays, setTotalOrders, 
+        setTotalCustomers, setTotalRevenue, setTrendingOrders])
 
     return(<div id="frontDashboard" onClick={ hideNotifications }>
                <div id="welcomeTitleWrapper">
@@ -69,7 +78,7 @@ export const FrontDashboard = () => {
                  <div className="statisticsWrapper" id="orderTab">
                     <div className="ordersCustomers">
                         <div className="amountLabelWrapper">
-                            <p id="totalOrders">100</p>
+                            <p id="totalOrders">{ totalOrders }</p>
                             <p id="ordersWord">Orders</p>
                         </div> 
                         <div id="ordersIconWrapper">
@@ -86,7 +95,7 @@ export const FrontDashboard = () => {
                  <div className="statisticsWrapper" id="customerTab">
                     <div className="ordersCustomers"> 
                         <div className="amountLabelWrapper">
-                            <p id="totalCustomers">64</p>
+                            <p id="totalCustomers">{ totalCustomers }</p>
                             <p id="customersWord">Customers</p>
                         </div> 
                         <div id="customersIconWrapper">
@@ -95,13 +104,29 @@ export const FrontDashboard = () => {
                     </div>
                     <div id="totalRevenue">
                         <p id="totalRevenueTitle">Total Revenue</p>
-                        <p id="totalRevenueAmount">&euro;25848</p>
+                        <p id="totalRevenueAmount">&euro;{ totalRevenue }</p>
                         <div id="walletIcon">
                             <FontAwesomeIcon icon={ faCoins }/>
                             <FontAwesomeIcon icon={ faMoneyBillWave }/>
                         </div>
                     </div> 
                  </div>                
+               </div>
+               <div id="trendingOrdersContainer">
+                    <h1 id="trendingOrdersTitle">Trending Orders</h1>
+                    <hr id="horizontalLine"/>
+                    <div id="trendingOrders">
+                    { trendingOrders.map( (item, index) => <div className="trendingProduct">
+                                                             <img className="trendingImage" src={ item.imageName } />
+                                                             <p className="trendingProductName">{ item.productName }</p>
+                                                             <p className="trendingProductPrice">&euro;{ item.unitPrice }</p>
+                                                             <div className="rankAmountWrapper">
+                                                               <p>Rank: <span className="rankOrdersValue">#{ index + 1}</span></p>
+                                                               <p>Orders: <span className="rankOrdersValue">{ item.amount }</span></p>
+                                                             </div>
+                                                           </div>    
+                                                         )}
+                    </div>
                </div>
             </div>)
 }
