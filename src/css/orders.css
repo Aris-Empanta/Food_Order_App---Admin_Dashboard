@@ -6,8 +6,13 @@
     margin-left: 230px; 
 }
 
+#loadingOrders {
+    text-align: center;
+}
+
 #tableWrapper {       
     overflow-x: scroll;
+    visibility: hidden;
 }
 
 #ordersWrapper {

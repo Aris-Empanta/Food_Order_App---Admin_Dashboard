@@ -16,6 +16,10 @@
     box-shadow: 1px 1px 4px #808080;    
 }
 
+#customersLoader {
+    text-align: center;
+}
+
 #customerListWrapper {
     display: flex;
     justify-content: space-between;
@@ -62,6 +66,11 @@
 
 #customersTableWrapper {
     overflow-x: scroll;
+    visibility: hidden;
+}
+
+#customersLoader {
+    margin-top: 50px;
 }
 
 .customersTable th {

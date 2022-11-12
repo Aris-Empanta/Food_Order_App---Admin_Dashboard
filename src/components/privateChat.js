@@ -8,6 +8,7 @@ import { showMessage } from "../functions/chat";
 import axios from "axios"   
 import useStateWithCallback from 'use-state-with-callback';
 import { hideNotifications } from "../functions/navBar"
+import { LoadingSpinner } from "../components/loadingSpinner"
 
 //Initializing socket.io and url's parameter name object.
 export const socket = io(`http://localhost:5000`)
@@ -111,7 +112,9 @@ export const PrivateChat = () => {
     }
 
      return(<div className="chat" onClick={ hideNotifications }>
-              <div id="loaderMessages">Loading.....</div>
+              <div id="loaderMessages">
+                <LoadingSpinner />
+              </div>
               <ul id="messages">                          
                 { messagesHistory.map( item => <li className={"messageInfoWrapper colorOf"+ item.Sender}>
                                                   <div className="senderAndDate">

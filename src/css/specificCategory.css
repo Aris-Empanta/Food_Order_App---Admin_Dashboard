@@ -13,6 +13,11 @@
   padding: 5%;  
 }
 
+#loadingCategory {
+  text-align: center;
+  margin-top: 50px;
+}
+
 #productsTitle {
   font-family: Arial, Helvetica, sans-serif;
   color: #202020;

@@ -9,6 +9,8 @@ import { faCamera} from "@fortawesome/free-solid-svg-icons"
 import { faPencil } from "@fortawesome/free-solid-svg-icons"
 import { faTrash } from "@fortawesome/free-solid-svg-icons"
 import { hideNotifications } from "../functions/navBar"
+import { LoadingSpinner } from "../components/loadingSpinner"
+import { hideLoadingSpinner } from "../functions/general";
 
 //The component where we can check and modify the menu.
 export const SpecificCategory = () => {
@@ -30,7 +32,7 @@ export const SpecificCategory = () => {
 
           axios.get("http://localhost:5000/products/by-category/" + params.category ).
           then((res) => {
-
+                  hideLoadingSpinner("loadingCategory")
                   setProducts(res.data)
                 }
               )            
@@ -163,6 +165,9 @@ export const SpecificCategory = () => {
                   <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </button>
               </div>
+            </div>
+            <div id="loadingCategory">
+              <LoadingSpinner />
             </div>
             <div id="productsWrapper">              
               {products.map((item, index) => 

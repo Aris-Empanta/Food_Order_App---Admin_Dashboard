@@ -3,6 +3,8 @@ import { useEffect, useState } from "react"
 import "../css/allCategories.css"
 import { useNavigate } from "react-router-dom";
 import { hideNotifications } from "../functions/navBar"
+import { hideLoadingSpinner } from "../functions/general";
+import { LoadingSpinner } from "./loadingSpinner";
 
 export const AllCategories = () => {
 
@@ -13,7 +15,10 @@ export const AllCategories = () => {
     useEffect(() => {
 
         axios.get("http://localhost:5000/products/categories-with-image")
-             .then( res => setCategories(res.data))
+             .then( res => {
+                            hideLoadingSpinner("loadingCategories")
+                            setCategories(res.data)
+                          })
     }, [])
 
     const checkDishes = (category) => {
@@ -25,6 +30,9 @@ export const AllCategories = () => {
     return (<div onClick={ hideNotifications }>
               <div id="typesTitle"> 
                 <h1>Dish types</h1>
+              </div>
+              <div id="loadingCategories">
+                <LoadingSpinner />
               </div>
               <div className="allCategories">
                 { categories.map( item => <div className="categoryWrapper">                                            

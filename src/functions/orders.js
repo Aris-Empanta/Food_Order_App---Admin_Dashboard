@@ -26,12 +26,16 @@ export const fetchOrders = (axios, number, callback) => {
 
 //The function to fetch the amount of orders groups of ten, 
 //so that we create the appropriate buttons
-export const fetchOrdersSections = (axios, callback) => {
+export const fetchOrdersSections = (axios, callback, hideLoader ) => {
 
-  
+ 
 
   axios.get("http://localhost:5000/orders/orders-amount")
-       .then((res) => callback(res.data))
+       .then((res) => { 
+                        hideLoader("loadingOrders")
+                        document.getElementById("tableWrapper").style.visibility = "visible"
+                        callback(res.data)
+                      })
 }
 
 //The function to fetch an orders total price

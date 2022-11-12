@@ -8,10 +8,12 @@ export const renderClass = (type) => {
     return type === "order" ? "orderType": "messageType"
 }
 
-export const fetchNotifications = (axios, callback) => {
+export const fetchNotifications = (axios, callback, hideLoadingSpinner) => {
 
     axios.get("http://localhost:5000/notifications/customers-info")
-             .then( res => callback(res.data))
+             .then( res => { 
+                            hideLoadingSpinner("notificationsLoader")
+                            callback(res.data)})
 }
 
 export const createLink = (type) => {

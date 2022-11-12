@@ -5,6 +5,7 @@ import { notificationType, renderClass,
          fetchNotifications, createLink } from "../functions/notifications"
 import { hideNotifications } from "../functions/navBar"
 import { socket } from "./privateChat";
+import { hideLoadingSpinner } from "../functions/general";
 
 export const Notifications = () => {
 
@@ -13,7 +14,7 @@ export const Notifications = () => {
     useEffect(() => {
 
         //The function to fetch all notifications
-        fetchNotifications(axios, setNotifications)
+        fetchNotifications(axios, setNotifications, hideLoadingSpinner)
 
         //Reevaluates notifications list when receiving new message
         socket.on('new message', () => fetchNotifications(axios, setNotifications)) 
@@ -28,7 +29,10 @@ export const Notifications = () => {
         socket.on('re-evaluate orders', () => fetchNotifications(axios, setNotifications))
     }, [])
 
-    return(<div id="notificationsComponent">
+    return(<div id="notificationsComponent"> 
+            <div id="notificationsLoader">
+                <p>Loading...</p>
+            </div>
             { notifications.map( item => <a className="notificationLinks" href={ createLink(item.type) }
                                             onClick = { hideNotifications } >
                                             <div className="notificationsWrapper">

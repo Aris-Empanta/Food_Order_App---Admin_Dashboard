@@ -28,6 +28,9 @@ export const FrontDashboard = () => {
 
     useEffect(() => { 
 
+        window.scrollTo(0,0)
+        //The function to hide several elements prior fetching all
+        //required data
         hideBeforeFetch()            
 
         const endpoints = [
@@ -40,6 +43,7 @@ export const FrontDashboard = () => {
                         ]
         axios.all(endpoints.map( endpoint => axios.get(endpoint)))
             .then((response) => {   
+                                    //The function to show the hidden data
                                     showAfterFetch()
 
                                     let dailyRevenues = response[1].data.map( item => parseInt(item.revenue)).reverse()

@@ -5,6 +5,8 @@ import { hideNotifications } from "../functions/navBar"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { searchCustomer } from '../functions/customers';
+import { LoadingSpinner } from "../components/loadingSpinner"
+import { hideLoadingSpinner } from "../functions/general";
 
 export const Customers = () => {
 
@@ -12,8 +14,13 @@ export const Customers = () => {
 
     useEffect(() => {
 
+        let customersTableWrapper = document.getElementById("customersTableWrapper")
+
         axios.get('http://localhost:5000/customers/customers-info')
-             .then( res => setCustomerData(res.data))
+             .then( res => {                             
+                            hideLoadingSpinner("customersLoader")
+                            customersTableWrapper.style.visibility = "visible"
+                            setCustomerData(res.data) })
     })
 
     return(<div className='customersComponent' onClick={ hideNotifications }>
@@ -26,7 +33,10 @@ export const Customers = () => {
                       <FontAwesomeIcon icon={faMagnifyingGlass} />
                     </button>
                   </div>
-                </div>                
+                </div>    
+                <div id='customersLoader'>
+                  <LoadingSpinner />
+                </div>            
                 <div id='customersTableWrapper'> 
                   <table className="customersTable" cellSpacing="0">
                     <tr>                    

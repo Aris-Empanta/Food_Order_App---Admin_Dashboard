@@ -176,6 +176,11 @@
     margin-right: 5px;
 }  
 
+#loaderMessages {
+    text-align: center;
+    padding-top: 30px;
+}
+
 .customersMessage {
     justify-self: left;
     flex-basis: 60%;

@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom"
 import { socket } from "./privateChat"
 import { generateOrderId, renderComments } from "../functions/orders"
 import { hideNotifications } from "../functions/navBar"
+import { hideLoadingSpinner } from "../functions/general"
+import { LoadingSpinner } from "../components/loadingSpinner"
 
 export const SpecificOrder = () => {
 
@@ -24,13 +26,22 @@ export const SpecificOrder = () => {
     useEffect(() => {
 
                 let id = params.id
+                const hidePriorFetch = document.getElementsByClassName("hidePriorFetch")                
 
                 //re-evaluates unchecked orders indicator in navbar
                 socket.emit("order checked")
 
                 //Fetching all the order's product details
                 axios.get("http://localhost:5000/orders/order-with-id-" + id)
-                     .then((res) => {
+                     .then((res) => {                     
+                         //Showing all hidden elements prior fetching   
+                         for( let element of hidePriorFetch) {
+
+                            element.style.visibility = "visible"
+                         }
+
+                         hideLoadingSpinner("orderLoadingWrapper")
+                         
                          setOrderDetails(res.data)
                          setName(res.data[0].customerName)
                          setDate(res.data[0].date) 
@@ -51,16 +62,19 @@ export const SpecificOrder = () => {
                     <p className="ordersInfo"><b>Order Info</b></p>
                     <p><b>{ generateOrderId(params.id) }</b></p>
                 </div>
-                <h1 className="customerInfo receiver">Receiver:</h1>
+                <div id="orderLoadingWrapper">
+                  <LoadingSpinner />
+                </div>
+                <h1 className="customerInfo receiver hidePriorFetch">Receiver:</h1>
                 <div className="nameAndDate customerInfo">
                     <p className="specificName">{name}</p> 
-                    <p><b>Date/time received:</b> {date}</p>
+                    <p className="hidePriorFetch"><b>Date/time received:</b> {date}</p>
                 </div>
-                <p className="customerInfo"><b>Email:</b> {email}</p>
-                <p className="customerInfo"><b>Phone number:</b> {phone}</p>
-                <p className="customerInfo specificAddress"><b>Address:</b> {address}</p>                
-                <p className="customerInfo comments"><b>Comments:</b> { renderComments(comments) }</p>
-                <div className="specificOrderTable">
+                <p className="customerInfo hidePriorFetch"><b>Email:</b> {email}</p>
+                <p className="customerInfo hidePriorFetch"><b>Phone number:</b> {phone}</p>
+                <p className="customerInfo specificAddress hidePriorFetch"><b>Address:</b> {address}</p>                
+                <p className="customerInfo comments hidePriorFetch"><b>Comments:</b> { renderComments(comments) }</p>
+                <div className="specificOrderTable hidePriorFetch">
                   <table className="allOrdersTable" cellspacing="0">
                     <tr>
                       <th>ID</th>

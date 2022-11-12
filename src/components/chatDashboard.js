@@ -11,6 +11,7 @@ import {  markAsRead, combineEndpoints,
          markAsUnread, deleteSelected, 
          searchConversation } from "../functions/chat"
 import { hideNotifications } from "../functions/navBar"
+import { LoadingSpinner } from "../components/loadingSpinner"
 
 export const ChatDashboard = () => {   
    
@@ -75,8 +76,7 @@ export const ChatDashboard = () => {
                </div>               
             </div>
             <div id="loaderInbox">
-               <div className="loading-spinner">
-               </div>
+               <LoadingSpinner />
             </div>
             <ul className="messageList"  id="chatWrapper">
             { customers.map( (item) => <li className={ item.Sender + " chatList"} >

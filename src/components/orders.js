@@ -6,6 +6,8 @@ import { fetchOrders, markAsChecked, fetchOrdersSections,
          renderCharacters, generateOrderId } from "../functions/orders"
 import { useNavigate } from "react-router-dom"; 
 import { hideNotifications } from "../functions/navBar"
+import { LoadingSpinner } from "../components/loadingSpinner"
+import { hideLoadingSpinner } from "../functions/general";
 
 export const Orders = () => {
  
@@ -18,7 +20,7 @@ export const Orders = () => {
                       //The function to fetch all the orders sorted by order's id reversed
                       fetchOrders(axios, 1, setOrdersDetails)
 
-                      fetchOrdersSections(axios, setOrdersSections)
+                      fetchOrdersSections(axios, setOrdersSections, hideLoadingSpinner)
                       
                       //Real time push notification for a new order
                       socket.on('new order', () => { 
@@ -29,7 +31,10 @@ export const Orders = () => {
 
     return(<div className="orders" onClick={ hideNotifications }>              
               <div id="ordersWrapper">
-               <div id="ordersListTitle"><h1>Orders' list</h1></div>                             
+               <div id="ordersListTitle"><h1>Orders' list</h1></div>     
+               <div id="loadingOrders">
+                 <LoadingSpinner />
+               </div>                        
                <div id="tableWrapper">
                 <table className="ordersTable" cellSpacing="0"> 
                     <tr>
