@@ -70,7 +70,7 @@ export const ChatDashboard = () => {
                <div id="searchMessageWrapper">
                   <input type="text" id="searchMessage" placeholder="Customer's name"/>
                   <button id="searchMessageButton" onClick={ searchConversation }>
-                     <FontAwesomeIcon icon={faMagnifyingGlass} />
+                     <FontAwesomeIcon icon={faMagnifyingGlass} /> 
                   </button>
                </div>               
             </div>

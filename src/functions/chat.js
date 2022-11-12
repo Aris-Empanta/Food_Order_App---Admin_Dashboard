@@ -7,13 +7,13 @@ export const combineEndpoints = (response, callback) => {
     let firstPartInfo = response[0].data
 
     let secondPartInfo = response[1].data
+    console.log(response)
     
     for(let i=0; i < firstPartInfo.length; i++) {
 
         let object = {...firstPartInfo[i], ...secondPartInfo[i]}
-
+       
         customerInfo.push(object)
-
     }
 
     callback(customerInfo)  

@@ -67,3 +67,37 @@ export const createChart = (d3, weeklyRevenues, days, chartRef) => {
        .attr('height', val => height - yScale(val))
        .attr('fill', '#8a2be2')    
 }
+
+//The function that will hide specific elements before we fetch the data
+export const hideBeforeFetch = () => {
+
+    let toBeHidden = document.getElementsByClassName("toBeHidden")
+    let ordersCustomers = document.getElementsByClassName("ordersCustomers")
+
+    for(let element of toBeHidden) {
+
+        element.style.opacity = 0
+    }
+
+    for(let element of ordersCustomers) {
+
+        element.style.background = "white"
+    }
+}
+
+//The function that will show the elements after fetching the data
+export const showAfterFetch = () => {
+
+    let toBeHidden = document.getElementsByClassName("toBeHidden")
+    let ordersCustomers = document.getElementsByClassName("ordersCustomers")
+
+    for(let element of toBeHidden) {
+
+        element.style.opacity = 1
+    }
+
+    for(let element of ordersCustomers) {
+
+        element.style.background = "linear-gradient( to bottom right, rgb(64, 84, 178) 30%, rgb(219, 2, 234))"
+    }
+}

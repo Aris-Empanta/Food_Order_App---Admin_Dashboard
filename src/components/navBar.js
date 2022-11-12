@@ -60,15 +60,17 @@ export const NavBar = () => {
     return( <div className="navBar">
                 <div id="darkBackground"></div>
                 <ul id="navBarList">
-                    <li id="firmWrapper">
+                  <a href="#/" id="logoLink">
+                    <li id="firmWrapper">                      
                         <div id="logoWrapper">
                             <FontAwesomeIcon icon={ faLemon } id="logo"/>                            
                         </div>
                         <div>
                             <p class="restaurantName">Snack Bar</p>
                             <p class="restaurantName">Dashboard</p>
-                        </div>
-                    </li>
+                        </div>                    
+                    </li> 
+                  </a>
                     <li id="dashboard"  className="navBarList">
                         <a href="#/" id="dashboardLink"                          
                            onClick={ () => { focus("dashboard", "dashboardColor"); handleNavbar() }}>

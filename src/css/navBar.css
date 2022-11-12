@@ -6,11 +6,16 @@
     height: 100%;
     width: 230px;
     background-color: white;
-    padding-top: 20px;
+    padding-top: 30px;
     position: fixed;
     box-shadow: 1px 1px 4px silver;
     transition: transform 0.5s;
     z-index: 1;
+}
+
+#logoLink {
+    text-decoration: none;
+    color: #303030;
 }
  
 #darkBackground {
@@ -153,6 +158,7 @@
 
     #navBarList {
         transform: translateX(-105%);
+        padding-top: 0;
     }
 
     #smallScreenNavbar {
