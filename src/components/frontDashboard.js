@@ -34,12 +34,12 @@ export const FrontDashboard = () => {
         hideBeforeFetch()            
 
         const endpoints = [
-                            "http://localhost:5000/statistics/daily-income",
-                            "http://localhost:5000/statistics/weekly-income",
-                            "http://localhost:5000/statistics/total-orders-amount",
-                            "http://localhost:5000/statistics/total-customers-amount",
-                            "http://localhost:5000/statistics/total-revenue",
-                            "http://localhost:5000/statistics/trending-orders"
+                            "https://restaurant-server.arisdb.myipservers.gr/statistics/daily-income",
+                            "https://restaurant-server.arisdb.myipservers.gr/statistics/weekly-income",
+                            "https://restaurant-server.arisdb.myipservers.gr/statistics/total-orders-amount",
+                            "https://restaurant-server.arisdb.myipservers.gr/statistics/total-customers-amount",
+                            "https://restaurant-server.arisdb.myipservers.gr/statistics/total-revenue",
+                            "https://restaurant-server.arisdb.myipservers.gr/statistics/trending-orders"
                         ]
         axios.all(endpoints.map( endpoint => axios.get(endpoint)))
             .then((response) => {   

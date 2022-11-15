@@ -23,7 +23,7 @@ export const AddProduct = () => {
     useEffect(() => {
         
         //Saving all product Ids, to avoid duplicates later.
-        axios.get("http://localhost:5000/products").then((res) => {
+        axios.get("https://restaurant-server.arisdb.myipservers.gr/products").then((res) => {
 
             let ids = []
             for(let data of res.data) {
@@ -125,8 +125,8 @@ export const AddProduct = () => {
                             
                             formComponents[i].style.border = "1px solid black"                            
                         }                        
-                            axios.post("http://localhost:5000/products/add/" + stringData.id, imageData)                            
-                            axios.post("http://localhost:5000/products/add/" + stringData.id, stringData)
+                            axios.post("https://restaurant-server.arisdb.myipservers.gr/products/add/" + stringData.id, imageData)                            
+                            axios.post("https://restaurant-server.arisdb.myipservers.gr/products/add/" + stringData.id, stringData)
                             
                             setTimeout(() => alert("product added successfully!"), 10)
                             setTimeout(() => window.location.reload(), 500)                         

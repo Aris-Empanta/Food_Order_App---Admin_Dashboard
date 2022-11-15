@@ -16,7 +16,7 @@ export const Customers = () => {
 
         let customersTableWrapper = document.getElementById("customersTableWrapper")
 
-        axios.get('http://localhost:5000/customers/customers-info')
+        axios.get('https://restaurant-server.arisdb.myipservers.gr/customers/customers-info')
              .then( res => {                             
                             hideLoadingSpinner("customersLoader")
                             customersTableWrapper.style.visibility = "visible"

@@ -32,7 +32,7 @@ export const SpecificOrder = () => {
                 socket.emit("order checked")
 
                 //Fetching all the order's product details
-                axios.get("http://localhost:5000/orders/order-with-id-" + id)
+                axios.get("https://restaurant-server.arisdb.myipservers.gr/orders/order-with-id-" + id)
                      .then((res) => {                     
                          //Showing all hidden elements prior fetching   
                          for( let element of hidePriorFetch) {
@@ -52,7 +52,7 @@ export const SpecificOrder = () => {
                          setComments(res.data[0].comments)
                          })
 
-                axios.get("http://localhost:5000/orders/price-of-" + id)
+                axios.get("https://restaurant-server.arisdb.myipservers.gr/orders/price-of-" + id)
                      .then((res) => setTotalPrice(res.data.totalPrice))
                }, [] )
 

@@ -30,14 +30,15 @@ export const SpecificCategory = () => {
     //-------> Saving all products from database to state <------
     useEffect(() => {
 
-          axios.get("http://localhost:5000/products/by-category/" + params.category ).
+          axios.get("https://restaurant-server.arisdb.myipservers.gr/products/by-category/" + params.category ).
           then((res) => {
+            console.log(res.data)
                   hideLoadingSpinner("loadingCategory")
                   setProducts(res.data)
                 }
               )            
             
-          axios.get("http://localhost:5000/products/categories").then((res) => {
+          axios.get("https://restaurant-server.arisdb.myipservers.gr/products/categories").then((res) => {
 
               setCategories(res.data)
           }) 
@@ -95,7 +96,7 @@ export const SpecificCategory = () => {
                       date = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear() +
                              "_" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
 
-                      axios.put("http://localhost:5000/products/update-characteristics/" + id,
+                      axios.put("https://restaurant-server.arisdb.myipservers.gr/products/update-characteristics/" + id,
                                                                  {  date: date,
                                                                     name: name,
                                                                     price: price,
@@ -131,7 +132,7 @@ export const SpecificCategory = () => {
 
                     newImage.append("newImage", event.target.files[0], newName )     
                     
-                    axios.post("http://localhost:5000/products/update-image/" + id, newImage)
+                    axios.post("https://restaurant-server.arisdb.myipservers.gr/products/update-image/" + id, newImage)
                     window.location.reload()
                 }  else if( type.test(name) === false ){
 
@@ -150,7 +151,7 @@ export const SpecificCategory = () => {
 
         let id = products[index].ID
 
-        axios.delete("http://localhost:5000/products/delete-product/" + id)
+        axios.delete("https://restaurant-server.arisdb.myipservers.gr/products/delete-product/" + id)
         window.location.reload()
     }
  

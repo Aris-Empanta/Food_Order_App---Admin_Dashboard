@@ -83,7 +83,7 @@ export const selectAllMessages = (callback, customersState) => {
 //The function to mark selected messages as unread
 export const markAsUnread = (axios, markedMessagesState) => {
 
-    axios.put('http://localhost:5000/chat-messages/mark-as-unread', { customers: markedMessagesState})
+    axios.put('https://restaurant-server.arisdb.myipservers.gr/chat-messages/mark-as-unread', { customers: markedMessagesState})
 
     setTimeout(window.location.reload(), 1)
  }
@@ -95,7 +95,7 @@ export const deleteSelected = (axios, markedMessagesState) => {
     //because delete http request doesnt accept body.
     let customer = markedMessagesState.join('-')
 
-    axios.delete('http://localhost:5000/chat-messages/delete-selected/' + customer)
+    axios.delete('https://restaurant-server.arisdb.myipservers.gr/chat-messages/delete-selected/' + customer)
 
     setTimeout(window.location.reload(), 1)
 }

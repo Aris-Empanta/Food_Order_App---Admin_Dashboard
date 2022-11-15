@@ -11,7 +11,7 @@ import { hideNotifications } from "../functions/navBar"
 import { LoadingSpinner } from "../components/loadingSpinner"
 
 //Initializing socket.io and url's parameter name object.
-export const socket = io(`http://localhost:5000`)
+export const socket = io(`https://restaurant-server.arisdb.myipservers.gr`)
 
 /*Below component is dynamically generated in order to chat with
   a specific customer that sent us a message*/
@@ -31,7 +31,7 @@ export const PrivateChat = () => {
                     let userTyping = document.getElementById("userTyping")           
                     
                    //Fetching all the old messages to be displayed.
-                    axios.get('http://localhost:5000/chat-messages')
+                    axios.get('https://restaurant-server.arisdb.myipservers.gr/chat-messages')
                          .then( res => {                              
                                         //Saving specific customer's fetched messages in a variable             
                                         let messages = res.data.filter(item => item.Customer === customer)

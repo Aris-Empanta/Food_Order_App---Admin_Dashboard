@@ -14,7 +14,7 @@ export const AllCategories = () => {
 
     useEffect(() => {
 
-        axios.get("http://localhost:5000/products/categories-with-image")
+        axios.get("https://restaurant-server.arisdb.myipservers.gr/products/categories-with-image")
              .then( res => {
                             hideLoadingSpinner("loadingCategories")
                             setCategories(res.data)

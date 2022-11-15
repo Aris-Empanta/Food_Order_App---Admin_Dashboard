@@ -25,8 +25,8 @@ export const ChatDashboard = () => {
          //The loading element
          let loader = document.getElementById("loaderInbox")  
          
-         let endpoints = [ 'http://localhost:5000/chat-messages/customers', 
-                           'http://localhost:5000/chat-messages/latest-message']
+         let endpoints = [ 'https://restaurant-server.arisdb.myipservers.gr/chat-messages/customers', 
+                           'https://restaurant-server.arisdb.myipservers.gr/chat-messages/latest-message']
 
               
          const fetchMessages = () => {  axios.all(endpoints.map((endpoint) => axios.get(endpoint))).then(

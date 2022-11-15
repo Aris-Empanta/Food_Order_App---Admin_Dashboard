@@ -11,7 +11,7 @@ export const fetchOrders = (axios, number, callback) => {
   }
   }
 
-  axios.get("http://localhost:5000/orders/orders-by-id?number=" + number)
+  axios.get("https://restaurant-server.arisdb.myipservers.gr/orders/orders-by-id?number=" + number)
        .then((res) => {
                       callback(res.data)
                       for(let i=0; i < res.data.length; i++){
@@ -30,7 +30,7 @@ export const fetchOrdersSections = (axios, callback, hideLoader ) => {
 
  
 
-  axios.get("http://localhost:5000/orders/orders-amount")
+  axios.get("https://restaurant-server.arisdb.myipservers.gr/orders/orders-amount")
        .then((res) => { 
                         hideLoader("loadingOrders")
                         document.getElementById("tableWrapper").style.visibility = "visible"
@@ -43,7 +43,7 @@ export const fetchTotalPrice = (axios, id) => {
 
     
 
-     axios.get("http://localhost:5000/orders/price-of-" + id)
+     axios.get("https://restaurant-server.arisdb.myipservers.gr/orders/price-of-" + id)
           .then((res) => res.data.totalPrice)
 
     

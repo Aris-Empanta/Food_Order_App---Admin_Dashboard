@@ -10,7 +10,7 @@ export const renderClass = (type) => {
 
 export const fetchNotifications = (axios, callback, hideLoadingSpinner) => {
 
-    axios.get("http://localhost:5000/notifications/customers-info")
+    axios.get("https://restaurant-server.arisdb.myipservers.gr/notifications/customers-info")
              .then( res => { 
                             hideLoadingSpinner("notificationsLoader")
                             callback(res.data)})

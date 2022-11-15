@@ -26,7 +26,7 @@ export const catalogueChoices = () => {
 export const fetchUnread = (axios, callback) => {
 
     
-    axios.get('http://localhost:5000/chat-messages/unread-messages')
+    axios.get('https://restaurant-server.arisdb.myipservers.gr/chat-messages/unread-messages')
          .then((res) => {                          
                           //If unread messages are '0', They will not be displayed in navbar. 
                           res.data[0].Unread === '0' ? callback("") : 
@@ -39,7 +39,7 @@ export const fetchUnread = (axios, callback) => {
 export const fetchUncheckedOrders = (axios, callback) => {
 
 
-    axios.get('http://localhost:5000/orders/unchecked-orders')
+    axios.get('https://restaurant-server.arisdb.myipservers.gr/orders/unchecked-orders')
         .then((res) => { 
                         
                         //If unread messages are '0', They will not be displayed in navbar. 
