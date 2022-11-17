@@ -7,6 +7,7 @@ import { generateOrderId, renderComments } from "../functions/orders"
 import { hideNotifications } from "../functions/navBar"
 import { hideLoadingSpinner } from "../functions/general"
 import { LoadingSpinner } from "../components/loadingSpinner"
+import { serverHost } from "../variables/variables"
 
 export const SpecificOrder = () => {
 
@@ -32,7 +33,7 @@ export const SpecificOrder = () => {
                 socket.emit("order checked")
 
                 //Fetching all the order's product details
-                axios.get("https://restaurant-server.arisdb.myipservers.gr/orders/order-with-id-" + id)
+                axios.get( serverHost + "orders/order-with-id-" + id)
                      .then((res) => {                     
                          //Showing all hidden elements prior fetching   
                          for( let element of hidePriorFetch) {
@@ -52,7 +53,7 @@ export const SpecificOrder = () => {
                          setComments(res.data[0].comments)
                          })
 
-                axios.get("https://restaurant-server.arisdb.myipservers.gr/orders/price-of-" + id)
+                axios.get( serverHost + "orders/price-of-" + id)
                      .then((res) => setTotalPrice(res.data.totalPrice))
                }, [] )
 

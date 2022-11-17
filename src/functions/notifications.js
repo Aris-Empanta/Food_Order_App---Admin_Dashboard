@@ -1,3 +1,6 @@
+import { serverHost } from "../variables/variables"
+
+
 export const notificationType = (type) => {
     
     return type === "order" ? "O": "M"
@@ -10,7 +13,7 @@ export const renderClass = (type) => {
 
 export const fetchNotifications = (axios, callback, hideLoadingSpinner) => {
 
-    axios.get("https://restaurant-server.arisdb.myipservers.gr/notifications/customers-info")
+    axios.get( serverHost + "notifications/customers-info")
              .then( res => { 
                             hideLoadingSpinner("notificationsLoader")
                             callback(res.data)})

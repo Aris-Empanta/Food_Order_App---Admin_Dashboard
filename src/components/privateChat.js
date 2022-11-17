@@ -9,9 +9,10 @@ import axios from "axios"
 import useStateWithCallback from 'use-state-with-callback';
 import { hideNotifications } from "../functions/navBar"
 import { LoadingSpinner } from "../components/loadingSpinner"
+import { serverHost } from "../variables/variables";
 
 //Initializing socket.io and url's parameter name object.
-export const socket = io(`https://restaurant-server.arisdb.myipservers.gr`)
+export const socket = io( serverHost )
 
 /*Below component is dynamically generated in order to chat with
   a specific customer that sent us a message*/
@@ -31,7 +32,7 @@ export const PrivateChat = () => {
                     let userTyping = document.getElementById("userTyping")           
                     
                    //Fetching all the old messages to be displayed.
-                    axios.get('https://restaurant-server.arisdb.myipservers.gr/chat-messages')
+                    axios.get( serverHost + 'chat-messages' )
                          .then( res => {                              
                                         //Saving specific customer's fetched messages in a variable             
                                         let messages = res.data.filter(item => item.Customer === customer)

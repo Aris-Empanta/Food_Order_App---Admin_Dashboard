@@ -8,10 +8,10 @@ import "../css/navBar.css"
 import { useEffect, useState } from "react"
 import { Notifications } from "./notifications"
 import { socket } from "./privateChat";
-import axios from 'axios'
+import axios from 'axios' 
 import { catalogueChoices, showHideNavbar,
          fetchUnread, fetchUncheckedOrders, 
-         focus, soundNotification, hideNotifications,
+         focus, soundNotification, 
          handleNavbar, handleNotifications,
          getNotifications } from "../functions/navBar";
 import  orderNotification  from "../mp3/orderNotification.mp3";
@@ -37,7 +37,7 @@ export const NavBar = () => {
                         fetchUncheckedOrders(axios, setUncheckedOrders)
                         
                         //Fetching unread messages number on component render
-                        fetchUnread( axios, setUnreadMessages)                        
+                        fetchUnread( axios, setUnreadMessages)                         
 
                         //Reevaluates unread messages when receiving new message
                         socket.on('new message', () => { fetchUnread( axios, setUnreadMessages) 

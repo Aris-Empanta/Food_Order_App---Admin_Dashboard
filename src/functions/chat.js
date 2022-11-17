@@ -1,13 +1,14 @@
+import { serverHost } from "../variables/variables"
+
 //Below function combines the 2 needed endpoints in one object array
 //and save the in state
 export const combineEndpoints = (response, callback) => {
 
     let customerInfo = []
-
+ 
     let firstPartInfo = response[0].data
 
     let secondPartInfo = response[1].data
-    console.log(response)
     
     for(let i=0; i < firstPartInfo.length; i++) {
 
@@ -83,9 +84,8 @@ export const selectAllMessages = (callback, customersState) => {
 //The function to mark selected messages as unread
 export const markAsUnread = (axios, markedMessagesState) => {
 
-    axios.put('https://restaurant-server.arisdb.myipservers.gr/chat-messages/mark-as-unread', { customers: markedMessagesState})
-
-    setTimeout(window.location.reload(), 1)
+    axios.put( serverHost + 'chat-messages/mark-as-unread', { customers: markedMessagesState})
+         .then( res => window.location.reload())    
  }
 
 //The function to delete selected conversations 
@@ -95,9 +95,8 @@ export const deleteSelected = (axios, markedMessagesState) => {
     //because delete http request doesnt accept body.
     let customer = markedMessagesState.join('-')
 
-    axios.delete('https://restaurant-server.arisdb.myipservers.gr/chat-messages/delete-selected/' + customer)
-
-    setTimeout(window.location.reload(), 1)
+    axios.delete( serverHost + 'chat-messages/delete-selected/' + customer)
+         .then( res => window.location.reload()) 
 }
 
 

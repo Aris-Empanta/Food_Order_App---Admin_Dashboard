@@ -1,3 +1,5 @@
+import { serverHost } from "../variables/variables"
+
 //The function that shows and hide the cataloque submenu on nav-bar.
 export const catalogueChoices = () => {
 
@@ -23,14 +25,14 @@ export const catalogueChoices = () => {
 }
 
 //The function to fetch the number  of unread messages
-export const fetchUnread = (axios, callback) => {
+export const fetchUnread = (axios, setUnreadMessages) => {
 
     
-    axios.get('https://restaurant-server.arisdb.myipservers.gr/chat-messages/unread-messages')
+    axios.get( serverHost + 'chat-messages/unread-messages') 
          .then((res) => {                          
                           //If unread messages are '0', They will not be displayed in navbar. 
-                          res.data[0].Unread === '0' ? callback("") : 
-                                                       callback(res.data[0].Unread)                          
+                          res.data[0].Unread === '0' ? setUnreadMessages("") : 
+                                                       setUnreadMessages(res.data[0].Unread)                          
                         })
     
 }
@@ -39,7 +41,7 @@ export const fetchUnread = (axios, callback) => {
 export const fetchUncheckedOrders = (axios, callback) => {
 
 
-    axios.get('https://restaurant-server.arisdb.myipservers.gr/orders/unchecked-orders')
+    axios.get( serverHost + 'orders/unchecked-orders')
         .then((res) => { 
                         
                         //If unread messages are '0', They will not be displayed in navbar. 

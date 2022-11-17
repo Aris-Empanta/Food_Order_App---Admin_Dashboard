@@ -2,6 +2,7 @@ import "../css/addProduct.css"
 import axios from "axios"
 import { useEffect, useState } from  'react'
 import { hideNotifications } from "../functions/navBar"
+import { serverHost } from "../variables/variables"
 
 //The component where we add new products to the restaurant menu.
 export const AddProduct = () => {
@@ -14,7 +15,6 @@ export const AddProduct = () => {
     const [ name, setName] = useState("")
     const [ price, setPrice] = useState("") 
     const [ description, setDescription] = useState("")
-    const [ imageName, setImageName] = useState("")
     const [ stringData, setStringData] = useState({})
 
     //----------------------FUNCTIONS NEEDED------------------------------------------------------>
@@ -23,7 +23,7 @@ export const AddProduct = () => {
     useEffect(() => {
         
         //Saving all product Ids, to avoid duplicates later.
-        axios.get("https://restaurant-server.arisdb.myipservers.gr/products").then((res) => {
+        axios.get( serverHost + "products").then((res) => {
 
             let ids = []
             for(let data of res.data) {
@@ -124,12 +124,18 @@ export const AddProduct = () => {
                         for(let i=0; i < formComponents.length; i++){
                             
                             formComponents[i].style.border = "1px solid black"                            
-                        }                        
-                            axios.post("https://restaurant-server.arisdb.myipservers.gr/products/add/" + stringData.id, imageData)                            
-                            axios.post("https://restaurant-server.arisdb.myipservers.gr/products/add/" + stringData.id, stringData)
-                            
-                            setTimeout(() => alert("product added successfully!"), 10)
-                            setTimeout(() => window.location.reload(), 500)                         
+                        }  
+
+                        axios.all([
+                                    axios.post( serverHost + "products/add/" + stringData.id, imageData ), 
+                                    axios.post( serverHost + "products/add/" + stringData.id, stringData ) 
+                                   ])   
+                                   .then(axios.spread((data1, data2) => {
+                                    // output of req.
+                                    alert("Product successfully added!")
+                                    window.location.reload()
+                                  }))
+
                         }          
                         
                     }      

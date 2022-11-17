@@ -13,6 +13,7 @@ import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 import { faUsers } from "@fortawesome/free-solid-svg-icons";
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import { serverHost } from "../variables/variables";
 
 export const FrontDashboard = () => {
 
@@ -34,12 +35,12 @@ export const FrontDashboard = () => {
         hideBeforeFetch()            
 
         const endpoints = [
-                            "https://restaurant-server.arisdb.myipservers.gr/statistics/daily-income",
-                            "https://restaurant-server.arisdb.myipservers.gr/statistics/weekly-income",
-                            "https://restaurant-server.arisdb.myipservers.gr/statistics/total-orders-amount",
-                            "https://restaurant-server.arisdb.myipservers.gr/statistics/total-customers-amount",
-                            "https://restaurant-server.arisdb.myipservers.gr/statistics/total-revenue",
-                            "https://restaurant-server.arisdb.myipservers.gr/statistics/trending-orders"
+                            serverHost + "statistics/daily-income",
+                            serverHost + "statistics/weekly-income",
+                            serverHost + "statistics/total-orders-amount",
+                            serverHost + "statistics/total-customers-amount",
+                            serverHost + "statistics/total-revenue",
+                            serverHost + "statistics/trending-orders"
                         ]
         axios.all(endpoints.map( endpoint => axios.get(endpoint)))
             .then((response) => {   

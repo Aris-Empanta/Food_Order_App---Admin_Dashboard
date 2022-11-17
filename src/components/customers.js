@@ -7,6 +7,7 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { searchCustomer } from '../functions/customers';
 import { LoadingSpinner } from "../components/loadingSpinner"
 import { hideLoadingSpinner } from "../functions/general";
+import { serverHost } from "../variables/variables"
 
 export const Customers = () => {
 
@@ -16,7 +17,7 @@ export const Customers = () => {
 
         let customersTableWrapper = document.getElementById("customersTableWrapper")
 
-        axios.get('https://restaurant-server.arisdb.myipservers.gr/customers/customers-info')
+        axios.get( serverHost + 'customers/customers-info')
              .then( res => {                             
                             hideLoadingSpinner("customersLoader")
                             customersTableWrapper.style.visibility = "visible"

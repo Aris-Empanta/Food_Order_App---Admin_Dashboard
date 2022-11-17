@@ -11,6 +11,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons"
 import { hideNotifications } from "../functions/navBar"
 import { LoadingSpinner } from "../components/loadingSpinner"
 import { hideLoadingSpinner } from "../functions/general";
+import { serverHost } from "../variables/variables"
 
 //The component where we can check and modify the menu.
 export const SpecificCategory = () => {
@@ -20,7 +21,6 @@ export const SpecificCategory = () => {
     const [categories, setCategories] = useState([])
     const [ name, setName ] = useState("")
     const [ price, setPrice ] = useState("")
-    const [ currency, setCurrency ] = useState("USD")
     const [ description, setDescription ] = useState("")
 
     const params = useParams()
@@ -30,15 +30,14 @@ export const SpecificCategory = () => {
     //-------> Saving all products from database to state <------
     useEffect(() => {
 
-          axios.get("https://restaurant-server.arisdb.myipservers.gr/products/by-category/" + params.category ).
+          axios.get( serverHost + "products/by-category/" + params.category ).
           then((res) => {
-            console.log(res.data)
                   hideLoadingSpinner("loadingCategory")
                   setProducts(res.data)
                 }
               )            
             
-          axios.get("https://restaurant-server.arisdb.myipservers.gr/products/categories").then((res) => {
+          axios.get( serverHost + "products/categories" ).then((res) => {
 
               setCategories(res.data)
           }) 
@@ -96,15 +95,17 @@ export const SpecificCategory = () => {
                       date = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear() +
                              "_" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds()
 
-                      axios.put("https://restaurant-server.arisdb.myipservers.gr/products/update-characteristics/" + id,
+                      axios.put( serverHost + "products/update-characteristics/" + id,
                                                                  {  date: date,
                                                                     name: name,
                                                                     price: price,
                                                                     currency: "EUR",
                                                                     description: description }
                                                                 )   
+                            .then( res => window.location.reload() )                               
+                            .catch( err => console.log(err)) 
                       
-                      window.location.reload()   
+                      
                     }   
                 }
             }
@@ -121,6 +122,7 @@ export const SpecificCategory = () => {
 
                 let newImage = new FormData()                      
                 
+                
                 //Allowing only images of specific size
                 if( type.test(name) === true && size <= 500000) {
                      
@@ -132,8 +134,10 @@ export const SpecificCategory = () => {
 
                     newImage.append("newImage", event.target.files[0], newName )     
                     
-                    axios.post("https://restaurant-server.arisdb.myipservers.gr/products/update-image/" + id, newImage)
-                    window.location.reload()
+                    axios.post( serverHost + "products/update-image/" + id, newImage)
+                         .then( res => window.location.reload() ) 
+                         .catch( err => console.log(err)) 
+                   
                 }  else if( type.test(name) === false ){
 
                     alert("This is not an image!!")
@@ -142,7 +146,7 @@ export const SpecificCategory = () => {
 
                     alert("The image size is too big")
                     input.value = ""
-                }              
+                }       
 
     }
     
@@ -151,8 +155,8 @@ export const SpecificCategory = () => {
 
         let id = products[index].ID
 
-        axios.delete("https://restaurant-server.arisdb.myipservers.gr/products/delete-product/" + id)
-        window.location.reload()
+        axios.delete( serverHost + "products/delete-product/" + id)
+             .then( res => window.location.reload() ) 
     }
  
   //----------------------------------------------------------------------------------------->

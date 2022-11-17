@@ -12,6 +12,7 @@ import {  markAsRead, combineEndpoints,
          searchConversation } from "../functions/chat"
 import { hideNotifications } from "../functions/navBar"
 import { LoadingSpinner } from "../components/loadingSpinner"
+import { serverHost } from "../variables/variables"
 
 export const ChatDashboard = () => {   
    
@@ -25,8 +26,8 @@ export const ChatDashboard = () => {
          //The loading element
          let loader = document.getElementById("loaderInbox")  
          
-         let endpoints = [ 'https://restaurant-server.arisdb.myipservers.gr/chat-messages/customers', 
-                           'https://restaurant-server.arisdb.myipservers.gr/chat-messages/latest-message']
+         let endpoints = [ serverHost + 'chat-messages/customers', 
+                           serverHost + 'chat-messages/latest-message']
 
               
          const fetchMessages = () => {  axios.all(endpoints.map((endpoint) => axios.get(endpoint))).then(

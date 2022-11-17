@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { hideNotifications } from "../functions/navBar"
 import { hideLoadingSpinner } from "../functions/general";
 import { LoadingSpinner } from "./loadingSpinner";
+import { serverHost } from "../variables/variables"
 
 export const AllCategories = () => {
 
@@ -14,7 +15,7 @@ export const AllCategories = () => {
 
     useEffect(() => {
 
-        axios.get("https://restaurant-server.arisdb.myipservers.gr/products/categories-with-image")
+        axios.get( serverHost + "products/categories-with-image")
              .then( res => {
                             hideLoadingSpinner("loadingCategories")
                             setCategories(res.data)
