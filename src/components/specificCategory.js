@@ -166,13 +166,13 @@ export const SpecificCategory = () => {
               <p id="productsTitle"> Dish types / {params.category}</p>
               <div id="searchWrapper">
                 <input id="searchBar" type="text" placeholder="product's name" />
-                <button id="searchButton" onClick={ filterName }>
+                <button id="searchButton" onClick={ filterName }> 
                   <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </button>
               </div>
             </div>
             <div id="loadingCategory">
-              <LoadingSpinner />
+              <LoadingSpinner />              
             </div>
             <div id="productsWrapper">              
               {products.map((item, index) => 

@@ -67,10 +67,24 @@
 #customersTableWrapper {
     overflow-x: scroll;
     visibility: hidden;
+    min-height: 60vh;
 }
 
 #customersLoader {
     margin-top: 50px;
+}
+
+#noCustomerFound {
+    display: none;
+    text-align: center;
+    top: 50px;
+    font-size: 1.1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #151515;
+}
+
+#noCustomerText {
+    margin-top: 60px;
 }
 
 .customersTable th {

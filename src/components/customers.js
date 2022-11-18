@@ -38,8 +38,12 @@ export const Customers = () => {
                 <div id='customersLoader'>
                   <LoadingSpinner />
                 </div>            
+                <div id="noCustomerFound">
+                  <p id='noCustomerText'>No customer with name "<span id='customerInputName'>customer</span>" found
+                  </p>
+                </div>
                 <div id='customersTableWrapper'> 
-                  <table className="customersTable" cellSpacing="0">
+                  <table className="customersTable" id="customerTable" cellSpacing="0">
                     <tr>                    
                       <th>Customer's name</th>
                       <th>Address</th> 

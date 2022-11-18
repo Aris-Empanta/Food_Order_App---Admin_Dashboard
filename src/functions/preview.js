@@ -7,8 +7,9 @@ export const filterName = () => {
     for(let i = 0; i < product.length; i++) {
 
         let name = names[i].innerText.toLowerCase()
+        
         name.includes(userInput) || userInput === ''?
         product[i].style.display = "flex" :
-        alert("No such product exists!")
+        product[i].style.display = "none"
     }
 }
