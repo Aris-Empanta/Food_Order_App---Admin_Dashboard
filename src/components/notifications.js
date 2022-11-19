@@ -27,7 +27,7 @@ export const Notifications = () => {
 
         //Reevaluates unchecked orders when we open an order
         socket.on('re-evaluate orders', () => fetchNotifications(axios, setNotifications))
-    }, [])
+    })
 
     return(<div id="notificationsComponent"> 
             <div id="notificationsLoader">

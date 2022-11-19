@@ -1,5 +1,5 @@
 import { serverHost } from "../variables/variables"
-
+ 
 
 export const notificationType = (type) => {
     
@@ -11,12 +11,12 @@ export const renderClass = (type) => {
     return type === "order" ? "orderType": "messageType"
 }
 
-export const fetchNotifications = (axios, callback, hideLoadingSpinner) => {
+export const fetchNotifications = (axios, setNotifications, hideLoadingSpinner) => {
 
     axios.get( serverHost + "notifications/customers-info")
              .then( res => { 
                             hideLoadingSpinner("notificationsLoader")
-                            callback(res.data)})
+                            setNotifications(res.data)})
 }
 
 export const createLink = (type) => {
