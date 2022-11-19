@@ -15,6 +15,13 @@ with each other, to carry out specific tasks. They are both connected to an
  used by the restaurant owner, who can check the orders and live chat messages of the customer, manage the products, and execute several
 other operations explained in further detail below: 
 
+## Main Technologies used
+
+- React
+- Vanilla JavaScript
+- CSS
+- Socket.io ( client )
+- Axios
 
 ## Dashboard Sections
 
@@ -51,11 +58,3 @@ Just like the orders, once you receive a new message a notification sounds, and 
 indication of all unread messages appears in the navbar and on all conversations 
 separately. The admin can delete any conversation selected, or 
 mark it as unread.
-
-## Main Technologies used
-
-- React
-- Vanilla JavaScript
-- CSS
-- Socket.io ( client )
-- Axios
