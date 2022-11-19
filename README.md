@@ -46,7 +46,7 @@ form that he filled up in Food Order App.
 
 &nbsp;&nbsp;&nbsp;&nbsp;This is the Live Chat section. The customer can
 send a message in real time to the admin, with the help of socket.io library.
-The messages are also save with the help of the HTTP server and MySql database.
+The messages are also saved with the help of the HTTP server and MySql database.
 Just like the orders, once you receive a new message a notification sounds, and the 
 indication of all unread messages appears in the navbar and on all conversations 
 separately. The admin can delete any conversation selected, or 
