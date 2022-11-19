@@ -174,6 +174,10 @@ export const SpecificCategory = () => {
             <div id="loadingCategory">
               <LoadingSpinner />              
             </div>
+            <div id="noProductFound">
+                  <p id='noProductText'>No product with name "<span id='productInputName'></span>" found
+                  </p>
+                </div>
             <div id="productsWrapper">              
               {products.map((item, index) => 
                               <div className={ "product product" + index }>

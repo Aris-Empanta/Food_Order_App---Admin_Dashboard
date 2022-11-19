@@ -78,8 +78,12 @@ export const ChatDashboard = () => {
             </div>
             <div id="loaderInbox">
                <LoadingSpinner />
-            </div>
+            </div>            
             <ul className="messageList"  id="chatWrapper">
+               <li id="noSenderFound">
+                     <p id='noSenderText'>No customer with name "<span id='senderInputName'></span>" found
+                     </p>
+               </li>
             { customers.map( (item) => <li className={ item.Sender + " chatList"} >
                                           <div className="checkbox">
                                              <input type="checkbox" className="checkBoxes" id={"check" + item.Customer} 

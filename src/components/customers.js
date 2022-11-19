@@ -39,7 +39,7 @@ export const Customers = () => {
                   <LoadingSpinner />
                 </div>            
                 <div id="noCustomerFound">
-                  <p id='noCustomerText'>No customer with name "<span id='customerInputName'>customer</span>" found
+                  <p id='noCustomerText'>No customer with name "<span id='customerInputName'></span>" found
                   </p>
                 </div>
                 <div id='customersTableWrapper'> 

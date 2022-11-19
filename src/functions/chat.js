@@ -126,14 +126,33 @@ export const searchConversation = () => {
 
     let text = document.getElementById('searchMessage').value.toLowerCase()
     let customerNames = document.getElementsByClassName('customersName')
-    let conversation = document.getElementsByClassName('chatList')
+    let conversation = document.getElementsByClassName('chatList') 
+    let noSenderFound = document.getElementById("noSenderFound")
+    let senderInputName = document.getElementById("senderInputName")
+    let results = 0
 
     for(let i = 0; i < customerNames.length; i++) {
 
        let name = customerNames[i].innerText.toLowerCase()
 
+       const showSenders = () => {
+
+        conversation[i].style.display = "initial"
+        results += 1
+    }
+
        name.includes(text) || text === ''?
-       conversation[i].style.display = "initial" :
-       conversation[i].style.display = "none" 
-   }        
+       showSenders() : conversation[i].style.display = "none" 
+   }      
+   
+   const senderNotFound = () => {
+
+        let text = document.getElementById('searchMessage').value
+
+        noSenderFound.style.display = "initial"
+        senderInputName.innerText = text
+    }
+
+    results === 0 ?  senderNotFound() :
+    noSenderFound.style.display = "none"
  }

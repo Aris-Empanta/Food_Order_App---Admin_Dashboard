@@ -163,8 +163,20 @@
     background: linear-gradient( to bottom right, rgb(64, 84, 178), rgb(219, 2, 234));
     color: white;
     padding: 6px 10px 6px 10px;
-    font-size: 1rem;
+    font-size: 1rem; 
     cursor: pointer;
+}
+
+#noSenderFound {
+    display: none;
+    text-align: center;
+    font-size: 1.1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #151515;
+}
+
+#noSenderText {
+    margin-top: 60px;
 }
 
 .chatList:hover {

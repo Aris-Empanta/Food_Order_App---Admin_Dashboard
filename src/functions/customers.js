@@ -1,4 +1,5 @@
 export const searchCustomer = () => {
+    
     let text = document.getElementById('desiredCustomer').value.toLowerCase()
     let customerName = document.getElementsByClassName('customerName')
     let customersData = document.getElementsByClassName('customersData')
