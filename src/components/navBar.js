@@ -139,7 +139,7 @@ export const NavBar = () => {
                         <FontAwesomeIcon icon={ faBell }/>   
                         { getNotifications(unreadMessages, uncheckedOrders) > 0 ? 
                         <div id="notificationsCircle">
-                            <p>{ getNotifications(unreadMessages, uncheckedOrders) }</p>  
+                            <p>{ getNotifications(unreadMessages, uncheckedOrders) }</p>   
                         </div> 
                         : 
                         null

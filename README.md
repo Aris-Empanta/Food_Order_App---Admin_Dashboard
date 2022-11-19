@@ -51,3 +51,11 @@ Just like the orders, once you receive a new message a notification sounds, and 
 indication of all unread messages appears in the navbar and on all conversations 
 separately. The admin can delete any conversation selected, or 
 mark it as unread.
+
+## Main Technologies used
+
+- React
+- Vanilla JavaScript
+- CSS
+- Socket.io ( client )
+- Axios
