@@ -165,7 +165,7 @@ export const SpecificCategory = () => {
             <div className="productsHeader">
               <p id="productsTitle"> Dish types / {params.category}</p>
               <div id="searchWrapper">
-                <input id="searchBar" type="text" placeholder="product's name" />
+                <input id="searchBar" type="text" placeholder="product's name" autocomplete="off"/>
                 <button id="searchButton" onClick={ filterName }> 
                   <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </button>

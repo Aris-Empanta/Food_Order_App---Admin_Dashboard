@@ -29,7 +29,7 @@ export const Customers = () => {
                 <div id='customerListWrapper'>
                   <h1 className='customersTitle'>Customer List</h1>
                   <div id='customerSearchWrapper'>
-                    <input type="text" id='desiredCustomer' placeholder="Customer's name"/>
+                    <input type="text" id='desiredCustomer' placeholder="Customer's name" autocomplete="off"/>
                     <button id='customerSearchInput' onClick={ searchCustomer }>
                       <FontAwesomeIcon icon={faMagnifyingGlass} />
                     </button>

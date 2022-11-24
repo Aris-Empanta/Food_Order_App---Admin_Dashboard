@@ -58,8 +58,8 @@ export const ChatDashboard = () => {
             <div id="deleteMessageWrapper">
                <div id="messageButtonHandlers">
                   <div id="selectAllWrapper">
-                  <input type="checkbox" id="selectAll"
-                        onClick={() => selectAllMessages(setMarkedMessages, customers)}/>
+                  <input type="checkbox" id="selectAll"                         
+                         onClick={() => selectAllMessages(setMarkedMessages, customers)}/>
                   <p id="selectAllLabel">Select all</p>    
                   </div>           
                   <button id="markUnread" onClick={ () => markAsUnread(axios, markedMessages) }> 
@@ -70,7 +70,7 @@ export const ChatDashboard = () => {
                   </button>
                </div>
                <div id="searchMessageWrapper">
-                  <input type="text" id="searchMessage" placeholder="Customer's name"/>
+                  <input type="text" id="searchMessage" placeholder="Customer's name" autocomplete="off"/>
                   <button id="searchMessageButton" onClick={ searchConversation }>
                      <FontAwesomeIcon icon={faMagnifyingGlass} /> 
                   </button>

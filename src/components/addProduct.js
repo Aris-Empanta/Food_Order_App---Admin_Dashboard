@@ -142,7 +142,7 @@ export const AddProduct = () => {
     //---------------------------------------------------------------------------------------------------->
 
     return(<div className="addProduct" onClick={ hideNotifications }>
-                <form encType= "multipart/form-data" >
+                <form encType= "multipart/form-data" autocomplete="off">
                     <h1 id="formTitle" className="formComponents" >ADD PRODUCT FORM</h1>
                     <hr id="formLine"></hr>                    
                     <label id="categoryLabel" className="formComponents" >Product Category</label>
